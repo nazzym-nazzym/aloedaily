@@ -10,14 +10,14 @@ export const MAIN_NAV: NavItem[] = [
   { label: 'Hair & Scalp', href: '/hair-care/', description: 'Follicular restoration & scalp microbiome health' },
   { label: 'Health & Juice', href: '/health/', description: 'Digestion, gut lining & aloin removal chemistry' },
   { label: 'Plant Care', href: '/cultivation/', description: 'Aloe harvesting, repotting & botanical cultivation' },
-  { label: 'Product Audits', href: '/audits/', description: 'The AloeDaily Purity Index™ & commercial lab testing' },
+  { label: 'Product Audits', href: '/audits/', description: 'The AloeDaily Purity Index™ & retail gel lab testing' },
 ];
 
 export const TOOL_NAV: NavItem[] = [
   { label: 'Aloin Flush Timer', href: '/health/how-to-remove-aloin-from-aloe-leaf/' },
   { label: 'Juice Dosage Calculator', href: '/health/aloe-vera-juice-dosage-calculator/' },
   { label: 'Plant Diagnostic Wizard', href: '/cultivation/fix-soft-mushy-aloe-leaves/' },
-  { label: 'Fake Gel Iodine Test', href: '/audits/how-to-spot-fake-aloe-vera-gel/' },
+  { label: 'Retail Gel Iodine Test', href: '/audits/how-to-spot-fake-aloe-vera-gel/' },
 ];
 
 export const FOOTER_NAV = {
@@ -28,6 +28,6 @@ export const FOOTER_NAV = {
     { label: 'Editorial & Fact-Checking Policy', href: '/about/#editorial-policy' },
     { label: 'Medical & Botanical Review Board', href: '/about/#medical-board' },
     { label: 'Lab Purity Standards', href: '/audits/' },
-    { label: 'Inquire to Acquire Domain', href: '#domain-inquire' },
+    { label: 'Editorial & Media Contact', href: '/about/#contact' },
   ]
 };

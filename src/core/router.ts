@@ -11,7 +11,7 @@ import { buildPageSchemaGraph } from '../schemas/graph';
 import { renderMasterSitemapXml } from '../feeds/sitemap';
 import { renderRobotsTxt } from '../feeds/robots';
 import { renderLlmsTxt } from '../feeds/llms-txt';
-import { handleDomainInquire } from '../api/domain-inquire';
+import { handleContactSubmission } from '../api/contact';
 import { handleAffiliateRedirect, handleLeadCapture } from '../api/affiliate-redirect';
 import { getCacheHeaders } from './cache';
 import { SITE_CONFIG } from '../config/site';
@@ -42,15 +42,15 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
   }
 
   // 2. Edge API Endpoints
-  if (pathname === '/api/domain-inquire') {
-    return handleDomainInquire(request);
+  if (pathname === '/api/contact') {
+    return handleContactSubmission(request);
   }
 
   if (pathname === '/api/lead-capture') {
     return handleLeadCapture(request);
   }
 
-  // 3. Outbound Affiliate Redirects (/out/{brand})
+  // 3. Outbound Affiliate Referral Redirects (/out/{brand})
   if (pathname.startsWith('/out/')) {
     const brandSlug = pathname.replace('/out/', '').replace(/\/$/, '');
     return handleAffiliateRedirect(brandSlug);

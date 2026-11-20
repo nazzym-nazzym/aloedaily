@@ -41,7 +41,7 @@ export function renderAboutPage(): string {
           Our Origin Story
         </h2>
         <p class="prose" style="font-size: 1.05rem; line-height: 1.7; color: #292524;">
-          If you search the internet for aloe vera today, you will immediately find two extremes. On one side are generic affiliate blogs churning out regurgitated fluff telling people to swallow whole raw leaves (unaware that the yellow aloin latex inside causes violent cramping and diarrhea). On the other side are multimillion-dollar cosmetic conglomerates selling \$7 squeeze bottles packed with carbomers, triethanolamine, and artificial dyes, boasting "100% Aloe" on the front label while containing virtually zero active acemannan.
+          If you search the internet for aloe vera today, you will immediately find two extremes. On one side are generic affiliate blogs churning out regurgitated fluff telling people to swallow whole raw leaves (unaware that the yellow aloin latex inside causes violent cramping and diarrhea). On the other side are multimillion-dollar cosmetic conglomerates selling inexpensive squeeze bottles packed with carbomers, triethanolamine, and artificial dyes, boasting "100% Aloe" on the front label while containing virtually zero active acemannan.
         </p>
         <p class="prose" style="font-size: 1.05rem; line-height: 1.7; color: #292524;">
           We brought together a board-certified dermatologist (Dr. Elena Vance), an experienced botanical horticulturist (Marcus Chen), and a clinical aesthetician (Sarah Jenkins) to create the definitive, evidence-backed daily authority on <em>Aloe barbadensis Miller</em>.
@@ -90,14 +90,14 @@ export function renderAboutPage(): string {
         ${reviewersHtml}
       </section>
 
-      <section style="background: #ecfdf5; border-radius: 1rem; padding: 2rem; border: 1px solid #a7f3d0;">
-        <h3 style="font-size: 1.3rem; color: #064e3b; margin-bottom: 0.5rem;">Get in Touch with Our Team</h3>
+      <section id="contact" style="background: #ecfdf5; border-radius: 1rem; padding: 2rem; border: 1px solid #a7f3d0;">
+        <h3 style="font-size: 1.3rem; color: #064e3b; margin-bottom: 0.5rem;">Editorial Desk & Media Inquiries</h3>
         <p style="font-size: 0.95rem; color: #065f46; line-height: 1.6; margin-bottom: 1rem;">
-          Have a clinical research question, spotted an ingredient typo, or looking to inquire about institutional domain acquisition? We read every email personally:
+          For clinical research corrections, press inquiries, or reader feedback, contact our management team:
         </p>
         <div style="font-size: 0.95rem; color: #064e3b; line-height: 1.7;">
-          <strong>Editorial & Research Corrections:</strong> <a href="mailto:${SITE_CONFIG.adminEmail}" style="color: #047857; text-decoration: underline;">${SITE_CONFIG.adminEmail}</a><br />
-          <strong>Domain Acquisition & Partnerships:</strong> <a href="mailto:${SITE_CONFIG.inquiryEmail}" style="color: #047857; text-decoration: underline;">${SITE_CONFIG.inquiryEmail}</a>
+          <strong>Editorial & Research Desk:</strong> <a href="mailto:${SITE_CONFIG.adminEmail}" style="color: #047857; text-decoration: underline;">${SITE_CONFIG.adminEmail}</a><br />
+          <strong>Media & Press Relations:</strong> <a href="mailto:${SITE_CONFIG.mediaEmail}" style="color: #047857; text-decoration: underline;">${SITE_CONFIG.mediaEmail}</a>
         </div>
       </section>
     </div>

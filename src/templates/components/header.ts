@@ -1,5 +1,4 @@
 import { MAIN_NAV } from '../../config/navigation';
-import { SITE_CONFIG } from '../../config/site';
 
 export function renderHeader(): string {
   const navHtml = MAIN_NAV.map(
@@ -15,7 +14,7 @@ export function renderHeader(): string {
         </a>
         <nav class="nav-links">
           ${navHtml}
-          <a href="#domain-inquire" onclick="openInquireModal(event)" class="nav-pill">Acquisition Inquiries</a>
+          <a href="/audits/" class="nav-pill">Lab Purity Audits</a>
         </nav>
       </div>
     </header>

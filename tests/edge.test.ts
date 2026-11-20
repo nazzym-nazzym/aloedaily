@@ -69,6 +69,7 @@ async function runTests() {
     assert(res.status === 200, 'Homepage returns 200 OK');
     assert(body.includes('AloeDaily') && body.includes('<style>'), 'Homepage renders brand & inlined styles');
     assert(body.includes('application/ld+json'), 'Homepage contains schema markup');
+    assert(!body.includes('domain-modal') && !body.includes('Acquisition Inquiries'), 'Homepage has ZERO domain-for-sale banners (passes MarketCall compliance)');
   }
 
   // Test 7: Pillar Hub Page (/skincare/)
@@ -106,7 +107,7 @@ async function runTests() {
     const res = await worker.fetch(req, env, mockCtx);
     const body = await res.text();
     assert(res.status === 200, 'Dosage calculator article returns 200 OK');
-    assert(body.includes('Daily Aloe Vera Juice Dosage Calculator'), 'Dosage calculator article embeds interactive dosage calculator');
+    assert(body.includes('Daily Aloe Vera Juice Intake Estimator'), 'Dosage calculator article embeds interactive dosage estimator');
   }
 
   // Test 11: Outbound Cloaked Affiliate Redirect
@@ -118,22 +119,22 @@ async function runTests() {
     assert(res.headers.get('Location')?.includes('amazon.com') === true, 'Affiliate redirect target is correct');
   }
 
-  // Test 12: Domain Acquisition API
+  // Test 12: Editorial & Media Contact API
   {
-    const req = new Request('https://aloedaily.com/api/domain-inquire', {
+    const req = new Request('https://aloedaily.com/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: 'John Investor',
-        email: 'john@investor.com',
-        budget: '100k-250k',
-        message: 'Interested in acquiring aloedaily.com for a botanical brand.'
+        name: 'Dr. Jane Smith',
+        email: 'jane@university.edu',
+        subject: 'Clinical trial citation inquiry',
+        message: 'Revisiting the acemannan molecular weight parameters.'
       }),
     });
     const res = await worker.fetch(req, env, mockCtx);
     const data: any = await res.json();
-    assert(res.status === 200, '/api/domain-inquire returns 200 OK');
-    assert(data.success === true, 'Inquiry processed successfully');
+    assert(res.status === 200, '/api/contact returns 200 OK');
+    assert(data.success === true, 'Editorial contact processed successfully');
   }
 
   // Test 13: 404 Not Found Page

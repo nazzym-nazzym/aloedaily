@@ -1,7 +1,6 @@
 import { INLINE_CSS } from '../styles';
 import { renderHeader } from '../components/header';
 import { renderFooter } from '../components/footer';
-import { renderDomainInquireModal } from '../components/domain-inquire-modal';
 import { SITE_CONFIG } from '../../config/site';
 
 export interface BaseLayoutOptions {
@@ -66,7 +65,6 @@ ${JSON.stringify(schemaJson, null, 2)}
     ${contentHtml}
   </main>
   ${renderFooter()}
-  ${renderDomainInquireModal()}
 </body>
 </html>`;
 }
