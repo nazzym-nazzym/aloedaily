@@ -1,0 +1,21 @@
+{
+  "name": "aloedaily",
+  "version": "1.0.0",
+  "description": "Zero-origin, edge-native programmatic SEO publication & botanical authority engine on Cloudflare Workers",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "tsc --noEmit",
+    "test:unit": "tsx tests/edge.test.ts",
+    "test": "tsc --noEmit && tsx tests/edge.test.ts && wrangler deploy --dry-run",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241101.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "wrangler": "^3.114.17"
+  }
+}

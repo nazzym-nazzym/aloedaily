@@ -1,0 +1,11 @@
+name = "aloedaily"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+SITE_URL = "https://aloedaily.com"
+SITE_NAME = "Aloe Daily"
+SITE_DESCRIPTION = "The definitive daily authority for botanical skincare, pure aloe vera applications, cultivation, and ingredient purity."
+ENVIRONMENT = "production"
+ADMIN_EMAIL = "contact@aloedaily.com"
