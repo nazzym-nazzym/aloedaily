@@ -13,29 +13,42 @@ import { renderRobotsTxt } from '../feeds/robots';
 import { renderLlmsTxt } from '../feeds/llms-txt';
 import { handleContactSubmission } from '../api/contact';
 import { handleAffiliateRedirect, handleLeadCapture } from '../api/affiliate-redirect';
+import { LOGO_WEBP_BYTES, LOGO_WEBP_96_BYTES, FAVICON_PNG_BYTES } from '../assets/logo-helper';
 import { getCacheHeaders } from './cache';
 import { SITE_CONFIG } from '../config/site';
 
 export async function routeRequest(request: Request, url: URL): Promise<Response> {
   const pathname = url.pathname;
 
-  // 1. Direct Favicon & Logo Assets
-  if (pathname === '/favicon.ico' || pathname === '/favicon.png' || pathname === '/assets/logo.png' || pathname === '/assets/logo.svg') {
-    try {
-      const imgRes = await fetch(SITE_CONFIG.logo);
-      if (imgRes.ok) {
-        return new Response(imgRes.body, {
-          status: 200,
-          headers: {
-            'Content-Type': 'image/png',
-            'Cache-Control': 'public, max-age=31536000, immutable',
-          },
-        });
-      }
-    } catch {
-      // fallback redirect
-    }
-    return Response.redirect(SITE_CONFIG.logo, 302);
+  // 1. Direct Edge-Native In-Memory Logo & Favicon Assets (Zero Outbound Latency)
+  if (pathname === '/assets/logo.webp' || pathname === '/assets/logo.png') {
+    return new Response(LOGO_WEBP_BYTES, {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/webp',
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    });
+  }
+
+  if (pathname === '/assets/logo-96.webp') {
+    return new Response(LOGO_WEBP_96_BYTES, {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/webp',
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    });
+  }
+
+  if (pathname === '/favicon.ico' || pathname === '/favicon.png') {
+    return new Response(FAVICON_PNG_BYTES, {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    });
   }
 
   // 2. Virtual Feeds & Robots

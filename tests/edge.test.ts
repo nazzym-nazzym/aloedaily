@@ -62,7 +62,7 @@ async function runTests() {
     assert(body.includes('<urlset') && body.includes('/skincare/aloe-vera-overnight-face-mask/'), '/sitemap.xml contains article URLs');
   }
 
-  // Test 6: Homepage & Inlined Critical CSS & Logo / Favicon
+  // Test 6: Homepage & Inlined Critical CSS & Preloaded Logo
   {
     const req = new Request('https://aloedaily.com/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -70,20 +70,34 @@ async function runTests() {
     assert(res.status === 200, 'Homepage returns 200 OK');
     assert(body.includes('AloeDaily') && body.includes('<style>'), 'Homepage renders brand & inlined styles');
     assert(body.includes('application/ld+json'), 'Homepage contains schema markup');
-    assert(body.includes(SITE_CONFIG.logo), 'Homepage contains verified custom logo image URL');
-    assert(body.includes('rel="icon"'), 'Homepage contains favicon link in <head>');
-    assert(body.includes('property="og:image"'), 'Homepage contains OpenGraph logo image');
+    assert(body.includes('rel="preload" as="image" href="/assets/logo.webp"'), 'Homepage contains high-priority preload link for logo');
+    assert(body.includes('width="40" height="40"'), 'Logo contains explicit width and height to prevent CLS');
+    assert(body.includes('fetchpriority="high"'), 'Logo contains fetchpriority="high"');
     assert(!body.includes('domain-modal') && !body.includes('Acquisition Inquiries'), 'Homepage has ZERO domain-for-sale banners (passes MarketCall compliance)');
   }
 
-  // Test 7: Direct Favicon Endpoint
+  // Test 7: Direct Zero-Latency Edge WebP Logo Route
+  {
+    const req = new Request('https://aloedaily.com/assets/logo.webp');
+    const res = await worker.fetch(req, env, mockCtx);
+    const buf = await res.arrayBuffer();
+    assert(res.status === 200, '/assets/logo.webp returns 200 OK');
+    assert(res.headers.get('Content-Type') === 'image/webp', 'Logo served as modern image/webp');
+    assert(res.headers.get('Cache-Control')?.includes('immutable') === true, 'Logo has immutable cache header');
+    assert(buf.byteLength > 1000, `Logo binary payload delivered (${buf.byteLength} bytes)`);
+  }
+
+  // Test 8: Direct Zero-Latency Edge Favicon Route
   {
     const req = new Request('https://aloedaily.com/favicon.ico');
     const res = await worker.fetch(req, env, mockCtx);
-    assert(res.status === 200 || res.status === 302, '/favicon.ico successfully serves or redirects image');
+    const buf = await res.arrayBuffer();
+    assert(res.status === 200, '/favicon.ico returns 200 OK');
+    assert(res.headers.get('Content-Type') === 'image/png', 'Favicon served as image/png');
+    assert(buf.byteLength > 1000, `Favicon binary payload delivered (${buf.byteLength} bytes)`);
   }
 
-  // Test 8: Pillar Hub Page (/skincare/)
+  // Test 9: Pillar Hub Page (/skincare/)
   {
     const req = new Request('https://aloedaily.com/skincare/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -92,7 +106,7 @@ async function runTests() {
     assert(body.includes('Facial Skincare & Dermatological Science'), 'Pillar hub renders headline');
   }
 
-  // Test 9: Article Spoke Page with Direct Answer & Schema
+  // Test 10: Article Spoke Page with Direct Answer & Schema
   {
     const req = new Request('https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -103,7 +117,7 @@ async function runTests() {
     assert(body.includes('MedicalWebPage'), 'Article JSON-LD schema includes MedicalWebPage');
   }
 
-  // Test 10: Aloin Removal Article contains Aloin Timer Tool
+  // Test 11: Aloin Removal Article contains Aloin Timer Tool
   {
     const req = new Request('https://aloedaily.com/health/how-to-remove-aloin-from-aloe-leaf/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -112,7 +126,7 @@ async function runTests() {
     assert(body.includes('Aloin Water Flush Countdown Timer'), 'Aloin guide embeds interactive countdown timer tool');
   }
 
-  // Test 11: Juice Dosage Calculator Article contains Dosage Calculator Tool
+  // Test 12: Juice Dosage Calculator Article contains Dosage Calculator Tool
   {
     const req = new Request('https://aloedaily.com/health/aloe-vera-juice-dosage-calculator/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -121,7 +135,7 @@ async function runTests() {
     assert(body.includes('Daily Aloe Vera Juice Intake Estimator'), 'Dosage calculator article embeds interactive dosage estimator');
   }
 
-  // Test 12: Outbound Cloaked Affiliate Redirect
+  // Test 13: Outbound Cloaked Affiliate Redirect
   {
     const req = new Request('https://aloedaily.com/out/seven-minerals-aloe-gel');
     const res = await worker.fetch(req, env, mockCtx);
@@ -130,7 +144,7 @@ async function runTests() {
     assert(res.headers.get('Location')?.includes('amazon.com') === true, 'Affiliate redirect target is correct');
   }
 
-  // Test 13: Editorial & Media Contact API
+  // Test 14: Editorial & Media Contact API
   {
     const req = new Request('https://aloedaily.com/api/contact', {
       method: 'POST',
@@ -148,7 +162,7 @@ async function runTests() {
     assert(data.success === true, 'Editorial contact processed successfully');
   }
 
-  // Test 14: 404 Not Found Page
+  // Test 15: 404 Not Found Page
   {
     const req = new Request('https://aloedaily.com/non-existent-page-xyz/');
     const res = await worker.fetch(req, env, mockCtx);

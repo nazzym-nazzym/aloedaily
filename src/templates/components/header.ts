@@ -10,7 +10,7 @@ export function renderHeader(): string {
     <header>
       <div class="container nav-wrap">
         <a href="/" class="brand">
-          <img src="${SITE_CONFIG.logo}" alt="${SITE_CONFIG.name} Logo" style="height: 2.5rem; width: auto; object-fit: contain; display: block;" />
+          <img src="${SITE_CONFIG.logo}" alt="${SITE_CONFIG.name} Logo" width="40" height="40" fetchpriority="high" decoding="async" style="height: 2.5rem; width: 2.5rem; object-fit: contain; display: block;" />
           <span>Aloe<span style="color: #059669;">Daily</span></span>
         </a>
         <nav class="nav-links">

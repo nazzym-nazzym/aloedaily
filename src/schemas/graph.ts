@@ -21,7 +21,7 @@ export function buildPageSchemaGraph(options: {
     url: SITE_CONFIG.url,
     logo: {
       '@type': 'ImageObject',
-      url: SITE_CONFIG.logo,
+      url: SITE_CONFIG.logoAbsolute,
     },
     sameAs: [
       SITE_CONFIG.social.pinterest,

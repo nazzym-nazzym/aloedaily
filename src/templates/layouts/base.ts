@@ -35,10 +35,13 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <meta name="description" content="${metaDescription}" />
   <link rel="canonical" href="${canonicalUrl}" />
 
+  <!-- Critical Edge Asset Preload for Sub-Millisecond LCP -->
+  <link rel="preload" as="image" href="/assets/logo.webp" fetchpriority="high" type="image/webp" />
+
   <!-- Favicon & Brand Icons -->
-  <link rel="icon" type="image/png" href="${SITE_CONFIG.logo}" />
-  <link rel="shortcut icon" href="${SITE_CONFIG.logo}" />
-  <link rel="apple-touch-icon" href="${SITE_CONFIG.logo}" />
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="48x48" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/logo.webp" />
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:site_name" content="${SITE_CONFIG.name}" />
@@ -46,7 +49,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <meta property="og:description" content="${metaDescription}" />
   <meta property="og:url" content="${canonicalUrl}" />
   <meta property="og:type" content="${ogType}" />
-  <meta property="og:image" content="${SITE_CONFIG.logo}" />
+  <meta property="og:image" content="${SITE_CONFIG.logoAbsolute}" />
   ${publishedTime ? `<meta property="article:published_time" content="${publishedTime}" />` : ''}
   ${modifiedTime ? `<meta property="article:modified_time" content="${modifiedTime}" />` : ''}
 
@@ -54,7 +57,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${title}" />
   <meta name="twitter:description" content="${metaDescription}" />
-  <meta name="twitter:image" content="${SITE_CONFIG.logo}" />
+  <meta name="twitter:image" content="${SITE_CONFIG.logoAbsolute}" />
 
   <!-- Performance Preconnect & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
