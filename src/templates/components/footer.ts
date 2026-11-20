@@ -19,9 +19,9 @@ export function renderFooter(): string {
       <div class="container">
         <div class="footer-grid">
           <div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">
-              <span>🌿</span>
-              <span>AloeDaily</span>
+            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.85rem;">
+              <img src="${SITE_CONFIG.logo}" alt="${SITE_CONFIG.name} Logo" style="height: 2.25rem; width: auto; object-fit: contain; display: block; border-radius: 6px; background: rgba(255,255,255,0.08); padding: 2px;" />
+              <span style="font-size: 1.4rem; font-weight: 800; color: #fff;">AloeDaily</span>
             </div>
             <p style="font-size: 0.875rem; color: #a7f3d0; line-height: 1.6; margin-bottom: 1.25rem;">
               The definitive daily authority for botanical skincare protocols, pure aloe vera applications, aloin safety, cultivation, and independent retail product purity audits.

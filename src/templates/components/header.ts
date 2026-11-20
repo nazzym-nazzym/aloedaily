@@ -1,4 +1,5 @@
 import { MAIN_NAV } from '../../config/navigation';
+import { SITE_CONFIG } from '../../config/site';
 
 export function renderHeader(): string {
   const navHtml = MAIN_NAV.map(
@@ -9,7 +10,7 @@ export function renderHeader(): string {
     <header>
       <div class="container nav-wrap">
         <a href="/" class="brand">
-          <span style="font-size: 1.6rem;">🌿</span>
+          <img src="${SITE_CONFIG.logo}" alt="${SITE_CONFIG.name} Logo" style="height: 2.5rem; width: auto; object-fit: contain; display: block;" />
           <span>Aloe<span style="color: #059669;">Daily</span></span>
         </a>
         <nav class="nav-links">

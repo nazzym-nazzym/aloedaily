@@ -21,7 +21,7 @@ export function buildPageSchemaGraph(options: {
     url: SITE_CONFIG.url,
     logo: {
       '@type': 'ImageObject',
-      url: `${SITE_CONFIG.url}${SITE_CONFIG.logo}`,
+      url: SITE_CONFIG.logo,
     },
     sameAs: [
       SITE_CONFIG.social.pinterest,
@@ -139,7 +139,7 @@ export function buildPageSchemaGraph(options: {
           '@type': 'Review',
           reviewRating: {
             '@type': 'Rating',
-            ratingValue: (article.purityScorecard.overallScore / 20).toFixed(1), // convert to 5-star scale
+            ratingValue: (article.purityScorecard.overallScore / 20).toFixed(1),
             bestRating: '5',
           },
           author: { '@id': `${SITE_CONFIG.url}/authors/${author?.id || 'sarah-jenkins'}/#person` },

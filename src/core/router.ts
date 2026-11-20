@@ -19,7 +19,26 @@ import { SITE_CONFIG } from '../config/site';
 export async function routeRequest(request: Request, url: URL): Promise<Response> {
   const pathname = url.pathname;
 
-  // 1. Virtual Feeds & Robots
+  // 1. Direct Favicon & Logo Assets
+  if (pathname === '/favicon.ico' || pathname === '/favicon.png' || pathname === '/assets/logo.png' || pathname === '/assets/logo.svg') {
+    try {
+      const imgRes = await fetch(SITE_CONFIG.logo);
+      if (imgRes.ok) {
+        return new Response(imgRes.body, {
+          status: 200,
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+          },
+        });
+      }
+    } catch {
+      // fallback redirect
+    }
+    return Response.redirect(SITE_CONFIG.logo, 302);
+  }
+
+  // 2. Virtual Feeds & Robots
   if (pathname === '/robots.txt') {
     return new Response(renderRobotsTxt(), {
       status: 200,
@@ -41,7 +60,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     });
   }
 
-  // 2. Edge API Endpoints
+  // 3. Edge API Endpoints
   if (pathname === '/api/contact') {
     return handleContactSubmission(request);
   }
@@ -50,13 +69,13 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     return handleLeadCapture(request);
   }
 
-  // 3. Outbound Affiliate Referral Redirects (/out/{brand})
+  // 4. Outbound Affiliate Referral Redirects (/out/{brand})
   if (pathname.startsWith('/out/')) {
     const brandSlug = pathname.replace('/out/', '').replace(/\/$/, '');
     return handleAffiliateRedirect(brandSlug);
   }
 
-  // 4. Homepage (/)
+  // 5. Homepage (/)
   if (pathname === '/' || pathname === '') {
     const canonical = `${SITE_CONFIG.url}/`;
     const schema = buildPageSchemaGraph({
@@ -78,7 +97,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     return new Response(html, { status: 200, headers: getCacheHeaders('html') });
   }
 
-  // 5. About & Editorial Standards (/about/)
+  // 6. About & Editorial Standards (/about/)
   if (pathname === '/about/' || pathname === '/about') {
     const canonical = `${SITE_CONFIG.url}/about/`;
     const schema = buildPageSchemaGraph({
@@ -100,7 +119,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     return new Response(html, { status: 200, headers: getCacheHeaders('html') });
   }
 
-  // 6. Pillar Hub Routes (/:pillar/)
+  // 7. Pillar Hub Routes (/:pillar/)
   const segments = pathname.replace(/^\/+|\/+$/g, '').split('/');
   
   if (segments.length === 1) {
@@ -129,7 +148,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     }
   }
 
-  // 7. Article Spoke Routes (/:pillar/:slug/)
+  // 8. Article Spoke Routes (/:pillar/:slug/)
   if (segments.length === 2) {
     const [pillarSegment, slugSegment] = segments;
     const article = getArticleBySlug(slugSegment);
@@ -165,7 +184,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     }
   }
 
-  // 8. 404 Fallback
+  // 9. 404 Fallback
   const notFoundHtml = renderBaseLayout({
     title: 'Page Not Found (404)',
     metaDescription: 'The requested botanical protocol was not found on AloeDaily.',

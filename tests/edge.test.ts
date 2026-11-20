@@ -1,4 +1,5 @@
 import worker from '../src/index';
+import { SITE_CONFIG } from '../src/config/site';
 
 async function runTests() {
   console.log('--- RUNNING ALOEDAILY EDGE WORKER TESTS ---');
@@ -61,7 +62,7 @@ async function runTests() {
     assert(body.includes('<urlset') && body.includes('/skincare/aloe-vera-overnight-face-mask/'), '/sitemap.xml contains article URLs');
   }
 
-  // Test 6: Homepage & Inlined Critical CSS
+  // Test 6: Homepage & Inlined Critical CSS & Logo / Favicon
   {
     const req = new Request('https://aloedaily.com/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -69,10 +70,20 @@ async function runTests() {
     assert(res.status === 200, 'Homepage returns 200 OK');
     assert(body.includes('AloeDaily') && body.includes('<style>'), 'Homepage renders brand & inlined styles');
     assert(body.includes('application/ld+json'), 'Homepage contains schema markup');
+    assert(body.includes(SITE_CONFIG.logo), 'Homepage contains verified custom logo image URL');
+    assert(body.includes('rel="icon"'), 'Homepage contains favicon link in <head>');
+    assert(body.includes('property="og:image"'), 'Homepage contains OpenGraph logo image');
     assert(!body.includes('domain-modal') && !body.includes('Acquisition Inquiries'), 'Homepage has ZERO domain-for-sale banners (passes MarketCall compliance)');
   }
 
-  // Test 7: Pillar Hub Page (/skincare/)
+  // Test 7: Direct Favicon Endpoint
+  {
+    const req = new Request('https://aloedaily.com/favicon.ico');
+    const res = await worker.fetch(req, env, mockCtx);
+    assert(res.status === 200 || res.status === 302, '/favicon.ico successfully serves or redirects image');
+  }
+
+  // Test 8: Pillar Hub Page (/skincare/)
   {
     const req = new Request('https://aloedaily.com/skincare/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -81,7 +92,7 @@ async function runTests() {
     assert(body.includes('Facial Skincare & Dermatological Science'), 'Pillar hub renders headline');
   }
 
-  // Test 8: Article Spoke Page with Direct Answer & Schema
+  // Test 9: Article Spoke Page with Direct Answer & Schema
   {
     const req = new Request('https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -92,7 +103,7 @@ async function runTests() {
     assert(body.includes('MedicalWebPage'), 'Article JSON-LD schema includes MedicalWebPage');
   }
 
-  // Test 9: Aloin Removal Article contains Aloin Timer Tool
+  // Test 10: Aloin Removal Article contains Aloin Timer Tool
   {
     const req = new Request('https://aloedaily.com/health/how-to-remove-aloin-from-aloe-leaf/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -101,7 +112,7 @@ async function runTests() {
     assert(body.includes('Aloin Water Flush Countdown Timer'), 'Aloin guide embeds interactive countdown timer tool');
   }
 
-  // Test 10: Juice Dosage Calculator Article contains Dosage Calculator Tool
+  // Test 11: Juice Dosage Calculator Article contains Dosage Calculator Tool
   {
     const req = new Request('https://aloedaily.com/health/aloe-vera-juice-dosage-calculator/');
     const res = await worker.fetch(req, env, mockCtx);
@@ -110,7 +121,7 @@ async function runTests() {
     assert(body.includes('Daily Aloe Vera Juice Intake Estimator'), 'Dosage calculator article embeds interactive dosage estimator');
   }
 
-  // Test 11: Outbound Cloaked Affiliate Redirect
+  // Test 12: Outbound Cloaked Affiliate Redirect
   {
     const req = new Request('https://aloedaily.com/out/seven-minerals-aloe-gel');
     const res = await worker.fetch(req, env, mockCtx);
@@ -119,7 +130,7 @@ async function runTests() {
     assert(res.headers.get('Location')?.includes('amazon.com') === true, 'Affiliate redirect target is correct');
   }
 
-  // Test 12: Editorial & Media Contact API
+  // Test 13: Editorial & Media Contact API
   {
     const req = new Request('https://aloedaily.com/api/contact', {
       method: 'POST',
@@ -137,7 +148,7 @@ async function runTests() {
     assert(data.success === true, 'Editorial contact processed successfully');
   }
 
-  // Test 13: 404 Not Found Page
+  // Test 14: 404 Not Found Page
   {
     const req = new Request('https://aloedaily.com/non-existent-page-xyz/');
     const res = await worker.fetch(req, env, mockCtx);
