@@ -7,8 +7,9 @@ export const SITE_CONFIG = {
   logo: '/assets/logo.webp',
   logoAbsolute: 'https://aloedaily.com/assets/logo.webp',
   foundedYear: 2024,
-  adminEmail: 'editorial@aloedaily.com',
-  mediaEmail: 'press@aloedaily.com',
+  adminEmail: 'contact@aloedaily.com',
+  mediaEmail: 'contact@aloedaily.com',
+  contactEmail: 'contact@aloedaily.com',
   social: {
     pinterest: 'https://www.pinterest.com/aloedaily',
     youtube: 'https://www.youtube.com/@aloedaily',

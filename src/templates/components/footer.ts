@@ -27,7 +27,7 @@ export function renderFooter(): string {
               The definitive daily authority for botanical skincare protocols, pure aloe vera applications, aloin safety, cultivation, and independent retail product purity audits.
             </p>
             <div style="font-size: 0.8rem; color: #6ee7b7; border-left: 2px solid #059669; padding-left: 0.75rem;">
-              Reviewed by Board-Certified Dermatology & Horticultural Specialists.
+              Vetted by Dedicated Botanical Science & Horticultural Research Desks.
             </div>
           </div>
 
