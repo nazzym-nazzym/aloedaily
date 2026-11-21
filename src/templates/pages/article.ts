@@ -191,7 +191,7 @@ export function renderArticlePage(article: Article): string {
         </div>
         ${reviewer ? `
           <a href="/authors/${reviewer.id}/" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.75rem; border-radius: 9999px; color: #065f46; font-weight: 600; font-size: 0.8rem;">
-            <span>🛡️ Medically Reviewed by ${reviewer.name}</span>
+            <span>🛡️ ${reviewer.isMedicalReviewer ? 'Scientifically Vetted by ' : 'Vetted by '}${reviewer.name}</span>
           </a>
         ` : ''}
       </div>
@@ -233,7 +233,7 @@ export function renderArticlePage(article: Article): string {
         <div class="reviewer-card">
           <img src="${reviewer.avatarUrl}" alt="${reviewer.name}" class="reviewer-avatar" loading="lazy" decoding="async" />
           <div>
-            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #059669;">Medical & Botanical Reviewer</div>
+            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #059669;">${reviewer.isMedicalReviewer ? 'Scientific & Clinical Reviewer' : 'Specialist Editorial Desk'}</div>
             <h4 style="font-size: 1.15rem; color: #064e3b; margin: 0.15rem 0 0.25rem;">
               <a href="/authors/${reviewer.id}/" style="color: inherit; text-decoration: none;">${reviewer.name}</a>
             </h4>

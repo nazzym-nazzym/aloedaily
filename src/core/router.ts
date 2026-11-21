@@ -132,14 +132,14 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     const schema = buildPageSchemaGraph({
       breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'About AloeDaily', url: '/about/' }],
       canonicalUrl: canonical,
-      pageTitle: `About AloeDaily: Editorial Integrity & Medical Board`,
-      pageDescription: 'Meet the board-certified dermatologists, horticulturalists, and cosmetic formulators behind AloeDaily. Review our editorial fact-checking and purity testing policies.',
+      pageTitle: `About AloeDaily: Editorial Standards & Research Desks`,
+      pageDescription: 'Meet the botanical science, horticulture, and cosmetic formulation desks behind AloeDaily. Review our editorial fact-checking and purity testing standards.',
       pageType: 'AboutPage',
     });
 
     const html = renderBaseLayout({
-      title: `About AloeDaily: Medical & Botanical Review Board`,
-      metaDescription: 'Meet our board-certified dermatologists, horticulturalists, and cosmetic formulators. Review our editorial fact-checking and purity testing policies.',
+      title: `About AloeDaily: Editorial Desks & Scientific Standards`,
+      metaDescription: 'Meet our botanical science, horticulture, and cosmetic formulation desks. Review our editorial fact-checking and purity testing standards.',
       canonicalUrl: canonical,
       schemaJson: schema,
       contentHtml: renderAboutPage(),
@@ -152,16 +152,16 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
   if (pathname === '/contact/' || pathname === '/contact') {
     const canonical = `${SITE_CONFIG.url}/contact/`;
     const schema = buildPageSchemaGraph({
-      breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Contact & Advisory Board', url: '/contact/' }],
+      breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Contact & Editorial Desks', url: '/contact/' }],
       canonicalUrl: canonical,
-      pageTitle: `Contact AloeDaily Editorial & Advisory Board`,
+      pageTitle: `Contact AloeDaily Editorial & Research Desks`,
       pageDescription: 'Submit clinical citation corrections, peer-reviewed study feedback, or press interview requests directly to the AloeDaily editorial desk.',
       pageType: 'ContactPage',
     });
 
     const html = renderBaseLayout({
       title: `Editorial & Press Contact | ${SITE_CONFIG.name}`,
-      metaDescription: 'Submit clinical citation inquiries, press interviews, or protocol corrections to the AloeDaily editorial desk and medical advisory board.',
+      metaDescription: 'Submit clinical citation inquiries, press interviews, or protocol corrections to the AloeDaily editorial desk.',
       canonicalUrl: canonical,
       schemaJson: schema,
       contentHtml: renderContactPage(),
@@ -227,7 +227,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
       const schema = buildPageSchemaGraph({
         breadcrumbs: [
           { name: 'Home', url: '/' },
-          { name: 'Medical & Botanical Board', url: '/about/' },
+          { name: 'Editorial Desks', url: '/about/' },
           { name: author.name, url: `/authors/${author.id}/` },
         ],
         canonicalUrl: canonical,

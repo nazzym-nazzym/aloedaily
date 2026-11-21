@@ -66,12 +66,12 @@ export function renderHomePage(): string {
     <!-- Hero Section -->
     <section style="background: linear-gradient(180deg, #ecfdf5 0%, #fafaf9 100%); padding: 4.5rem 0 3rem; border-bottom: 1px solid #e7e5e4;">
       <div class="container" style="text-align: center; max-width: 880px;">
-        <span class="badge-pill" style="margin-bottom: 1rem;">Clinical Botanical Dermatology & Greenhouse Horticulture</span>
+        <span class="badge-pill" style="margin-bottom: 1rem;">Evidence-Based Botanical Dermatology & Horticulture</span>
         <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem); color: #064e3b; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 1.25rem;">
           The Definitive Daily Authority on Pure Aloe Vera & Botanical Science
         </h1>
         <p style="font-size: 1.2rem; color: #44403c; line-height: 1.6; margin-bottom: 2rem;">
-          Cut through the noise of drugstore greenwashing and viral internet myths. We combine board-certified dermatology, clinical aesthetics, and greenhouse horticulture to show you how to safely use, harvest, and audit pure <em>Aloe barbadensis Miller</em>.
+          Cut through the noise of drugstore greenwashing and viral internet myths. We synthesize peer-reviewed clinical dermatology, pharmacological toxicology, and practical horticulture to show you how to safely use, harvest, and audit pure <em>Aloe barbadensis Miller</em>.
         </p>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
           <a href="/skincare/" style="background: #064e3b; color: #fff; padding: 0.85rem 1.75rem; border-radius: 9999px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(6,78,59,0.25);">
@@ -118,15 +118,15 @@ export function renderHomePage(): string {
                 <span>🧮</span> <span>Clinical Weight-Based Juice Dosage Calculator &rarr;</span>
               </a>
               <a href="/cultivation/fix-soft-mushy-aloe-leaves/" style="color: #a7f3d0; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
-                <span>🌱</span> <span>Plant Root Rot Diagnostic & Cinnamon Surgery &rarr;</span>
+                <span>🌱</span> <span>Plant Root Rot Diagnostic & Cinnamon Protocol &rarr;</span>
               </a>
             </div>
           </div>
           <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 1.5rem; padding: 2rem;">
             <div style="font-size: 0.85rem; color: #6ee7b7; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">Consumer Protection Benchmark</div>
-            <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 0.75rem;">The AloeDaily Purity Index™ (API-100)</h3>
+            <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 0.75rem;">The AloeDaily Purity & Formulation Index™</h3>
             <p style="color: #d1fae5; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">
-              Over 60% of commercial "100% Pure Aloe" products on Amazon are cut with synthetic carbomers and contain zero active acemannan. We purchase products anonymously at retail and publish independent lab scorecards.
+              Many commercial "100% Pure Aloe" products on retail shelves are thickened with synthetic carbomers or contain artificial additives. We audit INCI ingredient statements and verify third-party certifications to evaluate genuine botanical integrity.
             </p>
             <a href="/audits/best-pure-aloe-vera-gels-reviewed/" style="display: inline-block; background: #10b981; color: #064e3b; font-weight: 800; padding: 0.65rem 1.25rem; border-radius: 0.5rem; text-decoration: none;">
               Explore Commercial Gel Audits

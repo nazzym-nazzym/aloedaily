@@ -3,23 +3,23 @@ import { PurityScorecard } from './types';
 export const TESTED_PRODUCTS: Record<string, PurityScorecard> = {
   'seven-minerals-pure-gel': {
     brandName: 'Seven Minerals',
-    productName: 'Organic Aloe Vera Gel (Unfiltered Inner Fillet)',
+    productName: 'Organic Aloe Vera Gel (Inner Leaf Fillet Formulation)',
     overallScore: 96,
     acemannanPercentage: 99.1,
     preservativeSafety: 'Clean',
     processingMethod: 'Cold-Pressed Inner Fillet',
     iascCertified: true,
-    verdict: 'Highest overall purity benchmark. Uses cold-pressed Texas aloe with food-grade citric acid and ascorbic acid preservatives. Zero synthetic carbomers or sticky thickeners.',
+    verdict: 'Top formulation transparency benchmark. Declared 99.1% pure inner-fillet aloe stabilized with food-grade citric acid and potassium sorbate. Free from synthetic carbomers, acrylates, triethanolamine, and artificial colorants.',
     affiliateUrl: '/out/seven-minerals-aloe-gel',
     pros: [
-      'Cold-pressed inner fillet preserves bioactive acemannan',
-      'Food-grade clean preservation (citric acid, potassium sorbate)',
-      'Certified by International Aloe Science Council (IASC)',
-      'Water-light absorption without pore-clogging film'
+      'Cold-pressed inner fillet base preserves bioactive polysaccharides',
+      'Food-grade clean preservation (citric acid, potassium sorbate, ascorbic acid)',
+      'Verified International Aloe Science Council (IASC) facility standards',
+      'Non-sticky water-light skin absorption without synthetic polymer film'
     ],
     cons: [
-      'Requires refrigeration after opening (3-month shelf life)',
-      'Slightly thinner consistency than drug-store synthetic gels'
+      'Refrigeration recommended after opening due to gentle food-grade preservatives',
+      'Naturally thinner viscosity than artificially thickened drugstore gels'
     ]
   },
   'sky-organics-aloe-gel': {
@@ -30,35 +30,35 @@ export const TESTED_PRODUCTS: Record<string, PurityScorecard> = {
     preservativeSafety: 'Clean',
     processingMethod: 'Cold-Pressed Inner Fillet',
     iascCertified: true,
-    verdict: 'Excellent clean formulation for facial use. Certified USDA Organic with minimal natural thickener (xanthan gum) for smooth topical glide.',
+    verdict: 'High-quality clean formulation. USDA Organic certified raw material with a minimal addition of natural food-grade xanthan gum to provide smooth topical glide for facial application.',
     affiliateUrl: '/out/sky-organics-aloe-gel',
     pros: [
-      'USDA Organic certified raw material',
-      'Natural food-grade xanthan gum gives optimal glide for micro-current devices',
-      'Non-sticky, fragrance-free formula'
+      'Certified USDA Organic aloe barbadensis leaf juice base',
+      'Natural food-grade xanthan gum provides optimal glide for facial massage',
+      'Fragrance-free, dye-free formulation with clean safety profile'
     ],
     cons: [
-      'Mild natural botanical scent that fades quickly'
+      'Subtle natural botanical aroma that dissipates quickly upon drying'
     ]
   },
   'generic-drugstore-blue-gel': {
-    brandName: 'Commercial Drugstore Brand X',
-    productName: 'After-Sun Soothing Aloe Vera Gel',
+    brandName: 'Typical Mass-Market Commercial Formulation',
+    productName: 'After-Sun Synthetic Gel (Formulation Benchmark)',
     overallScore: 42,
     acemannanPercentage: 24.3,
     preservativeSafety: 'Synthetic/Harsh',
     processingMethod: 'Spray-Dried Reconstituted Powder',
     iascCertified: false,
-    verdict: 'Fails botanical purity test. Over 70% water, denatured alcohol, synthetic blue/yellow dyes, and triethanolamine thickeners. Can sting compromised sunburned skin.',
+    verdict: 'Fails botanical formulation transparency standards. Primary base is water reconstituted with spray-dried powder, heavy denatured alcohol (causing initial artificial cooling but subsequent barrier dehydration), synthetic carbomer thickeners, triethanolamine, and artificial colorants (FD&C Blue #1, Yellow #5).',
     affiliateUrl: '#',
     pros: [
-      'Very cheap retail price',
-      'Immediate artificial cooling effect due to alcohol evaporation'
+      'Inexpensive drugstore retail price',
+      'Immediate artificial cooling sensation caused by rapid alcohol evaporation'
     ],
     cons: [
-      'High concentration of denatured alcohol dehydrates the skin barrier',
-      'Artificial colorants (FD&C Blue #1, Yellow #5) pose dermatitis risk',
-      'Reconstituted from degraded spray-dried powder lacking active acemannan'
+      'High denatured alcohol content strips natural epidermal lipid barrier',
+      'Synthetic petrochemical dyes (FD&C Blue #1, Yellow #5) carry contact dermatitis risk',
+      'Contains carbomers and triethanolamine to create synthetic gel bounce without active aloe solids'
     ]
   }
 };

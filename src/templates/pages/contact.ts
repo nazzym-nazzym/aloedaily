@@ -2,8 +2,11 @@ import { SITE_CONFIG } from '../../config/site';
 import { AUTHORS } from '../../data/authors';
 
 export function renderContactPage(): string {
-  const boardHtml = Object.values(AUTHORS).map(
-    (author) => `
+  const primaryDeskIds = ['botanical-research-desk', 'horticulture-desk', 'formulation-desk'];
+  const boardHtml = primaryDeskIds.map(id => {
+    const author = AUTHORS[id];
+    if (!author) return '';
+    return `
       <div style="background: #ffffff; border: 1px solid #e7e5e4; border-radius: 0.75rem; padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
         <img src="${author.avatarUrl}" alt="${author.name}" style="width: 3.5rem; height: 3.5rem; border-radius: 9999px; object-fit: cover; border: 2px solid #059669;" />
         <div>
@@ -11,11 +14,11 @@ export function renderContactPage(): string {
             <a href="/authors/${author.id}/" style="color: inherit; text-decoration: none;">${author.name}</a>
           </h4>
           <div style="font-size: 0.85rem; color: #57534e;">${author.role}</div>
-          <a href="/authors/${author.id}/" style="font-size: 0.8rem; color: #047857; font-weight: 600;">View Profile & Verified Credentials &rarr;</a>
+          <a href="/authors/${author.id}/" style="font-size: 0.8rem; color: #047857; font-weight: 600;">View Profile & Editorial Standards &rarr;</a>
         </div>
       </div>
-    `
-  ).join('');
+    `;
+  }).join('');
 
   return `
     <div style="background: linear-gradient(180deg, #ecfdf5 0%, #fafaf9 100%); padding: 3.5rem 0 2.5rem; border-bottom: 1px solid #e7e5e4;">
@@ -30,7 +33,7 @@ export function renderContactPage(): string {
 
         <span class="badge-pill" style="margin-bottom: 0.75rem;">Direct Communications</span>
         <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); color: #064e3b; margin-bottom: 0.75rem;">
-          Contact AloeDaily Editorial & Advisory Board
+          Contact AloeDaily Editorial & Research Desks
         </h1>
         <p style="font-size: 1.15rem; color: #44403c; line-height: 1.6;">
           Have a scientific inquiry, clinical citation correction, or press interview request? Our editorial desk responds directly within 1 to 2 business days.
@@ -43,7 +46,7 @@ export function renderContactPage(): string {
         <div style="background: #ffffff; border: 1px solid #e7e5e4; border-radius: 1rem; padding: 1.5rem;">
           <h3 style="font-size: 1.2rem; color: #064e3b; margin-bottom: 0.5rem;">Editorial & Corrections Desk</h3>
           <p style="font-size: 0.9rem; color: #57534e; line-height: 1.5; margin-bottom: 1rem;">
-            For peer-reviewed literature citations, ingredient audit disputes, or factual feedback on clinical protocols.
+            For peer-reviewed literature citations, ingredient audit questions, or factual feedback on clinical protocols.
           </p>
           <a href="mailto:${SITE_CONFIG.adminEmail}" style="font-weight: 700; color: #047857;">${SITE_CONFIG.adminEmail}</a>
         </div>
@@ -51,7 +54,7 @@ export function renderContactPage(): string {
         <div style="background: #ffffff; border: 1px solid #e7e5e4; border-radius: 1rem; padding: 1.5rem;">
           <h3 style="font-size: 1.2rem; color: #064e3b; margin-bottom: 0.5rem;">Press & Media Relations</h3>
           <p style="font-size: 0.9rem; color: #57534e; line-height: 1.5; margin-bottom: 1rem;">
-            Interviews with Dr. Elena Vance or Marcus Chen regarding botanical research, aloin regulations, or consumer market findings.
+            Inquiries regarding botanical research synthesis, aloin toxicology guidelines, or consumer formulation transparency audits.
           </p>
           <a href="mailto:${SITE_CONFIG.mediaEmail}" style="font-weight: 700; color: #047857;">${SITE_CONFIG.mediaEmail}</a>
         </div>
@@ -59,7 +62,7 @@ export function renderContactPage(): string {
 
       <section style="background: #ffffff; border: 1px solid #e7e5e4; border-radius: 1.25rem; padding: 2rem; margin-bottom: 3.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
         <h2 style="font-size: 1.5rem; color: #064e3b; margin-bottom: 1.25rem;">
-          Send an Encrypted Dispatch to Our Editors
+          Send an Inquiry to Our Editors
         </h2>
         
         <form id="contact-form" action="/api/contact" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
@@ -91,7 +94,7 @@ export function renderContactPage(): string {
 
       <section>
         <h3 style="font-size: 1.35rem; color: #064e3b; margin-bottom: 1rem;">
-          Medical & Botanical Advisory Board Roster
+          Editorial & Research Desks Roster
         </h3>
         <div style="display: flex; flex-direction: column; gap: 1rem;">
           ${boardHtml}

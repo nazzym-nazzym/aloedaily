@@ -50,7 +50,7 @@ async function runTests() {
     const res = await worker.fetch(req, env, mockCtx);
     const body = await res.text();
     assert(res.status === 200, '/llms.txt returns 200 OK');
-    assert(body.includes('AloeDaily') && body.includes('Medical & Botanical Review Board'), '/llms.txt contains publisher authority data');
+    assert(body.includes('AloeDaily') && body.includes('Editorial & Research Desks'), '/llms.txt contains publisher authority data');
   }
 
   // Test 5: Sitemap.xml
@@ -113,7 +113,7 @@ async function runTests() {
     const body = await res.text();
     assert(res.status === 200, 'Article spoke returns 200 OK');
     assert(body.includes('Quick Answer & Key Finding'), 'Article contains GEO Direct Answer block');
-    assert(body.includes('Dr. Elena Vance'), 'Article contains medical reviewer credentials');
+    assert(body.includes('AloeDaily Botanical Research Desk'), 'Article contains scientific desk credentials');
     assert(body.includes('MedicalWebPage'), 'Article JSON-LD schema includes MedicalWebPage');
   }
 
@@ -183,14 +183,29 @@ async function runTests() {
     assert(res.headers.get('Content-Security-Policy')?.includes("default-src 'self'") === true, 'Content-Security-Policy header present');
   }
 
-  // Test 17: Author Profile Pages (/authors/dr-elena-vance/)
+  // Test 17: Author Profile Pages & Authentic Desks (/authors/:id/)
   {
     const req = new Request('https://aloedaily.com/authors/dr-elena-vance/');
     const res = await worker.fetch(req, env, mockCtx);
     const body = await res.text();
-    assert(res.status === 200, '/authors/dr-elena-vance/ profile returns 200 OK');
-    assert(body.includes('Dr. Elena Vance') && body.includes('ProfilePage'), 'Author profile includes name and ProfilePage schema');
-    assert(body.includes('Stanford University'), 'Author profile renders academic credentials');
+    assert(res.status === 200, '/authors/dr-elena-vance/ legacy alias returns 200 OK');
+    assert(body.includes('AloeDaily Botanical Research Desk') && body.includes('ProfilePage'), 'Author profile includes desk name and ProfilePage schema');
+    assert(body.includes('PubMed, JAAD, Burns & NTP Peer-Reviewed Literature Standards'), 'Author profile renders academic literature standards');
+  }
+
+  // Test 17b: Authentic Desks (/authors/horticulture-desk/ and /authors/formulation-desk/)
+  {
+    const reqHort = new Request('https://aloedaily.com/authors/horticulture-desk/');
+    const resHort = await worker.fetch(reqHort, env, mockCtx);
+    const bodyHort = await resHort.text();
+    assert(resHort.status === 200, '/authors/horticulture-desk/ returns 200 OK');
+    assert(bodyHort.includes('AloeDaily Horticulture & Cultivation Desk'), 'Horticulture desk renders proper title');
+
+    const reqForm = new Request('https://aloedaily.com/authors/formulation-desk/');
+    const resForm = await worker.fetch(reqForm, env, mockCtx);
+    const bodyForm = await resForm.text();
+    assert(resForm.status === 200, '/authors/formulation-desk/ returns 200 OK');
+    assert(bodyForm.includes('AloeDaily Ingredient & Formulation Audit Desk'), 'Formulation desk renders proper title');
   }
 
   // Test 18: Privacy Policy Page (/privacy/)
@@ -217,7 +232,7 @@ async function runTests() {
     const res = await worker.fetch(req, env, mockCtx);
     const body = await res.text();
     assert(res.status === 200, '/contact/ returns 200 OK');
-    assert(body.includes('Contact AloeDaily Editorial & Advisory Board'), 'Contact page renders correct heading and form');
+    assert(body.includes('Contact AloeDaily Editorial & Research Desks'), 'Contact page renders correct heading and form');
   }
 
   // Test 21: RSS 2.0 Feed (/feed.xml)

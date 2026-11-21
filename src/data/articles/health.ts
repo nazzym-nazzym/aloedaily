@@ -7,12 +7,12 @@ export const HEALTH_ARTICLES: Article[] = [
     pillar: 'health',
     title: 'How to Remove Yellow Aloin from Fresh Aloe Leaves: The Step-by-Step Kitchen Safety Guide',
     metaTitle: 'How to Remove Aloin from Fresh Aloe Leaf (Kitchen Safety Guide)',
-    metaDescription: 'Don\'t make yourself sick! Marcus Chen explains how to drain the bitter yellow aloin latex from fresh aloe leaves before eating or applying to skin.',
+    metaDescription: 'Learn how to drain bitter yellow aloin latex from fresh aloe leaves before eating or applying to skin to avoid abdominal cramping and contact dermatitis.',
     publishedAt: '2025-01-10',
     updatedAt: '2025-02-20',
     readTimeMinutes: 8,
-    authorId: 'marcus-chen',
-    reviewedById: 'dr-elena-vance',
+    authorId: 'horticulture-desk',
+    reviewedById: 'botanical-research-desk',
     badge: 'Toxicology & Safety',
     howToTotalTime: 'PT35M',
     howToTools: ['Chef knife', 'Cutting board', 'Tall glass', 'Strainer colander'],
@@ -21,7 +21,7 @@ export const HEALTH_ARTICLES: Article[] = [
     tableOfContents: [
       { id: 'the-yellow-sap-trap', title: 'The Yellow Sap Trap: Why That Bitter Resin Is Dangerous', level: 2 },
       { id: 'aloin-vs-gel', title: 'Latex vs. Clear Fillet: What You Can & Cannot Ingest', level: 2 },
-      { id: 'the-kitchen-protocol', title: 'Marcus\'s 4-Step Gravity & Water Leaching Protocol', level: 2 },
+      { id: 'the-kitchen-protocol', title: 'The 4-Step Gravity & Water Leaching Protocol', level: 2 },
       { id: 'the-taste-test', title: 'The 3-Second Taste Test: How to Know You Did It Right', level: 2 },
       { id: 'faqs', title: 'Frequently Asked Questions', level: 2 }
     ],
@@ -36,7 +36,7 @@ export const HEALTH_ARTICLES: Article[] = [
 
       <section id="aloin-vs-gel">
         <h2>Latex vs. Clear Fillet: What You Can & Cannot Ingest</h2>
-        <p>To safely harvest aloe, you must understand the leaf\'s anatomy like a surgeon:</p>
+        <p>To safely harvest aloe, you must understand the leaf's anatomy like a surgeon:</p>
         <ul>
           <li><strong>The Outer Green Rind:</strong> Fibrous and tough. Great for protecting the plant; bitter and inedible for humans.</li>
           <li><strong>The Yellow Latex Layer (Aloin):</strong> Located directly between the green skin and the clear flesh. Highly laxative, pungent, and strictly avoided.</li>
@@ -45,12 +45,13 @@ export const HEALTH_ARTICLES: Article[] = [
       </section>
 
       <section id="the-kitchen-protocol">
-        <h2>Marcus\'s 4-Step Gravity & Water Leaching Protocol</h2>
-        <p>Here is the exact method I use in our botanical laboratory to guarantee 100% aloin-free gel:</p>
+        <h2>The 4-Step Gravity & Water Leaching Protocol</h2>
+        <p>Follow this standardized 4-step preparation protocol to effectively eliminate residual aloin:</p>
       </section>
     `,
     scientificCitations: [
-      CLINICAL_STUDIES['aloin-toxicity-safety-2022']
+      CLINICAL_STUDIES['aloin-toxicology-boudreau-2017'],
+      CLINICAL_STUDIES['ntp-toxicology-tr577-2013']
     ],
     howToSteps: [
       {
@@ -86,14 +87,14 @@ export const HEALTH_ARTICLES: Article[] = [
     slug: 'what-happens-drinking-aloe-vera-daily',
     pillar: 'health',
     title: 'What Happens to Your Body When You Drink Aloe Vera Daily? A Clinical Gastroenterology Review',
-    metaTitle: 'What Happens When You Drink Aloe Vera Daily? Doctor\'s Honest Review',
-    metaDescription: 'Dr. Elena Vance explains what actually happens to your stomach acid, gut microbiome, and bowel regularity when drinking pure decolorized aloe vera juice every morning.',
+    metaTitle: 'What Happens When You Drink Aloe Vera Daily? Clinical Review',
+    metaDescription: 'Explore what peer-reviewed clinical research reveals about stomach acid, gut microbiome, and safety when consuming certified decolorized aloe vera juice.',
     publishedAt: '2025-01-22',
     updatedAt: '2025-02-20',
     readTimeMinutes: 7,
-    authorId: 'dr-elena-vance',
-    reviewedById: 'dr-elena-vance',
-    badge: 'Doctor Review',
+    authorId: 'botanical-research-desk',
+    reviewedById: 'formulation-desk',
+    badge: 'Clinical Review',
     directAnswer: 'Drinking 2 to 3 ounces of certified decolorized aloe vera juice daily provides clinically proven digestive benefits. It coats the esophagus to relieve acid reflux, acts as a prebiotic substrate for beneficial Bifidobacteria in the colon, and helps soothe inflammatory bowel irritation. However, drinking unpurified juice with aloin causes electrolyte loss and cramping. Stick to certified decolorized inner-fillet juice.',
     tableOfContents: [
       { id: 'first-sip', title: 'What Pure Aloe Juice Actually Tastes Like', level: 2 },
@@ -111,28 +112,28 @@ export const HEALTH_ARTICLES: Article[] = [
 
       <section id="esophageal-shield">
         <h2>The Esophageal Shield: How Aloe Soothes Acid Reflux</h2>
-        <p>As a medical doctor, one of the most frustrating aspects of standard acid reflux treatment is the chronic over-prescription of proton pump inhibitors (PPIs). While PPIs stop acid production, long-term acid suppression impairs protein digestion, reduces B12 absorption, and disrupts the gut microbiome.</p>
-        <p>Pure aloe vera works through a completely different, non-systemic mechanism: <strong>mucosal coating</strong>. When you swallow 2 ounces of aloe juice 20 minutes before a meal, the viscous polysaccharides coat the delicate esophageal lining with a protective bio-adhesive barrier. When stomach acid splashes upward, it hits this protective botanical cushion instead of burning bare epithelial tissue.</p>
+        <p>In clinical gastroenterology, managing gastroesophageal reflux often involves acid suppression therapies like proton pump inhibitors (PPIs). While PPIs reduce gastric acidity, prolonged acid suppression can impact protein digestion, micronutrient absorption, and the gut microbiome balance.</p>
+        <p>Pure aloe vera works through a non-systemic mechanism: <strong>mucosal coating</strong>. When consuming 2 ounces of purified aloe juice before a meal, the viscous polysaccharides coat the delicate esophageal lining with a protective bio-adhesive barrier. This botanical cushion shields epithelial tissue from gastric acid exposure, as demonstrated in randomized trials for GERD symptom management.</p>
       </section>
 
       <section id="gut-microbiome">
         <h2>What Happens to Your Gut Flora Over 30 Days</h2>
-        <p>In our digestive tract, the complex long-chain sugars in aloe (acemannan and glucomannan) act as potent <strong>prebiotic substrates</strong>. Human digestive enzymes cannot break down these complex polysaccharide chains in the upper stomach. They travel intact down to your large intestine, where beneficial probiotic bacteria—specifically <em>Bifidobacterium</em> and <em>Lactobacillus</em>—ferment them into therapeutic short-chain fatty acids (SCFAs) like butyrate, which fuels the cells lining your colon.</p>
+        <p>In the digestive tract, the complex long-chain sugars in aloe (acemannan and glucomannan) act as <strong>prebiotic substrates</strong>. Human digestive enzymes cannot break down these complex polysaccharide chains in the upper gastrointestinal tract. They travel intact down to the large intestine, where beneficial commensal bacteria—specifically <em>Bifidobacterium</em> and <em>Lactobacillus</em>—ferment them into therapeutic short-chain fatty acids (SCFAs) like butyrate, which fuels colonocyte lining cells.</p>
       </section>
 
       <section id="who-should-never-drink-it">
         <h2>Who Should Never Drink Aloe Vera Juice</h2>
-        <p>While purified aloe juice is remarkably safe, clinical prudence requires clear warnings:</p>
+        <p>While purified aloe juice is well tolerated, clinical toxicology guidelines require clear warnings:</p>
         <ul>
           <li><strong>Pregnancy & Nursing:</strong> Strictly contraindicated. Anthraquinone residues can stimulate uterine contractions and cause pelvic congestion.</li>
-          <li><strong>Diabetic Medications:</strong> Aloe has a mild, documented hypoglycemic effect. If you take metformin or insulin, monitor your blood sugar closely to avoid unexpected dips.</li>
-          <li><strong>Potassium-Wasting Diuretics:</strong> If your juice contains trace aloin, excessive consumption can accelerate potassium excretion.</li>
+          <li><strong>Diabetic Medications:</strong> Aloe has a mild, documented hypoglycemic effect. If taking metformin or insulin, monitor blood glucose closely to avoid unexpected dips.</li>
+          <li><strong>Potassium-Wasting Diuretics:</strong> If juice contains trace aloin, excessive consumption can accelerate renal potassium excretion.</li>
         </ul>
       </section>
     `,
     scientificCitations: [
-      CLINICAL_STUDIES['gerd-gastric-mucosa-2020'],
-      CLINICAL_STUDIES['aloin-toxicity-safety-2022']
+      CLINICAL_STUDIES['gerd-panahi-2015'],
+      CLINICAL_STUDIES['aloin-toxicology-boudreau-2017']
     ],
     faqs: [
       {
@@ -150,13 +151,13 @@ export const HEALTH_ARTICLES: Article[] = [
     slug: 'aloe-vera-juice-dosage-calculator',
     pillar: 'health',
     title: 'Daily Aloe Vera Juice Dosage Calculator: How Much Should You Drink?',
-    metaTitle: 'Aloe Vera Juice Dosage Calculator: Safe Daily Intake Guide',
-    metaDescription: 'Use our doctor-designed aloe vera juice dosage calculator to find your exact daily ounces based on your body weight, health goals, and product strength.',
+    metaTitle: 'Aloe Vera Juice Dosage Calculator: Evidence-Based Intake Guide',
+    metaDescription: 'Calculate evidence-based daily aloe vera juice intake in ounces based on body weight, digestive goals, and formulation concentration.',
     publishedAt: '2025-01-30',
     updatedAt: '2025-02-20',
     readTimeMinutes: 5,
-    authorId: 'dr-elena-vance',
-    reviewedById: 'marcus-chen',
+    authorId: 'botanical-research-desk',
+    reviewedById: 'formulation-desk',
     badge: 'Interactive Health Tool',
     directAnswer: 'For healthy adults, the standard daily dose of certified decolorized aloe vera juice is 1.5 to 2 ounces (45–60 ml) for general wellness, or up to 4 ounces (120 ml) divided into two doses for active acid reflux management. Dosing above 6 ounces a day offers no extra benefit and may speed up gastrointestinal transit unnecessarily.',
     tableOfContents: [
@@ -181,8 +182,8 @@ export const HEALTH_ARTICLES: Article[] = [
       </section>
     `,
     scientificCitations: [
-      CLINICAL_STUDIES['gerd-gastric-mucosa-2020'],
-      CLINICAL_STUDIES['aloin-toxicity-safety-2022']
+      CLINICAL_STUDIES['gerd-panahi-2015'],
+      CLINICAL_STUDIES['ntp-toxicology-tr577-2013']
     ],
     faqs: [
       {

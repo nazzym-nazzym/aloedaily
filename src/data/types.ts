@@ -88,7 +88,7 @@ export interface Author {
   organization: string;
   alumniOf: string;
   orcidId?: string;
-  linkedInUrl: string;
+  linkedInUrl?: string;
   medicalRegistryUrl?: string;
   bio: string;
   avatarUrl: string;

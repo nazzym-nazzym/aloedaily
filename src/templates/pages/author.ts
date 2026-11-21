@@ -49,7 +49,7 @@ export function renderAuthorPage(
       <article class="card">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
           <span class="badge-pill" style="font-size: 0.7rem;">${article.pillar}</span>
-          <span style="font-size: 0.7rem; font-weight: 700; color: #065f46; background: #ecfdf5; padding: 0.2rem 0.5rem; border-radius: 9999px; border: 1px solid #a7f3d0;">🛡️ Medically Reviewed</span>
+          <span style="font-size: 0.7rem; font-weight: 700; color: #065f46; background: #ecfdf5; padding: 0.2rem 0.5rem; border-radius: 9999px; border: 1px solid #a7f3d0;">🛡️ Scientifically Vetted</span>
           <span style="font-size: 0.75rem; color: #78716c; margin-left: auto;">${article.readTimeMinutes} min read</span>
         </div>
         <h3 style="font-size: 1.15rem; color: #064e3b; margin-bottom: 0.5rem;">
@@ -75,7 +75,7 @@ export function renderAuthorPage(
           <ol style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #78716c;">
             <li><a href="/" style="color: #047857;">Home</a></li>
             <li aria-hidden="true">&rsaquo;</li>
-            <li><a href="/about/" style="color: #047857;">Medical & Botanical Board</a></li>
+            <li><a href="/about/" style="color: #047857;">Editorial Desks</a></li>
             <li aria-hidden="true">&rsaquo;</li>
             <li aria-current="page" style="color: #44403c; font-weight: 600;">${author.name}</li>
           </ol>
@@ -84,7 +84,7 @@ export function renderAuthorPage(
         <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
           <img
             src="${author.avatarUrl}"
-            alt="Portrait of ${author.name}, ${author.role}"
+            alt="Emblem of ${author.name}, ${author.role}"
             width="120"
             height="120"
             fetchpriority="high"
@@ -93,7 +93,7 @@ export function renderAuthorPage(
           />
           <div style="flex: 1; min-width: 280px;">
             <span class="badge-pill" style="margin-bottom: 0.5rem;">
-              ${author.isMedicalReviewer ? 'Board-Certified Medical Reviewer' : 'Botanical Subject Specialist'}
+              ${author.isMedicalReviewer ? 'Scientific & Clinical Research Desk' : 'Specialist Editorial Desk'}
             </span>
             <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); color: #064e3b; margin: 0.25rem 0 0.4rem; line-height: 1.2;">
               ${author.name}
@@ -118,7 +118,7 @@ export function renderAuthorPage(
     <div class="container" style="max-width: 900px; padding: 3rem 1.25rem 5rem;">
       <section style="background: #ffffff; border: 1px solid #e7e5e4; border-radius: 1.25rem; padding: 2rem; margin-bottom: 3.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
         <h2 style="font-size: 1.4rem; color: #064e3b; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem;">
-          Biography & Clinical Credentials
+          Mandate & Editorial Standards
         </h2>
         <p style="font-size: 1.05rem; color: #292524; line-height: 1.7; margin-bottom: 1.25rem;">
           ${author.bio}

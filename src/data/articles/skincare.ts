@@ -5,91 +5,91 @@ export const SKINCARE_ARTICLES: Article[] = [
   {
     slug: 'aloe-vera-overnight-face-mask',
     pillar: 'skincare',
-    title: 'Can You Leave Aloe Vera on Your Face Overnight? A Dermatologist & Aesthetician Safety Guide',
-    metaTitle: 'Can You Leave Aloe Vera on Face Overnight? (Doctor & Aesthetician Review)',
-    metaDescription: 'Is sleeping with aloe vera on your skin actually safe? Dr. Elena Vance and aesthetician Sarah Jenkins break down pore-clogging risks, tight film sensations, and step-by-step nighttime routines.',
+    title: 'Can You Leave Aloe Vera on Your Face Overnight? Dermatological Evidence & Safety Protocol',
+    metaTitle: 'Can You Leave Aloe Vera on Face Overnight? Dermatological Safety Guide',
+    metaDescription: 'Is sleeping with aloe vera on your face safe? We examine nocturnal transepidermal water loss (TEWL), pore-clogging ratings, tightening films, and application routines.',
     publishedAt: '2025-01-15',
     updatedAt: '2025-02-20',
     readTimeMinutes: 7,
-    authorId: 'sarah-jenkins',
-    reviewedById: 'dr-elena-vance',
+    authorId: 'botanical-research-desk',
+    reviewedById: 'formulation-desk',
     badge: 'Clinical Protocol',
     directAnswer: 'Yes, leaving pure aloe vera gel on your face overnight is safe and deeply hydrating for most skin types. Because genuine aloe has a comedogenic rating of 0, it cannot clog pores. However, as the water evaporates, natural polysaccharides create a tight surface film. Layering two drops of squalane oil over the gel prevents this tightness, while anyone with sensitive skin must ensure yellow aloin latex is completely removed first.',
     tableOfContents: [
-      { id: 'quick-verdict', title: 'The Honest Truth About Sleeping with Aloe', level: 2 },
-      { id: 'what-happens-at-night', title: 'What Actually Happens to Your Skin Between 11 PM and 4 AM', level: 2 },
+      { id: 'quick-verdict', title: 'The Scientific Verdict on Sleeping with Aloe', level: 2 },
+      { id: 'what-happens-at-night', title: 'Nocturnal Skin Physiology & Moisture Retention', level: 2 },
       { id: 'why-does-it-feel-tight', title: 'Why Does Aloe Feel Tight & Stiff When It Dries?', level: 2 },
-      { id: 'the-pore-clogging-myth', title: 'The Breakout Trap: Why Some People React', level: 2 },
-      { id: 'fresh-leaf-vs-bottle', title: 'Raw Leaf Fillet vs. Bottled Gel: Our Hands-On Take', level: 2 },
-      { id: 'the-nighttime-ritual', title: 'Sarah\'s 3-Step Bedtime Application Routine', level: 2 },
-      { id: 'faqs', title: 'Common Questions from Our Treatment Room', level: 2 },
+      { id: 'the-pore-clogging-myth', title: 'The Breakout Trap: Why Some Skin Reacts', level: 2 },
+      { id: 'fresh-leaf-vs-bottle', title: 'Raw Leaf Fillet vs. Decolorized Commercial Gel', level: 2 },
+      { id: 'the-nighttime-ritual', title: 'The 3-Step Bedtime Application Protocol', level: 2 },
+      { id: 'faqs', title: 'Frequently Asked Questions', level: 2 },
     ],
     htmlContent: `
       <section id="quick-verdict">
-        <h2>The Honest Truth About Sleeping with Aloe</h2>
-        <p>In my treatment room, clients constantly ask me if slathering fresh aloe vera on their face before bed is a miracle cure or a recipe for disaster. The short answer: when done correctly, it is one of the most gentle, effective sleeping masks on earth. But when done carelessly—especially with raw leaves picked straight off a windowsill or with cheap green drugstore gels loaded with dye—it can leave your skin red, stinging, and covered in micro-bumps by morning.</p>
-        <p>The difference comes down to two simple things: understanding how aloe behaves as it dries, and making sure you aren't accidentally coating your face in <em>aloin</em> (the plant's irritating yellow sap).</p>
+        <h2>The Scientific Verdict on Sleeping with Aloe</h2>
+        <p>In dermatological skincare research, leaving pure aloe vera gel on the skin overnight functions as an effective, biocompatible humectant compress. When formulated correctly, pure inner-fillet aloe provides sustained hydration without pore-clogging lipids or occlusive waxes. However, improper application—particularly using raw leaves containing unremoved <em>aloin</em> latex or commercial formulas adulterated with synthetic dyes and triethanolamine—can cause acute skin irritation.</p>
+        <p>Understanding the physiological mechanism of aloe requires analyzing how its polysaccharide matrix behaves as moisture evaporates during sleep.</p>
       </section>
 
       <section id="what-happens-at-night">
-        <h2>What Actually Happens to Your Skin Between 11 PM and 4 AM</h2>
-        <p>Your skin does not sleep when you do. During the nocturnal circadian repair window, skin temperature rises slightly, cell turnover accelerates, and <strong>transepidermal water loss (TEWL)</strong> peaks. In plain English: your skin dumps water into the bedroom air faster at 2:00 AM than at 2:00 PM.</p>
-        <p>When you apply pure aloe vera before hitting the pillow, its dense network of <strong>acemannan polysaccharides</strong> forms a breathable, water-rich shield over your stratum corneum. Instead of suffocating your pores beneath heavy waxes or mineral oils, aloe acts like a cool reservoir, slowly feeding hydration to thirsty skin cells while anti-inflammatory gibberellins quietly calm down the day's redness, windburn, or active breakout inflammation.</p>
+        <h2>Nocturnal Skin Physiology & Moisture Retention</h2>
+        <p>During the nocturnal circadian cycle, epidermal skin temperature elevates, cell turnover accelerates, and <strong>transepidermal water loss (TEWL)</strong> reaches its peak. In clinical terms, the skin barrier loses moisture into the surrounding air at a significantly higher rate during nocturnal hours than during the daytime.</p>
+        <p>When pure inner-fillet aloe vera is applied prior to sleep, its network of <strong>acemannan polysaccharides</strong> establishes a breathable, water-rich hydrogel barrier across the stratum corneum. Clinical bioengineering studies (such as Dal'Belo et al., 2006) demonstrate that aloe vera formulations significantly improve stratum corneum water content after continuous application without disrupting baseline barrier integrity.</p>
       </section>
 
       <section id="why-does-it-feel-tight">
         <h2>Why Does Aloe Feel Tight & Stiff When It Dries?</h2>
-        <p>Almost everyone who tries sleeping with aloe vera panics the first time it sets: <em>"My face feels like a frozen porcelain mask—is this drying my skin out?"</em></p>
-        <p>No, your skin isn't drying out. Pure inner-leaf aloe gel is over 98% pure water held together by a scaffold of complex long-chain sugars. As the water evaporates into the ambient air over the first 5 to 10 minutes, those sugar chains contract and knit together, forming a gossamer-thin, flexible film on your skin's surface. That physical shrinkage produces a distinctive pulling sensation.</p>
-        <p><strong>Aesthetician's Pro-Tip:</strong> If you hate that taut feeling or sleep on your side, don't let the aloe dry completely bare. Once you've massaged in your aloe gel and it's slightly tacky (about 90 seconds in), press <strong>two to three drops of 100% plant-derived squalane or jojoba oil</strong> over your cheeks and forehead. The oil blankets the aloe, stops the moisture from evaporating into dry indoor air, and leaves your skin feeling baby-soft instead of paper-stiff.</p>
+        <p>A frequent consumer observation when applying pure aloe vera gel is a sudden sensation of tightness as the product dries: <em>"My face feels tight and stiff—is this dehydrating my skin?"</em></p>
+        <p>No, the skin is not drying out. Pure inner-leaf aloe gel consists of approximately 98.5% water held within a lattice of high-molecular-weight polysaccharides. As the water phase evaporates over the initial 5 to 10 minutes, these polysaccharide chains contract and form an ultra-thin, flexible film on the skin's surface. This physical contraction creates the distinct tightening sensation.</p>
+        <p><strong>Formulation Tip:</strong> To mitigate surface tightening, apply pure aloe onto slightly damp skin. Once the aloe has settled into a slightly tacky layer (approximately 90 seconds after application), seal the humectant base with <strong>two drops of squalane or jojoba oil</strong>. The lipid layer prevents rapid ambient evaporation and softens the dried polysaccharide film.</p>
       </section>
 
       <section id="the-pore-clogging-myth">
-        <h2>The Breakout Trap: Why Some People React</h2>
-        <p>Dr. Elena Vance and I frequently see patients who swear aloe broke them out. In virtually 100% of these cases, the aloe itself wasn't the culprit. Here is what actually happened behind the scenes:</p>
+        <h2>The Breakout Trap: Why Some Skin Reacts</h2>
+        <p>When individuals report sudden breakouts or micro-bumps after using aloe vera, clinical evaluation typically reveals one of two non-aloe culprits:</p>
         <ul>
-          <li><strong>The Yellow Aloin Rash:</strong> If they cut a raw leaf from their garden and smeared it straight on their cheeks without draining the yellow sap that oozes from the green rind, they exposed their barrier to <em>aloin</em>. Aloin is an irritant anthraquinone. On delicate facial skin, it triggers acute contact dermatitis—tiny, itchy red bumps that look deceptively like an acne flare-up.</li>
-          <li><strong>The "Drugstore Green" Formula:</strong> Many mass-market squeeze bottles sold in the sunscreen aisle contain less than 20% real aloe. The rest is water, triethanolamine, synthetic carbomer thickeners, and artificial colorants (FD&C Blue #1 and Yellow #5). Those synthetic thickeners and artificial fragrances are notorious for trapping sweat and clogging pores overnight.</li>
+          <li><strong>The Aloin Anthraquinone Reaction:</strong> Cutting a raw leaf and applying it directly to the face without flushing out the yellow exudate introduces <em>aloin</em> onto the skin. Aloin is an irritating anthraquinone that causes acute irritant contact dermatitis—producing pruritic red papules that mimic an acne flare.</li>
+          <li><strong>Synthetic Gelling Polymers & Fragrances:</strong> Mass-market after-sun gels frequently contain less than 25% aloe solids, relying instead on synthetic acrylic polymers (carbomers), neutralizing amines (triethanolamine), and synthetic fragrances that can trap sweat and induce follicular irritation.</li>
         </ul>
       </section>
 
       <section id="fresh-leaf-vs-bottle">
-        <h2>Raw Leaf Fillet vs. Bottled Gel: Our Hands-On Take</h2>
-        <p>We've tested both methods extensively in our studio. Here is how they stack up when you're actually getting ready for bed:</p>
+        <h2>Raw Leaf Fillet vs. Decolorized Commercial Gel</h2>
+        <p>Comparing fresh raw harvesting to certified commercial inner-fillet products reveals distinct practical and safety considerations:</p>
         <div class="overflow-x-auto my-6">
           <table class="w-full text-left border-collapse border border-emerald-200">
             <thead>
               <tr class="bg-emerald-50 text-emerald-900">
-                <th class="p-3 border border-emerald-200">What You Experience</th>
+                <th class="p-3 border border-emerald-200">Parameter</th>
                 <th class="p-3 border border-emerald-200">Fresh Raw Leaf Fillet</th>
-                <th class="p-3 border border-emerald-200">Cold-Pressed Bottle (e.g. Seven Minerals)</th>
+                <th class="p-3 border border-emerald-200">Certified Decolorized Bottle</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="p-3 border border-emerald-200 font-medium">Prep Time Before Bed</td>
-                <td class="p-3 border border-emerald-200 text-amber-800">25–30 minutes (must soak & drain aloin)</td>
-                <td class="p-3 border border-emerald-200 text-emerald-800">5 seconds (pump and go)</td>
+                <td class="p-3 border border-emerald-200 font-medium">Preparation Time</td>
+                <td class="p-3 border border-emerald-200 text-amber-800">25–30 minutes (requires water flush of aloin)</td>
+                <td class="p-3 border border-emerald-200 text-emerald-800">Immediate pump application</td>
               </tr>
               <tr>
-                <td class="p-3 border border-emerald-200 font-medium">Texture & Slip</td>
-                <td class="p-3 border border-emerald-200">Slightly slimy at first; turns very watery</td>
-                <td class="p-3 border border-emerald-200">Smooth, silky, spreads evenly across face</td>
+                <td class="p-3 border border-emerald-200 font-medium">Texture Profile</td>
+                <td class="p-3 border border-emerald-200">Viscous mucilaginous liquid; breaks to water</td>
+                <td class="p-3 border border-emerald-200">Even, smooth spread with consistent slip</td>
               </tr>
               <tr>
-                <td class="p-3 border border-emerald-200 font-medium">Natural Aroma</td>
-                <td class="p-3 border border-emerald-200">Faintly green and earthy (cucumber-like)</td>
-                <td class="p-3 border border-emerald-200">Completely neutral or subtle citrus note</td>
+                <td class="p-3 border border-emerald-200 font-medium">Aromatic Quality</td>
+                <td class="p-3 border border-emerald-200">Faintly earthy and botanical (cucumber-like)</td>
+                <td class="p-3 border border-emerald-200">Neutral with clean food-grade acid note</td>
               </tr>
               <tr>
-                <td class="p-3 border border-emerald-200 font-medium">Active Polysaccharides</td>
-                <td class="p-3 border border-emerald-200 text-emerald-800">100% native bioactive acemannan</td>
-                <td class="p-3 border border-emerald-200">95–99% preserved acemannan</td>
+                <td class="p-3 border border-emerald-200 font-medium">Native Polysaccharides</td>
+                <td class="p-3 border border-emerald-200 text-emerald-800">100% native unheated acemannan</td>
+                <td class="p-3 border border-emerald-200">Preserved cold-processed acemannan</td>
               </tr>
               <tr>
-                <td class="p-3 border border-emerald-200 font-medium">Risk of Irritation</td>
-                <td class="p-3 border border-emerald-200 text-amber-800">Moderate if aloin isn't fully flushed</td>
-                <td class="p-3 border border-emerald-200 text-emerald-800">Virtually zero (decolorized certified)</td>
+                <td class="p-3 border border-emerald-200 font-medium">Aloin Dermatitis Risk</td>
+                <td class="p-3 border border-emerald-200 text-amber-800">Moderate if latex draining is incomplete</td>
+                <td class="p-3 border border-emerald-200 text-emerald-800">Negligible (&lt; 10 ppm certified decolorized)</td>
               </tr>
             </tbody>
           </table>
@@ -97,179 +97,180 @@ export const SKINCARE_ARTICLES: Article[] = [
       </section>
 
       <section id="the-nighttime-ritual">
-        <h2>Sarah's 3-Step Bedtime Application Routine</h2>
-        <p>If you want to wake up with calm, plump, glass-like skin without sticking to your pillowcase, here is the exact protocol I prescribe to my clients:</p>
+        <h2>The 3-Step Bedtime Application Protocol</h2>
+        <p>To optimize epidermal hydration while preventing surface tightness, follow this evidence-based nighttime protocol:</p>
       </section>
     `,
     scientificCitations: [
-      CLINICAL_STUDIES['skin-barrier-2023'],
-      CLINICAL_STUDIES['burn-wound-healing-2021']
+      CLINICAL_STUDIES['skin-hydration-dalbelo-2006'],
+      CLINICAL_STUDIES['burn-wound-healing-maenthaisong-2007'],
+      CLINICAL_STUDIES['dermatology-review-surjushe-2008']
     ],
     howToSteps: [
       {
         name: 'Step 1: Cleanse Thoroughly & Leave Skin Damp',
-        text: 'Wash your face with a non-foaming, pH-balanced milk or gel cleanser. Pat with a clean towel, but leave your skin faintly damp. Aloe needs water molecules to anchor onto.'
+        text: 'Cleanse with a mild, non-stripping, pH-balanced cleanser (pH 5.0–5.5). Pat gently with a clean towel, leaving the stratum corneum slightly damp so humectant polysaccharides can bind ambient moisture.'
       },
       {
-        name: 'Step 2: Layer Your Water Actives First',
-        text: 'If you use hyaluronic acid, niacinamide, or gentle soothing toners, pat them in now. Let them settle for 60 seconds so your skin is primed.'
+        name: 'Step 2: Apply Water-Based Serums First',
+        text: 'If your regimen includes low-molecular hyaluronic acid, niacinamide, or soothing toners, apply them first and allow 60 seconds to absorb.'
       },
       {
-        name: 'Step 3: Smooth on a Nickel-Sized Veil of Aloe & Seal',
-        text: 'Pump a nickel-sized amount of pure, cold-pressed aloe gel. Smooth gently from center outward—do not rub aggressively. After 2 minutes when it feels lightly tacky, press 2 drops of squalane oil over your cheeks and forehead to lock everything in place.'
+        name: 'Step 3: Smooth on an Even Layer of Pure Aloe & Seal',
+        text: 'Dispense a nickel-sized portion of cold-pressed aloe gel. Smooth gently across the face without aggressive friction. After 2 minutes, when the surface feels tacky, press 2 drops of squalane oil over the cheeks to lock in hydration.'
       }
     ],
     faqs: [
       {
         question: 'Should I wash my face with cleanser the next morning?',
-        answer: 'Lukewarm water is usually plenty! A gentle splash of warm water dissolves the remaining surface polysaccharides instantly. If you have oily skin or applied a heavy oil seal, a gentle morning gel cleanse feels wonderful.'
+        answer: 'Rinsing with lukewarm water is generally sufficient to dissolve any dried surface polysaccharide matrix. If an occlusive oil seal was layered on top, a gentle morning cleanser effectively clears any residual surface lipids.'
       },
       {
-        question: 'Will aloe ruin my silk or satin pillowcases?',
-        answer: 'Not if you give it 5 to 7 minutes to absorb before lying down! Pure aloe contains no oils or artificial dyes, so it will not stain fabrics. If you toss and turn immediately after application, it can leave a faint, harmless starchy residue that washes right out in cold water.'
+        question: 'Will pure aloe vera stain silk or linen pillowcases?',
+        answer: 'Pure, dye-free aloe gel does not contain oils or staining petrochemical colorants. Allowing 5 minutes for the gel to settle before lying down prevents any physical transfer to bedding.'
       },
       {
-        question: 'Can I do this every single night?',
-        answer: 'Yes! Unlike chemical exfoliating acids or strong retinoids that require off-nights to prevent barrier thinning, pure aloe vera is a restorative botanical humectant. It can be used seven nights a week, especially after sun exposure, retinol purging, or during dry winter months.'
+        question: 'Can aloe vera face masks be used nightly?',
+        answer: 'Yes. Pure aloe vera is a non-exfoliating botanical humectant with a comedogenic rating of 0. It can be utilized nightly as a restorative hydration layer, especially after environmental sun exposure or during seasonal dry conditions.'
       }
     ],
-    relatedSlugs: ['aloe-vera-and-retinol-layering', 'aloe-vera-fungal-acne', 'raw-aloe-vs-commercial-gel-skin']
+    relatedSlugs: ['aloe-vera-and-retinol-layering', 'aloe-vera-fungal-acne', 'best-pure-aloe-vera-gels-reviewed']
   },
   {
     slug: 'aloe-vera-and-retinol-layering',
     pillar: 'skincare',
-    title: 'Can You Mix Aloe Vera with Retinol? (Timing, Order & The "Sandwich" Buffer Method)',
-    metaTitle: 'Can You Mix Aloe Vera with Retinol? Dermatologist Layering Guide',
-    metaDescription: 'Eliminate retinol peeling and redness without sacrificing anti-aging results. Dr. Elena Vance explains how to buffer retinoids using pure aloe vera gel.',
+    title: 'Can You Mix Aloe Vera with Retinol? The "Sandwich" Buffering Method & Application Timing',
+    metaTitle: 'Can You Mix Aloe Vera with Retinol? Layering Protocol',
+    metaDescription: 'Learn how to buffer retinoids using pure aloe vera gel. Reduce retinol erythema and peeling without compromising vitamin A absorption and collagen synthesis.',
     publishedAt: '2025-01-20',
     updatedAt: '2025-02-20',
     readTimeMinutes: 8,
-    authorId: 'sarah-jenkins',
-    reviewedById: 'dr-elena-vance',
+    authorId: 'botanical-research-desk',
+    reviewedById: 'formulation-desk',
     badge: 'Clinical Protocol',
     directAnswer: 'Yes, aloe vera and retinol are an exceptional pairing when layered sequentially. Aloe vera supplies cooling hydration and natural sterols that blunt retinoid dermatitis, flaking, and barrier inflammation without altering the skin pH required for retinol conversion. Never mix them together in your palm before applying; instead, use the "aloe buffer sandwich" method.',
     tableOfContents: [
       { id: 'the-retinol-problem', title: 'Why Retinization Knocks Skin Off Balance', level: 2 },
       { id: 'why-aloe-works', title: 'How Aloe Vera Calms the Vitamin A Storm', level: 2 },
       { id: 'never-mix-in-palm', title: 'Why You Must Never Mix Them in Your Hand', level: 2 },
-      { id: 'the-sandwich-protocol', title: 'The Dermatologist "Aloe Sandwich" Protocol', level: 2 },
+      { id: 'the-sandwich-protocol', title: 'The "Aloe Buffer Sandwich" Protocol', level: 2 },
       { id: 'faqs', title: 'Common Questions About Retinol & Aloe', level: 2 }
     ],
     htmlContent: `
       <section id="the-retinol-problem">
         <h2>Why Retinization Knocks Skin Off Balance</h2>
-        <p>Retinoids—whether you're using an over-the-counter 0.3% retinol serum or prescription-strength 0.05% tretinoin—are undisputed royalty in modern dermatology for collagen production and cellular renewal. But the first month of using them can feel like hazing for your face.</p>
-        <p>As cellular turnover is forced into hyperdrive, your stratum corneum sheds immature cells before they've had time to build a tight lipid barrier. The result? <strong>Retinoid dermatitis</strong>: stinging when you wash your face, stubborn redness around your nose and chin, and flaking that ruins your makeup.</p>
+        <p>Retinoids—ranging from over-the-counter retinol to prescription tretinoin—are well-established in dermatological literature for accelerating keratinocyte turnover and stimulating procollagen synthesis. However, the initial 4 to 6 weeks of retinoid introduction commonly induces <strong>retinoid dermatitis</strong>.</p>
+        <p>As cell turnover accelerates, the stratum corneum sheds prematurely before mature lipid lamellae are fully assembled. This transiently compromises barrier function, leading to erythema, stinging, and micro-flaking.</p>
       </section>
 
       <section id="why-aloe-works">
         <h2>How Aloe Vera Calms the Vitamin A Storm</h2>
-        <p>This is where pure aloe vera becomes your best ally. Aloe is packed with <strong>plant sterols (campesterol, β-sitosterol, lupeol)</strong> that downregulate the pro-inflammatory cytokines triggered by Vitamin A. Unlike thick petroleum jellies that can trap retinoids against the skin and inadvertently increase irritation spikes, aloe delivers clean, aqueous moisture that cools dermal heat instantly.</p>
+        <p>Pure inner-fillet aloe vera provides beneficial support during retinization. Aloe contains <strong>phytosterols (including campesterol, β-sitosterol, and lupeol)</strong> along with bradykinase enzymes that modulate localized cutaneous inflammatory mediators. Unlike heavy petrolatum-based ointments that can occlude retinoids and inadvertently increase irritation spikes, aloe delivers non-comedogenic, aqueous hydration that mitigates surface irritation.</p>
       </section>
 
       <section id="never-mix-in-palm">
         <h2>Why You Must Never Mix Them in Your Hand</h2>
-        <p>One of the most common mistakes we see on social media is people squirting a dollop of retinol and a pump of aloe into their palm, swirling them together, and slapping it on. <strong>Don't do this.</strong></p>
-        <p>Retinol is notoriously delicate and lipophilic (fat-soluble), formulated in specialized emulsions designed to maintain chemical stability. Mixing it directly with a water-heavy aloe gel destabilizes the carrier emulsion on contact, causing the retinol to clump or degrade prematurely. You get patchy, unpredictable absorption. Always apply them in deliberate, separated layers.</p>
+        <p>A common consumer mistake is mixing retinol and aloe vera together in the palm before application. <strong>This disrupts product formulation integrity.</strong></p>
+        <p>Retinoids are lipophilic molecules formulated in specialized, stabilized emulsions designed for controlled release. Mixing a retinoid formulation with a water-heavy aloe gel can destabilize the carrier emulsion, leading to uneven phase separation and inconsistent dermal absorption. Retinol and aloe should always be applied in deliberate, separated layers.</p>
       </section>
 
       <section id="the-sandwich-protocol">
-        <h2>The Dermatologist "Aloe Sandwich" Protocol</h2>
-        <p>If your skin is prone to redness or you're stepping up to a stronger prescription retinoid, use Dr. Vance's clinical buffering technique three nights a week:</p>
+        <h2>The "Aloe Buffer Sandwich" Protocol</h2>
+        <p>To minimize retinoid dermatitis while preserving active efficacy, follow this sequential buffering protocol:</p>
       </section>
     `,
     scientificCitations: [
-      CLINICAL_STUDIES['skin-barrier-2023']
+      CLINICAL_STUDIES['skin-hydration-dalbelo-2006'],
+      CLINICAL_STUDIES['dermatology-review-surjushe-2008']
     ],
     howToSteps: [
       {
-        name: 'Layer 1: The Aloe Base Shield',
-        text: 'On completely dry, cleansed skin, apply a sheer layer of cold-pressed aloe vera gel. Let it dry for 3 to 4 minutes. This acts as a microscopic buffer, slowing down the rapid penetration spikes that trigger irritation.'
+        name: 'Layer 1: The Aloe Base Buffer',
+        text: 'On thoroughly clean, dry skin, apply a sheer layer of pure cold-pressed aloe vera gel. Allow 3 to 4 minutes to dry. This creates a light humectant layer that moderates the initial penetration surge of vitamin A.'
       },
       {
-        name: 'Layer 2: The Retinoid Treatment',
-        text: 'Dispense a pea-sized amount of retinol or tretinoin. Dot onto forehead, cheeks, and chin, then smooth gently across the buffered surface.'
+        name: 'Layer 2: The Retinoid Application',
+        text: 'Dispense a pea-sized amount of retinol or tretinoin. Dot onto the forehead, cheeks, and chin, then smooth evenly across the buffered surface.'
       },
       {
-        name: 'Layer 3: The Moisture Seal',
-        text: 'Wait 5 minutes for the retinoid to bind to epidermal receptors. Finish with a gentle ceramide barrier cream or a second light layer of aloe mixed with two drops of squalane oil.'
+        name: 'Layer 3: The Barrier Moisture Seal',
+        text: 'Allow 5 minutes for the retinoid to settle. Finish with a gentle ceramide barrier moisturizer or a second light layer of aloe sealed with two drops of squalane oil.'
       }
     ],
     faqs: [
       {
-        question: 'Does buffering with aloe make retinol less effective?',
-        answer: 'No! Clinical dermatological studies have confirmed that buffering slows the initial absorption rate—which prevents the intense inflammatory spike that causes peeling—without reducing overall cellular uptake or long-term collagen remodeling.'
+        question: 'Does buffering with aloe reduce retinol efficacy?',
+        answer: 'Clinical literature indicates that buffering moderates the peak rate of absorption—mitigating acute inflammatory irritation—without diminishing long-term cellular conversion or collagen remodeling.'
       },
       {
-        question: 'Can I use aloe vera with Bakuchiol?',
-        answer: 'Absolutely. Bakuchiol is already far gentler than retinol, and pairing it with aloe creates an ultra-soothing, pregnancy-safe evening routine for sensitive skin.'
+        question: 'Can aloe vera be combined with bakuchiol?',
+        answer: 'Yes. Bakuchiol is a plant-derived meroterpene that acts through similar cellular pathways as retinol without triggering significant retinoid dermatitis. Pairing bakuchiol with aloe vera provides a gentle, well-tolerated evening routine.'
       }
     ],
-    relatedSlugs: ['aloe-vera-overnight-face-mask', 'aloe-vera-fungal-acne', 'aloe-vera-for-skin-barrier-repair']
+    relatedSlugs: ['aloe-vera-overnight-face-mask', 'aloe-vera-fungal-acne', 'best-pure-aloe-vera-gels-reviewed']
   },
   {
     slug: 'aloe-vera-fungal-acne',
     pillar: 'skincare',
-    title: 'Is Aloe Vera Safe for Fungal Acne? An Ingredient Audit for Malassezia Folliculitis',
-    metaTitle: 'Is Aloe Vera Safe for Fungal Acne? Malassezia Safety Audit',
-    metaDescription: 'Battling stubborn forehead bumps? We explain why 100% pure aloe is fungal-acne safe, and expose the hidden fatty acids in commercial aloe gels that feed Malassezia yeast.',
+    title: 'Is Aloe Vera Safe for Fungal Acne? Malassezia Folliculitis Ingredient Analysis',
+    metaTitle: 'Is Aloe Vera Safe for Fungal Acne? Malassezia Ingredient Audit',
+    metaDescription: 'Evaluating pure aloe vera for Malassezia folliculitis (fungal acne). Discover why pure inner fillet is fungal-safe, and how to spot hidden ester traps on labels.',
     publishedAt: '2025-01-28',
     updatedAt: '2025-02-20',
     readTimeMinutes: 6,
-    authorId: 'sarah-jenkins',
-    reviewedById: 'dr-elena-vance',
+    authorId: 'botanical-research-desk',
+    reviewedById: 'formulation-desk',
     badge: 'Ingredient Audit',
     directAnswer: 'Yes, 100% pure aloe vera is completely fungal-acne safe. The yeast responsible for fungal acne (Malassezia) requires fatty acids with carbon chain lengths C11–C24 to survive, which pure aloe completely lacks. However, commercial aloe gels frequently sneak in emulsifiers, oils, or polysorbates that feed the yeast aggressively. Check the ingredient label before applying.',
     tableOfContents: [
-      { id: 'what-is-fungal-acne', title: 'Why Fungal Acne Isn\'t Actually Acne', level: 2 },
-      { id: 'why-pure-aloe-is-safe', title: 'The Molecular Breakdown: Why Pure Aloe Can\'t Feed Yeast', level: 2 },
-      { id: 'toxic-ingredients', title: 'The Hidden Traps on Drugstore Aloe Labels', level: 2 },
-      { id: 'how-to-use-safely', title: 'How to Incorporate Aloe into a Fungal-Safe Routine', level: 2 },
+      { id: 'what-is-fungal-acne', title: 'Understanding Malassezia Folliculitis', level: 2 },
+      { id: 'why-pure-aloe-is-safe', title: 'Why Pure Inner-Fillet Aloe Cannot Feed Yeast', level: 2 },
+      { id: 'toxic-ingredients', title: 'Hidden Formulation Traps on Commercial Labels', level: 2 },
+      { id: 'how-to-use-safely', title: 'Incorporating Aloe into a Fungal-Safe Routine', level: 2 },
       { id: 'faqs', title: 'Frequently Asked Questions', level: 2 }
     ],
     htmlContent: `
       <section id="what-is-fungal-acne">
-        <h2>Why Fungal Acne Isn't Actually Acne</h2>
-        <p>If you've been fighting tiny, uniform, intensely itchy bumps across your forehead, jawline, or chest that refuse to budge with benzoyl peroxide or salicylic acid, you're likely dealing with <strong>Malassezia folliculitis</strong> (commonly called fungal acne).</p>
-        <p>Unlike standard bacterial acne (caused by <em>Cutibacterium acnes</em>), Malassezia is a yeast infection of the hair follicle. And this yeast has a very specific diet: it cannot manufacture its own fats. It survives exclusively by feeding on exogenous lipids, fatty acids, and oils that have carbon chain lengths between <strong>C11 and C24</strong>. Feed it a single drop of coconut oil or olive oil, and the yeast colony explodes into an itchy flare.</p>
+        <h2>Understanding Malassezia Folliculitis</h2>
+        <p>When persistent, monomorphic, pruritic papules appear across the forehead, hairline, or upper chest without responding to typical antibacterial acne agents (such as benzoyl peroxide), the underlying etiology is often <strong>Malassezia folliculitis</strong> (commonly referred to as fungal acne).</p>
+        <p>Unlike standard acne vulgaris caused by <em>Cutibacterium acnes</em> bacteria, this condition represents a fungal overgrowth within the hair follicle. <em>Malassezia</em> species are lipid-dependent yeasts that lack the enzymatic machinery to synthesize their own fatty acids. They rely on external lipids with carbon chain lengths between <strong>C11 and C24</strong>. When exposed to oils, esters, or polysorbates, the yeast colony proliferates rapidly.</p>
       </section>
 
       <section id="why-pure-aloe-is-safe">
-        <h2>The Molecular Breakdown: Why Pure Aloe Can\'t Feed Yeast</h2>
-        <p>Pure inner fillet aloe vera is a dream come true for anyone with Malassezia. Here is what is actually inside genuine aloe:</p>
+        <h2>Why Pure Inner-Fillet Aloe Cannot Feed Yeast</h2>
+        <p>Pure inner-fillet aloe vera is inherently compatible with fungal-acne protocols because of its chemical composition:</p>
         <ul>
-          <li><strong>Over 98.5% Distilled Water:</strong> Delivers pure weightless hydration to parched skin without a single lipid molecule.</li>
-          <li><strong>Zero Problematic Fatty Acids:</strong> Contains no C11–C24 lipids or esters. Malassezia literally starves in the presence of pure aloe.</li>
-          <li><strong>Natural Saponins & Lupeol:</strong> Natural plant compounds that have documented mild antifungal and antibacterial properties in laboratory petri dish assays.</li>
+          <li><strong>Over 98.5% Water Matrix:</strong> Provides lightweight, humectant hydration without lipid content.</li>
+          <li><strong>Zero C11–C24 Fatty Acids:</strong> Contains no problematic lipids, triglycerides, or esters capable of nourishing <em>Malassezia</em>.</li>
+          <li><strong>Natural Saponins & Lupeol:</strong> Contains natural phytocompounds documented to possess mild antimicrobial and antifungal properties in laboratory assays.</li>
         </ul>
       </section>
 
       <section id="toxic-ingredients">
-        <h2>The Hidden Traps on Drugstore Aloe Labels</h2>
-        <p>Here is where people get hurt: they pick up a green bottle at the drugstore that screams "99% Pure Aloe Gel" on the front, apply it to their forehead, and wake up with twenty new itchy bumps. Why?</p>
-        <p>Flip that bottle over and read the fine print under "Inactive Ingredients." You will frequently find:</p>
+        <h2>Hidden Formulation Traps on Commercial Labels</h2>
+        <p>While unadulterated aloe is safe for fungal acne, commercial bottled products frequently introduce problematic additives. Scrutinize the ingredient declaration for these common additions:</p>
         <ul>
-          <li><strong>Polysorbate 20 / Polysorbate 80:</strong> Derived from fatty acid esters—this is basically high-fructose corn syrup for Malassezia yeast.</li>
-          <li><strong>PEG-40 Hydrogenated Castor Oil:</strong> An emulsifier that triggers immediate fungal flare-ups.</li>
-          <li><strong>Isopropyl Palmitate / Myristate:</strong> Heavy esters that will ruin weeks of clear skin progress.</li>
+          <li><strong>Polysorbate 20 and Polysorbate 80:</strong> Fatty acid esters that serve as direct nutritional substrates for <em>Malassezia</em> yeasts.</li>
+          <li><strong>PEG-40 Hydrogenated Castor Oil:</strong> An emulsifying agent that can trigger fungal flare-ups in reactive individuals.</li>
+          <li><strong>Isopropyl Palmitate / Isopropyl Myristate:</strong> Known comedogenic and yeast-feeding synthetic esters.</li>
         </ul>
-        <p>If you have fungal acne, your aloe gel must have a completely clean deck: pure aloe barbadensis leaf juice, water, thickeners like xanthan gum (fungal-safe), and clean food-grade preservatives like citric acid and potassium sorbate.</p>
+        <p>For fungal-acne-prone skin, ensure the formula contains pure aloe barbadensis leaf juice, water, safe thickeners (such as xanthan gum), and clean food-grade preservatives (citric acid, potassium sorbate, sodium benzoate).</p>
       </section>
     `,
     scientificCitations: [
-      CLINICAL_STUDIES['scalp-dermatitis-2022'],
-      CLINICAL_STUDIES['skin-barrier-2023']
+      CLINICAL_STUDIES['seborrheic-dermatitis-vardy-1999'],
+      CLINICAL_STUDIES['dermatology-review-surjushe-2008']
     ],
     faqs: [
       {
-        question: 'Does aloe vera kill fungal acne permanently?',
-        answer: 'No. Aloe vera is a safe, non-feeding hydrating agent, but it is not an active antifungal drug. You still need active antifungals (like ketoconazole shampoo or prescription topical creams) to clear the infection. Aloe simply keeps your skin calm and hydrated while you treat it.'
+        question: 'Does aloe vera act as an active antifungal treatment for Malassezia?',
+        answer: 'No. Aloe vera is a non-feeding, soothing humectant, but it does not replace active targeted antifungal treatments (such as ketoconazole or zinc pyrithione). It supports the epidermal barrier while active antifungals address yeast overgrowth.'
       },
       {
-        question: 'Can I harvest raw aloe from my backyard if I have fungal acne?',
-        answer: 'Yes, as long as you rinse off the yellow aloin latex and use clean cutting boards and sanitized hands. Raw inner fillet contains zero lipids that feed Malassezia.'
+        question: 'Can fresh leaf aloe be used if someone has fungal acne?',
+        answer: 'Yes, provided the yellow aloin latex is thoroughly flushed. The clear inner parenchyma gel contains zero lipid fractions that could nourish Malassezia yeast.'
       }
     ],
-    relatedSlugs: ['aloe-vera-overnight-face-mask', 'aloe-vera-and-retinol-layering', 'how-to-spot-fake-aloe-vera-gel']
+    relatedSlugs: ['aloe-vera-overnight-face-mask', 'aloe-vera-and-retinol-layering', 'best-pure-aloe-vera-gels-reviewed']
   }
 ];
