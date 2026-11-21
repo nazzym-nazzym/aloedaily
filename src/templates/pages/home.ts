@@ -3,6 +3,20 @@ import { getLatestArticles } from '../../data/articles';
 import { TESTED_PRODUCTS } from '../../data/products';
 import { SITE_CONFIG } from '../../config/site';
 
+function formatDate(dateStr: string): string {
+  try {
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const monthIndex = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const date = new Date(Date.UTC(year, monthIndex, day));
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+    }
+  } catch (e) {}
+  return dateStr;
+}
+
 export function renderHomePage(): string {
   const latest = getLatestArticles(6);
 
@@ -42,7 +56,7 @@ export function renderHomePage(): string {
         ${article.metaDescription}
       </p>
       <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f5f5f4; padding-top: 0.75rem; margin-top: auto;">
-        <span style="font-size: 0.8rem; color: #78716c;">Updated ${article.updatedAt}</span>
+        <span style="font-size: 0.8rem; color: #78716c;">Updated <time datetime="${article.updatedAt}">${formatDate(article.updatedAt)}</time></span>
         <a href="/${article.pillar}/${article.slug}/" style="font-size: 0.85rem; font-weight: 700; color: #047857;">Read Protocol &rarr;</a>
       </div>
     </article>

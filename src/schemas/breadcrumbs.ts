@@ -1,9 +1,10 @@
 import { BreadcrumbItem } from '../data/types';
 import { SITE_CONFIG } from '../config/site';
 
-export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
+export function generateBreadcrumbSchema(items: BreadcrumbItem[], canonicalUrl?: string) {
   return {
     '@type': 'BreadcrumbList',
+    '@id': canonicalUrl ? `${canonicalUrl}#breadcrumb` : undefined,
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,

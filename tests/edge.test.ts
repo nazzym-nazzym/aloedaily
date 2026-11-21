@@ -162,11 +162,94 @@ async function runTests() {
     assert(data.success === true, 'Editorial contact processed successfully');
   }
 
-  // Test 15: 404 Not Found Page
+  // Test 15: 404 Not Found Page with SEO Compliance
   {
     const req = new Request('https://aloedaily.com/non-existent-page-xyz/');
     const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
     assert(res.status === 404, 'Unknown path returns 404');
+    assert(res.headers.get('X-Robots-Tag')?.includes('noindex') === true, '404 contains X-Robots-Tag noindex');
+    assert(body.includes('name="robots" content="noindex, nofollow"'), '404 HTML body contains noindex, nofollow meta tag');
+  }
+
+  // Test 16: Security Headers Enforced on Responses
+  {
+    const req = new Request('https://aloedaily.com/');
+    const res = await worker.fetch(req, env, mockCtx);
+    assert(res.headers.get('X-Content-Type-Options') === 'nosniff', 'Security header X-Content-Type-Options: nosniff present');
+    assert(res.headers.get('X-Frame-Options') === 'SAMEORIGIN', 'Security header X-Frame-Options: SAMEORIGIN present');
+    assert(res.headers.get('Referrer-Policy') === 'strict-origin-when-cross-origin', 'Security header Referrer-Policy present');
+    assert(res.headers.get('Strict-Transport-Security')?.includes('max-age=') === true, 'HSTS header present');
+    assert(res.headers.get('Content-Security-Policy')?.includes("default-src 'self'") === true, 'Content-Security-Policy header present');
+  }
+
+  // Test 17: Author Profile Pages (/authors/dr-elena-vance/)
+  {
+    const req = new Request('https://aloedaily.com/authors/dr-elena-vance/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/authors/dr-elena-vance/ profile returns 200 OK');
+    assert(body.includes('Dr. Elena Vance') && body.includes('ProfilePage'), 'Author profile includes name and ProfilePage schema');
+    assert(body.includes('Stanford University'), 'Author profile renders academic credentials');
+  }
+
+  // Test 18: Privacy Policy Page (/privacy/)
+  {
+    const req = new Request('https://aloedaily.com/privacy/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/privacy/ returns 200 OK');
+    assert(body.includes('Privacy Policy & Data Governance'), 'Privacy page renders correct heading');
+  }
+
+  // Test 19: Terms of Service Page (/terms/)
+  {
+    const req = new Request('https://aloedaily.com/terms/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/terms/ returns 200 OK');
+    assert(body.includes('Terms of Service & Editorial Disclaimers'), 'Terms page renders correct heading');
+  }
+
+  // Test 20: Editorial Contact Page (/contact/)
+  {
+    const req = new Request('https://aloedaily.com/contact/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/contact/ returns 200 OK');
+    assert(body.includes('Contact AloeDaily Editorial & Advisory Board'), 'Contact page renders correct heading and form');
+  }
+
+  // Test 21: RSS 2.0 Feed (/feed.xml)
+  {
+    const req = new Request('https://aloedaily.com/feed.xml');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/feed.xml returns 200 OK');
+    assert(res.headers.get('Content-Type')?.includes('application/rss+xml') === true, 'RSS served with application/rss+xml');
+    assert(body.includes('<rss version="2.0"') && body.includes('<item>'), 'RSS XML contains valid 2.0 structure and items');
+  }
+
+  // Test 22: Schema Rich Snippet Compliance (Speakable, Product Offers, AggregateRating)
+  {
+    const req = new Request('https://aloedaily.com/audits/best-pure-aloe-vera-gels-reviewed/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('SpeakableSpecification'), 'Article schema includes speakable specification for AI overviews');
+    assert(body.includes('"@type": "Product"'), 'Scorecard article includes Product schema');
+    assert(body.includes('"@type": "Offer"'), 'Product schema contains valid Offer node for Google Rich Results');
+    assert(body.includes('"@type": "AggregateRating"'), 'Product schema contains AggregateRating');
+  }
+
+  // Test 23: Accessible Mobile Navigation & Semantic Breadcrumbs
+  {
+    const req = new Request('https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('aria-label="Main navigation"'), 'Header navigation has accessible aria-label');
+    assert(body.includes('id="nav-toggle"'), 'Responsive mobile menu hamburger toggle present');
+    assert(body.includes('aria-label="Breadcrumb"'), 'Breadcrumbs wrapped in semantic nav with aria-label');
+    assert(body.includes('<ol') && body.includes('aria-current="page"'), 'Breadcrumb uses semantic ol with aria-current="page"');
   }
 
   console.log(`\nTEST SUMMARY: ${passed} Passed, ${failed} Failed`);

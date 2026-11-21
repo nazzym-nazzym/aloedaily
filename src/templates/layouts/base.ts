@@ -10,8 +10,11 @@ export interface BaseLayoutOptions {
   schemaJson: object;
   contentHtml: string;
   ogType?: 'website' | 'article';
+  ogImage?: string;
+  ogImageAlt?: string;
   publishedTime?: string;
   modifiedTime?: string;
+  noindex?: boolean;
 }
 
 export function renderBaseLayout(options: BaseLayoutOptions): string {
@@ -22,18 +25,28 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
     schemaJson,
     contentHtml,
     ogType = 'website',
+    ogImage = SITE_CONFIG.logoAbsolute,
+    ogImageAlt = `${SITE_CONFIG.name} — Pure Aloe Vera & Botanical Science`,
     publishedTime,
     modifiedTime,
+    noindex = false,
   } = options;
+
+  const displayTitle = title.toLowerCase().includes(SITE_CONFIG.name.toLowerCase())
+    ? title
+    : `${title} | ${SITE_CONFIG.name}`;
 
   return `<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${title} | ${SITE_CONFIG.name}</title>
+  <title>${displayTitle}</title>
   <meta name="description" content="${metaDescription}" />
+  ${noindex ? '<meta name="robots" content="noindex, nofollow" />\n  <meta name="googlebot" content="noindex, nofollow" />' : `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="${canonicalUrl}" />
+  <link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />
+  <link rel="alternate" hreflang="en" href="${canonicalUrl}" />`}
 
   <!-- Critical Edge Asset Preload for Sub-Millisecond LCP -->
   <link rel="preload" as="image" href="/assets/logo.webp" fetchpriority="high" type="image/webp" />
@@ -43,25 +56,35 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/logo.webp" />
 
+  <!-- RSS Feed Auto-Discovery -->
+  <link rel="alternate" type="application/rss+xml" title="${SITE_CONFIG.name} RSS Feed" href="/feed.xml" />
+
   <!-- Open Graph & Social Cards -->
   <meta property="og:site_name" content="${SITE_CONFIG.name}" />
   <meta property="og:title" content="${title}" />
   <meta property="og:description" content="${metaDescription}" />
   <meta property="og:url" content="${canonicalUrl}" />
   <meta property="og:type" content="${ogType}" />
-  <meta property="og:image" content="${SITE_CONFIG.logoAbsolute}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="${ogImage}" />
+  <meta property="og:image:secure_url" content="${ogImage}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="${ogImageAlt}" />
+  <meta property="og:image:type" content="image/webp" />
   ${publishedTime ? `<meta property="article:published_time" content="${publishedTime}" />` : ''}
   ${modifiedTime ? `<meta property="article:modified_time" content="${modifiedTime}" />` : ''}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@aloedaily" />
+  <meta name="twitter:creator" content="@aloedaily" />
   <meta name="twitter:title" content="${title}" />
   <meta name="twitter:description" content="${metaDescription}" />
-  <meta name="twitter:image" content="${SITE_CONFIG.logoAbsolute}" />
+  <meta name="twitter:image" content="${ogImage}" />
+  <meta name="twitter:image:alt" content="${ogImageAlt}" />
 
-  <!-- Performance Preconnect & Styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Inlined Critical Styles -->
   <style>${INLINE_CSS}</style>
 
   <!-- Structured JSON-LD Schema Graph -->
@@ -70,8 +93,9 @@ ${JSON.stringify(schemaJson, null, 2)}
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   ${renderHeader()}
-  <main>
+  <main id="main-content">
     ${contentHtml}
   </main>
   ${renderFooter()}

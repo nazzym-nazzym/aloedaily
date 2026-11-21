@@ -1,16 +1,22 @@
 import { PILLARS } from '../data/pillars';
 import { PillarId } from '../data/types';
-import { getArticleBySlug } from '../data/articles';
+import { getArticleBySlug, getArticlesByAuthor, getArticlesByReviewer } from '../data/articles';
+import { AUTHORS } from '../data/authors';
 import { renderBaseLayout } from '../templates/layouts/base';
 import { renderHomePage } from '../templates/pages/home';
 import { renderPillarHubPage } from '../templates/pages/pillar-hub';
 import { renderArticlePage } from '../templates/pages/article';
 import { renderAboutPage } from '../templates/pages/about';
+import { renderAuthorPage } from '../templates/pages/author';
+import { renderContactPage } from '../templates/pages/contact';
+import { renderPrivacyPage } from '../templates/pages/privacy';
+import { renderTermsPage } from '../templates/pages/terms';
 import { renderNotFoundPage } from '../templates/pages/not-found';
 import { buildPageSchemaGraph } from '../schemas/graph';
 import { renderMasterSitemapXml } from '../feeds/sitemap';
 import { renderRobotsTxt } from '../feeds/robots';
 import { renderLlmsTxt } from '../feeds/llms-txt';
+import { renderRssFeed } from '../feeds/rss';
 import { handleContactSubmission } from '../api/contact';
 import { handleAffiliateRedirect, handleLeadCapture } from '../api/affiliate-redirect';
 import { LOGO_WEBP_BYTES, LOGO_WEBP_96_BYTES, FAVICON_PNG_BYTES } from '../assets/logo-helper';
@@ -51,7 +57,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     });
   }
 
-  // 2. Virtual Feeds & Robots
+  // 2. Virtual Feeds, RSS & Robots
   if (pathname === '/robots.txt') {
     return new Response(renderRobotsTxt(), {
       status: 200,
@@ -70,6 +76,16 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     return new Response(renderMasterSitemapXml(), {
       status: 200,
       headers: getCacheHeaders('sitemap'),
+    });
+  }
+
+  if (pathname === '/feed.xml' || pathname === '/rss.xml') {
+    return new Response(renderRssFeed(), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/rss+xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600, s-maxage=43200, stale-while-revalidate=86400',
+      },
     });
   }
 
@@ -132,7 +148,107 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     return new Response(html, { status: 200, headers: getCacheHeaders('html') });
   }
 
-  // 7. Pillar Hub Routes (/:pillar/)
+  // 7. Editorial & Media Contact (/contact/)
+  if (pathname === '/contact/' || pathname === '/contact') {
+    const canonical = `${SITE_CONFIG.url}/contact/`;
+    const schema = buildPageSchemaGraph({
+      breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Contact & Advisory Board', url: '/contact/' }],
+      canonicalUrl: canonical,
+      pageTitle: `Contact AloeDaily Editorial & Advisory Board`,
+      pageDescription: 'Submit clinical citation corrections, peer-reviewed study feedback, or press interview requests directly to the AloeDaily editorial desk.',
+      pageType: 'ContactPage',
+    });
+
+    const html = renderBaseLayout({
+      title: `Editorial & Press Contact | ${SITE_CONFIG.name}`,
+      metaDescription: 'Submit clinical citation inquiries, press interviews, or protocol corrections to the AloeDaily editorial desk and medical advisory board.',
+      canonicalUrl: canonical,
+      schemaJson: schema,
+      contentHtml: renderContactPage(),
+    });
+
+    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+  }
+
+  // 8. Privacy Policy (/privacy/)
+  if (pathname === '/privacy/' || pathname === '/privacy') {
+    const canonical = `${SITE_CONFIG.url}/privacy/`;
+    const schema = buildPageSchemaGraph({
+      breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Privacy Policy', url: '/privacy/' }],
+      canonicalUrl: canonical,
+      pageTitle: `Privacy Policy & Data Governance | ${SITE_CONFIG.name}`,
+      pageDescription: 'AloeDaily data protection, zero third-party tracking cookies policy, CCPA/GDPR compliance, and affiliate disclosure.',
+      pageType: 'WebPage',
+    });
+
+    const html = renderBaseLayout({
+      title: `Privacy Policy & Data Governance | ${SITE_CONFIG.name}`,
+      metaDescription: 'AloeDaily data protection, zero third-party tracking cookies policy, CCPA/GDPR compliance, and affiliate disclosure.',
+      canonicalUrl: canonical,
+      schemaJson: schema,
+      contentHtml: renderPrivacyPage(),
+    });
+
+    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+  }
+
+  // 9. Terms of Service (/terms/)
+  if (pathname === '/terms/' || pathname === '/terms') {
+    const canonical = `${SITE_CONFIG.url}/terms/`;
+    const schema = buildPageSchemaGraph({
+      breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Terms of Service', url: '/terms/' }],
+      canonicalUrl: canonical,
+      pageTitle: `Terms of Service & Editorial Disclaimers | ${SITE_CONFIG.name}`,
+      pageDescription: 'Terms of service, educational medical disclaimer, FDA compliance notice, and independent testing guidelines for AloeDaily.com.',
+      pageType: 'WebPage',
+    });
+
+    const html = renderBaseLayout({
+      title: `Terms of Service & Disclaimers | ${SITE_CONFIG.name}`,
+      metaDescription: 'Terms of service, educational medical disclaimer, FDA compliance notice, and independent testing guidelines for AloeDaily.com.',
+      canonicalUrl: canonical,
+      schemaJson: schema,
+      contentHtml: renderTermsPage(),
+    });
+
+    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+  }
+
+  // 10. Author Profile Pages (/authors/:authorId/)
+  if (pathname.startsWith('/authors/')) {
+    const authorId = pathname.replace('/authors/', '').replace(/\/$/, '');
+    const author = AUTHORS[authorId];
+
+    if (author) {
+      const canonical = `${SITE_CONFIG.url}/authors/${author.id}/`;
+      const authoredArticles = getArticlesByAuthor(author.id);
+      const reviewedArticles = getArticlesByReviewer(author.id);
+
+      const schema = buildPageSchemaGraph({
+        breadcrumbs: [
+          { name: 'Home', url: '/' },
+          { name: 'Medical & Botanical Board', url: '/about/' },
+          { name: author.name, url: `/authors/${author.id}/` },
+        ],
+        canonicalUrl: canonical,
+        pageTitle: `${author.name} (${author.credentials}) - Profile & Clinical Articles`,
+        pageDescription: author.bio,
+        pageType: 'ProfilePage',
+      });
+
+      const html = renderBaseLayout({
+        title: `${author.name} - Profile & Articles | ${SITE_CONFIG.name}`,
+        metaDescription: author.bio,
+        canonicalUrl: canonical,
+        schemaJson: schema,
+        contentHtml: renderAuthorPage(author, authoredArticles, reviewedArticles),
+      });
+
+      return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+    }
+  }
+
+  // 11. Pillar Hub Routes (/:pillar/)
   const segments = pathname.replace(/^\/+|\/+$/g, '').split('/');
   
   if (segments.length === 1) {
@@ -161,7 +277,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     }
   }
 
-  // 8. Article Spoke Routes (/:pillar/:slug/)
+  // 12. Article Spoke Routes (/:pillar/:slug/)
   if (segments.length === 2) {
     const [pillarSegment, slugSegment] = segments;
     const article = getArticleBySlug(slugSegment);
@@ -197,14 +313,22 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     }
   }
 
-  // 9. 404 Fallback
+  // 13. 404 Fallback with explicit noindex and no self-canonical
   const notFoundHtml = renderBaseLayout({
     title: 'Page Not Found (404)',
     metaDescription: 'The requested botanical protocol was not found on AloeDaily.',
-    canonicalUrl: `${SITE_CONFIG.url}${pathname}`,
-    schemaJson: { '@context': 'https://schema.org', '@type': 'WebPage', name: '404 Not Found' },
+    canonicalUrl: `${SITE_CONFIG.url}/`,
+    noindex: true,
+    schemaJson: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: '404 Page Not Found',
+      description: 'The requested botanical protocol was not found on AloeDaily.',
+    },
     contentHtml: renderNotFoundPage(),
   });
 
-  return new Response(notFoundHtml, { status: 404, headers: getCacheHeaders('html') });
+  const notFoundHeaders = getCacheHeaders('html');
+  notFoundHeaders.set('X-Robots-Tag', 'noindex, nofollow');
+  return new Response(notFoundHtml, { status: 404, headers: notFoundHeaders });
 }

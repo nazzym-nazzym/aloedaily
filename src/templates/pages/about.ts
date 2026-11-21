@@ -5,17 +5,26 @@ export function renderAboutPage(): string {
   const reviewersHtml = Object.values(AUTHORS).map(author => `
     <div class="card" style="margin-bottom: 1.5rem;">
       <div style="display: flex; gap: 1.25rem; align-items: flex-start; flex-wrap: wrap;">
-        <img src="${author.avatarUrl}" alt="${author.name}" style="width: 4.5rem; height: 4.5rem; border-radius: 9999px; object-fit: cover; border: 2px solid #059669;" />
+        <img
+          src="${author.avatarUrl}"
+          alt="Portrait of ${author.name}, ${author.role}"
+          loading="lazy"
+          decoding="async"
+          style="width: 4.5rem; height: 4.5rem; border-radius: 9999px; object-fit: cover; border: 2px solid #059669;"
+        />
         <div style="flex: 1; min-width: 250px;">
           <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #059669; letter-spacing: 0.05em;">
             ${author.isMedicalReviewer ? 'Medical Reviewer' : 'Botanical Specialist'}
           </span>
-          <h3 style="font-size: 1.3rem; color: #064e3b; margin: 0.15rem 0 0.25rem;">${author.name}</h3>
+          <h3 style="font-size: 1.3rem; color: #064e3b; margin: 0.15rem 0 0.25rem;">
+            <a href="/authors/${author.id}/" style="color: inherit; text-decoration: none;">${author.name}</a>
+          </h3>
           <div style="font-size: 0.875rem; color: #57534e; margin-bottom: 0.5rem;">${author.role} &bull; ${author.organization}</div>
           <p style="font-size: 0.9rem; color: #44403c; line-height: 1.5; margin-bottom: 0.75rem;">${author.bio}</p>
           <div style="display: flex; gap: 0.85rem; font-size: 0.825rem; flex-wrap: wrap;">
-            ${author.linkedInUrl ? `<a href="${author.linkedInUrl}" target="_blank" rel="noopener noreferrer" style="color: #047857; font-weight: 600;">LinkedIn Profile &rarr;</a>` : ''}
-            ${author.orcidId ? `<a href="https://orcid.org/${author.orcidId}" target="_blank" rel="noopener noreferrer" style="color: #047857; font-weight: 600;">ORCID ID: ${author.orcidId} &rarr;</a>` : ''}
+            <a href="/authors/${author.id}/" style="color: #047857; font-weight: 700;">Full Profile & Bio &rarr;</a>
+            ${author.linkedInUrl ? `<a href="${author.linkedInUrl}" target="_blank" rel="noopener noreferrer" style="color: #047857; font-weight: 600;">LinkedIn &rarr;</a>` : ''}
+            ${author.orcidId ? `<a href="https://orcid.org/${author.orcidId}" target="_blank" rel="noopener noreferrer" style="color: #047857; font-weight: 600;">ORCID: ${author.orcidId} &rarr;</a>` : ''}
           </div>
         </div>
       </div>
@@ -25,6 +34,14 @@ export function renderAboutPage(): string {
   return `
     <div style="background: linear-gradient(180deg, #ecfdf5 0%, #fafaf9 100%); padding: 3.5rem 0 2.5rem; border-bottom: 1px solid #e7e5e4;">
       <div class="container" style="max-width: 820px;">
+        <nav aria-label="Breadcrumb" style="margin-bottom: 1.25rem;">
+          <ol style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #78716c;">
+            <li><a href="/" style="color: #047857;">Home</a></li>
+            <li aria-hidden="true">&rsaquo;</li>
+            <li aria-current="page" style="color: #44403c; font-weight: 600;">About AloeDaily</li>
+          </ol>
+        </nav>
+
         <span class="badge-pill" style="margin-bottom: 0.75rem;">Our Mission & Manifesto</span>
         <h1 style="font-size: clamp(2rem, 4vw, 2.85rem); color: #064e3b; margin-bottom: 0.75rem;">
           Why We Founded AloeDaily: The Antidote to "Greenwashed" Botanical Misinformation

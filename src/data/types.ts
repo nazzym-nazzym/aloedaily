@@ -72,6 +72,9 @@ export interface Article {
   scientificCitations: Citation[];
   faqs: FAQItem[];
   howToSteps?: HowToStep[];
+  howToTotalTime?: string; // ISO 8601 duration e.g. "PT20M"
+  howToTools?: string[];
+  howToSupplies?: string[];
   relatedSlugs: string[];
   purityScorecard?: PurityScorecard;
   badge?: string;

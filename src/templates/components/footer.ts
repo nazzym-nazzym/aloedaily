@@ -15,7 +15,7 @@ export function renderFooter(): string {
   ).join('');
 
   return `
-    <footer>
+    <footer role="contentinfo">
       <div class="container">
         <div class="footer-grid">
           <div>
@@ -31,26 +31,26 @@ export function renderFooter(): string {
             </div>
           </div>
 
-          <div>
+          <nav aria-label="Footer Verticals Navigation">
             <h4 style="color: #fff; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Core Verticals</h4>
             <ul style="list-style: none; font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.6rem;">
               ${pillarsHtml}
             </ul>
-          </div>
+          </nav>
 
-          <div>
+          <nav aria-label="Footer Utilities Navigation">
             <h4 style="color: #fff; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Interactive Utilities</h4>
             <ul style="list-style: none; font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.6rem;">
               ${toolsHtml}
             </ul>
-          </div>
+          </nav>
 
-          <div>
+          <nav aria-label="Footer Company & Legal Navigation">
             <h4 style="color: #fff; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Standards & Contact</h4>
             <ul style="list-style: none; font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.6rem;">
               ${companyHtml}
             </ul>
-          </div>
+          </nav>
         </div>
 
         <!-- Compliance & Regulatory Disclosure Matrix -->

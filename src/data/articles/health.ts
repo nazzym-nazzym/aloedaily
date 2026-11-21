@@ -14,6 +14,9 @@ export const HEALTH_ARTICLES: Article[] = [
     authorId: 'marcus-chen',
     reviewedById: 'dr-elena-vance',
     badge: 'Toxicology & Safety',
+    howToTotalTime: 'PT35M',
+    howToTools: ['Chef knife', 'Cutting board', 'Tall glass', 'Strainer colander'],
+    howToSupplies: ['Cold running water', 'Fresh Aloe barbadensis Miller leaf'],
     directAnswer: 'To remove bitter yellow aloin latex from a fresh aloe leaf: 1) Stand the freshly cut leaf upright in a glass for 15 minutes to let gravity bleed out the dark yellow sap; 2) Slice away the spiky leaf margins and green rind; 3) Dice the clear inner fillet into cubes; and 4) Soak the cubes in cold water for 20 minutes, rinsing until the water is completely clear and the gel tastes clean like fresh cucumber.',
     tableOfContents: [
       { id: 'the-yellow-sap-trap', title: 'The Yellow Sap Trap: Why That Bitter Resin Is Dangerous', level: 2 },
@@ -153,7 +156,7 @@ export const HEALTH_ARTICLES: Article[] = [
     updatedAt: '2025-02-20',
     readTimeMinutes: 5,
     authorId: 'dr-elena-vance',
-    reviewedById: 'dr-elena-vance',
+    reviewedById: 'marcus-chen',
     badge: 'Interactive Health Tool',
     directAnswer: 'For healthy adults, the standard daily dose of certified decolorized aloe vera juice is 1.5 to 2 ounces (45–60 ml) for general wellness, or up to 4 ounces (120 ml) divided into two doses for active acid reflux management. Dosing above 6 ounces a day offers no extra benefit and may speed up gastrointestinal transit unnecessarily.',
     tableOfContents: [

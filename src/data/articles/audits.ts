@@ -12,8 +12,11 @@ export const AUDIT_ARTICLES: Article[] = [
     updatedAt: '2025-02-20',
     readTimeMinutes: 7,
     authorId: 'sarah-jenkins',
-    reviewedById: 'sarah-jenkins',
+    reviewedById: 'dr-elena-vance',
     badge: 'Lab Investigation',
+    howToTotalTime: 'PT5M',
+    howToTools: ['Clear drinking glass', 'Measuring spoon'],
+    howToSupplies: ['Distilled water', '10% Povidone-iodine solution'],
     directAnswer: 'You can test if your aloe vera gel is authentic or cheap synthetic filler using a simple 2-minute kitchen iodine test: Stir 1 teaspoon of aloe gel into 2 tablespoons of water, then add 3 drops of standard povidone-iodine. If the liquid turns dark purple or inky black, your product is cut with artificial starch or plastic carbomer thickeners. If it stays pale yellow or clears completely, it contains genuine antioxidant-rich aloe.',
     tableOfContents: [
       { id: 'the-industry-lie', title: 'The Great "100% Pure" Cosmetic Deception', level: 2 },
@@ -92,7 +95,7 @@ export const AUDIT_ARTICLES: Article[] = [
     updatedAt: '2025-02-20',
     readTimeMinutes: 8,
     authorId: 'sarah-jenkins',
-    reviewedById: 'sarah-jenkins',
+    reviewedById: 'dr-elena-vance',
     badge: 'Lab Benchmark',
     directAnswer: 'The highest-ranking commercial pure aloe vera gel of 2025 is Seven Minerals Organic Aloe Vera Gel, scoring 96/100 on The AloeDaily Purity Index™. It is cold-pressed from fresh Texas-grown inner fillet leaves, contains 99.1% pure aloe solids with verified acemannan bioactivity, and uses food-grade citric acid and potassium sorbate without synthetic carbomers or artificial green colorants.',
     tableOfContents: [

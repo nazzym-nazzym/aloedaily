@@ -5,6 +5,20 @@ import { getArticleBySlug } from '../../data/articles';
 import { renderAloinTimerScript } from '../../tools/aloin-timer';
 import { renderDosageCalculatorScript } from '../../tools/dosage-calculator';
 
+function formatDate(dateStr: string): string {
+  try {
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const monthIndex = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const date = new Date(Date.UTC(year, monthIndex, day));
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+    }
+  } catch (e) {}
+  return dateStr;
+}
+
 export function renderArticlePage(article: Article): string {
   const author = AUTHORS[article.authorId];
   const reviewer = article.reviewedById ? AUTHORS[article.reviewedById] : undefined;
@@ -99,6 +113,17 @@ export function renderArticlePage(article: Article): string {
             </ul>
           </div>
         </div>
+
+        ${sc.affiliateUrl && sc.affiliateUrl !== '#' ? `
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #e7e5e4; padding-top: 1rem;">
+            <div style="font-size: 0.8rem; color: #78716c;">
+              Independent retail batch evaluation &bull; Non-sponsored testing
+            </div>
+            <a href="${sc.affiliateUrl}" target="_blank" rel="sponsored nofollow noopener" style="display: inline-block; background: #064e3b; color: #ffffff; padding: 0.65rem 1.25rem; border-radius: 0.5rem; font-weight: 700; font-size: 0.875rem; text-decoration: none;">
+              Check Verified Retail Availability &rarr;
+            </a>
+          </div>
+        ` : ''}
       </div>
     `;
   }
@@ -135,11 +160,15 @@ export function renderArticlePage(article: Article): string {
 
   return `
     <article class="article-container" style="padding: 2.5rem 1.25rem 5rem;">
-      <!-- Breadcrumbs -->
-      <nav style="font-size: 0.85rem; color: #78716c; margin-bottom: 1.25rem;">
-        <a href="/" style="color: #047857;">Home</a> &rsaquo;
-        <a href="/${pillar.slug}/" style="color: #047857;">${pillar.shortTitle}</a> &rsaquo;
-        <span style="color: #44403c; font-weight: 600;">${article.title}</span>
+      <!-- Semantic Accessible Breadcrumbs -->
+      <nav aria-label="Breadcrumb" style="margin-bottom: 1.25rem;">
+        <ol style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #78716c;">
+          <li><a href="/" style="color: #047857;">Home</a></li>
+          <li aria-hidden="true">&rsaquo;</li>
+          <li><a href="/${pillar.slug}/" style="color: #047857;">${pillar.shortTitle}</a></li>
+          <li aria-hidden="true">&rsaquo;</li>
+          <li aria-current="page" style="color: #44403c; font-weight: 600;">${article.title}</li>
+        </ol>
       </nav>
 
       <!-- Badge & Title -->
@@ -153,16 +182,17 @@ export function renderArticlePage(article: Article): string {
         ${article.title}
       </h1>
 
-      <!-- Author & Reviewer Metadata -->
+      <!-- Author & Reviewer Metadata with Structured Profiles -->
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e7e5e4; margin-bottom: 1.75rem; font-size: 0.875rem; color: #57534e;">
         <div>
-          Authored by <strong>${author?.name || 'AloeDaily Editorial Team'}</strong> 
-          &bull; Updated <time datetime="${article.updatedAt}">${article.updatedAt}</time>
+          Authored by ${author ? `<a href="/authors/${author.id}/" style="color: #064e3b; font-weight: 700; text-decoration: underline;">${author.name}</a>` : '<strong>AloeDaily Editorial Team</strong>'}
+          &bull; Published <time datetime="${article.publishedAt}">${formatDate(article.publishedAt)}</time>
+          &bull; Updated <time datetime="${article.updatedAt}">${formatDate(article.updatedAt)}</time>
         </div>
         ${reviewer ? `
-          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.75rem; border-radius: 9999px; color: #065f46; font-weight: 600; font-size: 0.8rem;">
+          <a href="/authors/${reviewer.id}/" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.75rem; border-radius: 9999px; color: #065f46; font-weight: 600; font-size: 0.8rem;">
             <span>🛡️ Medically Reviewed by ${reviewer.name}</span>
-          </div>
+          </a>
         ` : ''}
       </div>
 
@@ -201,12 +231,15 @@ export function renderArticlePage(article: Article): string {
       <!-- Reviewer E-E-A-T Card -->
       ${reviewer ? `
         <div class="reviewer-card">
-          <img src="${reviewer.avatarUrl}" alt="${reviewer.name}" class="reviewer-avatar" />
+          <img src="${reviewer.avatarUrl}" alt="${reviewer.name}" class="reviewer-avatar" loading="lazy" decoding="async" />
           <div>
             <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #059669;">Medical & Botanical Reviewer</div>
-            <h4 style="font-size: 1.15rem; color: #064e3b; margin: 0.15rem 0 0.25rem;">${reviewer.name}</h4>
+            <h4 style="font-size: 1.15rem; color: #064e3b; margin: 0.15rem 0 0.25rem;">
+              <a href="/authors/${reviewer.id}/" style="color: inherit; text-decoration: none;">${reviewer.name}</a>
+            </h4>
             <div style="font-size: 0.85rem; color: #57534e; margin-bottom: 0.35rem;">${reviewer.role} &bull; ${reviewer.organization}</div>
-            <p style="font-size: 0.8rem; color: #78716c; margin: 0; line-height: 1.4;">${reviewer.bio}</p>
+            <p style="font-size: 0.8rem; color: #78716c; margin: 0 0 0.4rem; line-height: 1.4;">${reviewer.bio}</p>
+            <a href="/authors/${reviewer.id}/" style="font-size: 0.8rem; color: #047857; font-weight: 700;">View Verified Reviewer Profile &rarr;</a>
           </div>
         </div>
       ` : ''}

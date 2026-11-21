@@ -25,9 +25,12 @@ export const FOOTER_NAV = {
   tools: TOOL_NAV,
   company: [
     { label: 'About AloeDaily', href: '/about/' },
+    { label: 'Editorial & Media Contact', href: '/contact/' },
     { label: 'Editorial & Fact-Checking Policy', href: '/about/#editorial-policy' },
     { label: 'Medical & Botanical Review Board', href: '/about/#medical-board' },
     { label: 'Lab Purity Standards', href: '/audits/' },
-    { label: 'Editorial & Media Contact', href: '/about/#contact' },
+    { label: 'Privacy Policy', href: '/privacy/' },
+    { label: 'Terms of Service', href: '/terms/' },
+    { label: 'RSS Context Feed', href: '/feed.xml' },
   ]
 };

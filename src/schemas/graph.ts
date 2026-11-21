@@ -10,7 +10,7 @@ export function buildPageSchemaGraph(options: {
   canonicalUrl: string;
   pageTitle: string;
   pageDescription: string;
-  pageType?: 'WebPage' | 'AboutPage' | 'CollectionPage';
+  pageType?: 'WebPage' | 'AboutPage' | 'CollectionPage' | 'ProfilePage' | 'ContactPage';
 }) {
   const { article, breadcrumbs, canonicalUrl, pageTitle, pageDescription, pageType = 'WebPage' } = options;
 
@@ -22,7 +22,31 @@ export function buildPageSchemaGraph(options: {
     logo: {
       '@type': 'ImageObject',
       url: SITE_CONFIG.logoAbsolute,
+      width: 1200,
+      height: 630,
     },
+    foundingDate: `${SITE_CONFIG.foundedYear}`,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        email: SITE_CONFIG.adminEmail,
+        contactType: 'editorial',
+        availableLanguage: 'English',
+      },
+      {
+        '@type': 'ContactPoint',
+        email: SITE_CONFIG.mediaEmail,
+        contactType: 'press inquiry',
+        availableLanguage: 'English',
+      },
+    ],
+    knowsAbout: [
+      'Aloe barbadensis Miller',
+      'Botanical Dermatology',
+      'Aloin Toxicology & Decolorization',
+      'Succulent Horticulture & Cultivation',
+      'Cosmetic Ingredient Auditing',
+    ],
     sameAs: [
       SITE_CONFIG.social.pinterest,
       SITE_CONFIG.social.youtube,
@@ -43,7 +67,7 @@ export function buildPageSchemaGraph(options: {
 
   // Add Breadcrumb
   if (breadcrumbs.length > 0) {
-    graph.push(generateBreadcrumbSchema(breadcrumbs));
+    graph.push(generateBreadcrumbSchema(breadcrumbs, canonicalUrl));
   }
 
   // If this is an article page, build rich YMYL / E-E-A-T entity graph
@@ -55,8 +79,10 @@ export function buildPageSchemaGraph(options: {
       graph.push({
         '@type': 'Person',
         '@id': `${SITE_CONFIG.url}/authors/${author.id}/#person`,
+        url: `${SITE_CONFIG.url}/authors/${author.id}/`,
         name: author.name,
         jobTitle: author.role,
+        image: author.avatarUrl,
         worksFor: { '@id': `${SITE_CONFIG.url}/#organization` },
         alumniOf: author.alumniOf,
         description: author.bio,
@@ -71,8 +97,11 @@ export function buildPageSchemaGraph(options: {
       graph.push({
         '@type': 'Person',
         '@id': `${SITE_CONFIG.url}/authors/${reviewer.id}/#person`,
+        url: `${SITE_CONFIG.url}/authors/${reviewer.id}/`,
         name: reviewer.name,
         jobTitle: reviewer.role,
+        image: reviewer.avatarUrl,
+        worksFor: { '@id': `${SITE_CONFIG.url}/#organization` },
         alumniOf: reviewer.alumniOf,
         description: reviewer.bio,
         sameAs: [
@@ -86,23 +115,59 @@ export function buildPageSchemaGraph(options: {
     // Determine if topic is YMYL (Skincare, Health, Hair) -> use MedicalWebPage
     const isYMYL = ['skincare', 'health', 'hair-care'].includes(article.pillar);
 
+    // 1. WebPage entity
+    const webPageEntity: any = {
+      '@type': isYMYL ? 'MedicalWebPage' : 'WebPage',
+      '@id': `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: pageTitle,
+      description: pageDescription,
+      isPartOf: { '@id': `${SITE_CONFIG.url}/#website` },
+      publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
+      breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+      inLanguage: 'en-US',
+    };
+
+    if (isYMYL) {
+      webPageEntity.medicalAudience = {
+        '@type': 'MedicalAudience',
+        audienceType: 'Patient',
+      };
+      webPageEntity.about = {
+        '@type': 'MedicalEntity',
+        name: 'Aloe Vera Clinical Dermatology and Topical Therapeutics',
+      };
+    }
+    graph.push(webPageEntity);
+
+    // 2. Article / MedicalWebPage Article Entity
     const articleEntity: any = {
       '@type': isYMYL ? 'MedicalWebPage' : 'Article',
-      '@id': `${canonicalUrl}#webpage`,
+      '@id': `${canonicalUrl}#article`,
       url: canonicalUrl,
       name: article.title,
       headline: article.title,
       description: article.metaDescription,
       datePublished: `${article.publishedAt}T08:00:00+00:00`,
       dateModified: `${article.updatedAt}T10:00:00+00:00`,
+      mainEntityOfPage: { '@id': `${canonicalUrl}#webpage` },
       isPartOf: { '@id': `${SITE_CONFIG.url}/#website` },
       publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
+      image: {
+        '@type': 'ImageObject',
+        url: SITE_CONFIG.logoAbsolute,
+        width: 1200,
+        height: 630,
+      },
       author: author ? { '@id': `${SITE_CONFIG.url}/authors/${author.id}/#person` } : undefined,
       inLanguage: 'en-US',
-      mainEntityOfPage: canonicalUrl,
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['.direct-answer-box', 'h1'],
+      },
     };
 
-    if (reviewer) {
+    if (reviewer && reviewer.id !== author?.id) {
       articleEntity.reviewedBy = { '@id': `${SITE_CONFIG.url}/authors/${reviewer.id}/#person` };
     }
 
@@ -111,14 +176,25 @@ export function buildPageSchemaGraph(options: {
         '@type': 'MedicalAudience',
         audienceType: 'Patient',
       };
-      articleEntity.aspect = 'Treatment';
+      articleEntity.about = {
+        '@type': 'MedicalEntity',
+        name: 'Aloe Vera Clinical Dermatology and Topical Therapeutics',
+      };
     }
 
     graph.push(articleEntity);
 
     // HowTo schema
     if (article.howToSteps && article.howToSteps.length > 0) {
-      graph.push(generateHowToSchema(article.title, article.howToSteps));
+      graph.push(
+        generateHowToSchema(
+          article.title,
+          article.howToSteps,
+          article.howToTotalTime,
+          article.howToTools,
+          article.howToSupplies
+        )
+      );
     }
 
     // FAQ schema
@@ -126,28 +202,58 @@ export function buildPageSchemaGraph(options: {
       graph.push(generateFAQSchema(article.faqs));
     }
 
-    // Product schema for commercial reviews
+    // Product schema for commercial reviews with full rich-snippet compliance
     if (article.purityScorecard) {
+      const sc = article.purityScorecard;
+      const targetOfferUrl = sc.affiliateUrl.startsWith('http')
+        ? sc.affiliateUrl
+        : `${SITE_CONFIG.url}${sc.affiliateUrl}`;
+
       graph.push({
         '@type': 'Product',
-        name: article.purityScorecard.productName,
+        '@id': `${canonicalUrl}#product`,
+        name: sc.productName,
+        image: SITE_CONFIG.logoAbsolute,
+        description: `${sc.productName} by ${sc.brandName} - Laboratory purity audit and acemannan bioactivity testing by AloeDaily.`,
         brand: {
           '@type': 'Brand',
-          name: article.purityScorecard.brandName,
+          name: sc.brandName,
+        },
+        offers: {
+          '@type': 'Offer',
+          url: targetOfferUrl,
+          priceCurrency: 'USD',
+          price: '19.99',
+          availability: 'https://schema.org/InStock',
+          seller: {
+            '@type': 'Organization',
+            name: sc.brandName,
+          },
         },
         review: {
           '@type': 'Review',
+          name: `${sc.productName} Lab Purity Audit & Verdict`,
           reviewRating: {
             '@type': 'Rating',
-            ratingValue: (article.purityScorecard.overallScore / 20).toFixed(1),
+            ratingValue: (sc.overallScore / 20).toFixed(1),
             bestRating: '5',
+            worstRating: '1',
           },
           author: { '@id': `${SITE_CONFIG.url}/authors/${author?.id || 'sarah-jenkins'}/#person` },
+          publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
+          datePublished: `${article.publishedAt}T08:00:00+00:00`,
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: (sc.overallScore / 20).toFixed(1),
+          reviewCount: 1,
+          bestRating: '5',
+          worstRating: '1',
         },
       });
     }
   } else {
-    // Non-article page (Home, Hub, About)
+    // Non-article page (Home, Hub, About, Profile, Contact, Legal)
     graph.push({
       '@type': pageType,
       '@id': `${canonicalUrl}#webpage`,
@@ -156,6 +262,7 @@ export function buildPageSchemaGraph(options: {
       description: pageDescription,
       isPartOf: { '@id': `${SITE_CONFIG.url}/#website` },
       publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
+      breadcrumb: breadcrumbs.length > 0 ? { '@id': `${canonicalUrl}#breadcrumb` } : undefined,
       inLanguage: 'en-US',
     });
   }

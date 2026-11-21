@@ -11,8 +11,10 @@ export const CULTIVATION_ARTICLES: Article[] = [
     updatedAt: '2025-02-20',
     readTimeMinutes: 6,
     authorId: 'marcus-chen',
-    reviewedById: 'marcus-chen',
     badge: 'Horticulture Guide',
+    howToTotalTime: 'PT15M',
+    howToTools: ['Sterilized razor utility knife', 'Clean cutting board', 'Tall drinking glass'],
+    howToSupplies: ['70% Isopropyl rubbing alcohol', 'Clean paper towel'],
     directAnswer: 'To harvest an aloe vera leaf safely: 1) Choose a plump, mature outer leaf at the very base of the plant; 2) Using a sterilized, razor-sharp utility knife, make a clean horizontal incision through the white leaf base right where it connects to the main stem; 3) Never tear or pull with your hands, and never cut the upright central leaves; 4) Leave the cut surface dry for 3 days to form a hard waterproof callus.',
     tableOfContents: [
       { id: 'anatomy-of-growth', title: 'The Anatomy of Growth: Why You Must Never Cut the Center', level: 2 },
@@ -86,8 +88,10 @@ export const CULTIVATION_ARTICLES: Article[] = [
     updatedAt: '2025-02-20',
     readTimeMinutes: 7,
     authorId: 'marcus-chen',
-    reviewedById: 'marcus-chen',
     badge: 'Plant Doctor Diagnostic',
+    howToTotalTime: 'PT48H',
+    howToTools: ['Sterilized pruning shears', 'Clean newspaper', 'Unglazed terracotta pot with drainage hole'],
+    howToSupplies: ['Organic Ceylon ground cinnamon', 'Coarse pumice or perlite', 'Granite grit', 'Organic succulent potting soil'],
     directAnswer: 'Aloe leaves turn soft, mushy, and translucent because of root rot caused by dense, waterlogged soil and overwatering. When roots sit in damp soil, fungal pathogens (Pythium) destroy root hairs, suffocating the plant and causing leaf cells to rupture with water. To save the plant: unpot immediately, amputate all black/mushy roots, dust wounds with ground cinnamon, let the bare plant dry for 48 hours, and repot in dry gritty soil.',
     tableOfContents: [
       { id: 'the-root-rot-diagnosis', title: 'The Diagnostic: Is It Dying of Thirst or Drowning in Soil?', level: 2 },

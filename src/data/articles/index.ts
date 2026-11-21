@@ -41,3 +41,11 @@ export function getLatestArticles(limit: number = 6): Article[] {
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, limit);
 }
+
+export function getArticlesByAuthor(authorId: string): Article[] {
+  return ALL_ARTICLES.filter((a) => a.authorId === authorId);
+}
+
+export function getArticlesByReviewer(reviewerId: string): Article[] {
+  return ALL_ARTICLES.filter((a) => a.reviewedById === reviewerId);
+}
