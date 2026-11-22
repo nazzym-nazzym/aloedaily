@@ -25,7 +25,6 @@ Allow: /
 
 # Sitemaps & LLM Context Feeds
 Sitemap: ${SITE_CONFIG.url}/sitemap.xml
-Sitemap: ${SITE_CONFIG.url}/feed.xml
 LLM-Context: ${SITE_CONFIG.url}/llms.txt
 `;
 }

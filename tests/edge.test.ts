@@ -53,13 +53,23 @@ async function runTests() {
     assert(body.includes('AloeDaily') && body.includes('Editorial & Research Desks'), '/llms.txt contains publisher authority data');
   }
 
-  // Test 5: Sitemap.xml
+  // Test 5: Sitemap.xml & XML Well-Formedness
   {
     const req = new Request('https://aloedaily.com/sitemap.xml');
     const res = await worker.fetch(req, env, mockCtx);
     const body = await res.text();
     assert(res.status === 200, '/sitemap.xml returns 200 OK');
+    assert(res.headers.get('Content-Type')?.includes('xml') === true, '/sitemap.xml served with xml Content-Type');
     assert(body.includes('<urlset') && body.includes('/skincare/aloe-vera-overnight-face-mask/'), '/sitemap.xml contains article URLs');
+    
+    // Check for XML entity escaping (no bare &)
+    const unescapedAmp = body.match(/&(?!(amp|lt|gt|quot|apos);)/);
+    assert(!unescapedAmp, '/sitemap.xml has ZERO unescaped ampersands (valid XML for Google Search Console)');
+    
+    // Check for duplicate URLs
+    const locMatches = [...body.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
+    const duplicateLocs = locMatches.filter((item, index) => locMatches.indexOf(item) !== index);
+    assert(duplicateLocs.length === 0, '/sitemap.xml contains ZERO duplicate URLs');
   }
 
   // Test 6: Homepage & Inlined Critical CSS & Preloaded Logo

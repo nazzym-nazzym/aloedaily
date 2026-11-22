@@ -1,9 +1,20 @@
 import { ALL_ARTICLES } from '../data/articles';
 import { PILLARS } from '../data/pillars';
-import { AUTHORS } from '../data/authors';
 import { SITE_CONFIG } from '../config/site';
 
+function escapeXml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
 export function renderMasterSitemapXml(): string {
+  // Primary unique author desks (exclude alias keys to prevent duplicate sitemap entries)
+  const primaryDeskIds = ['botanical-research-desk', 'horticulture-desk', 'formulation-desk'];
+
   const staticUrls = [
     { loc: `${SITE_CONFIG.url}/`, changefreq: 'daily', priority: '1.0' },
     { loc: `${SITE_CONFIG.url}/about/`, changefreq: 'monthly', priority: '0.85' },
@@ -15,8 +26,8 @@ export function renderMasterSitemapXml(): string {
       changefreq: 'weekly',
       priority: '0.9',
     })),
-    ...Object.values(AUTHORS).map((author) => ({
-      loc: `${SITE_CONFIG.url}/authors/${author.id}/`,
+    ...primaryDeskIds.map((id) => ({
+      loc: `${SITE_CONFIG.url}/authors/${id}/`,
       changefreq: 'monthly',
       priority: '0.75',
     })),
@@ -32,17 +43,23 @@ export function renderMasterSitemapXml(): string {
 
   const allEntries = [...staticUrls, ...articleUrls];
 
-  const urlXml = allEntries.map((e) => `
-  <url>
-    <loc>${e.loc}</loc>
-    ${'lastmod' in e && e.lastmod ? `<lastmod>${e.lastmod}</lastmod>` : `<lastmod>${new Date().toISOString().split('T')[0]}</lastmod>`}
+  const urlXml = allEntries.map((e) => {
+    const titleVal = ('title' in e && typeof e.title === 'string' && e.title) ? e.title : SITE_CONFIG.name;
+    const lastmodVal = ('lastmod' in e && typeof e.lastmod === 'string' && e.lastmod)
+      ? e.lastmod
+      : new Date().toISOString().split('T')[0];
+
+    return `  <url>
+    <loc>${escapeXml(e.loc)}</loc>
+    <lastmod>${lastmodVal}</lastmod>
     <changefreq>${e.changefreq}</changefreq>
     <priority>${e.priority}</priority>
     <image:image>
-      <image:loc>${SITE_CONFIG.logoAbsolute}</image:loc>
-      <image:title>${'title' in e && e.title ? e.title : SITE_CONFIG.name}</image:title>
+      <image:loc>${escapeXml(SITE_CONFIG.logoAbsolute)}</image:loc>
+      <image:title>${escapeXml(titleVal)}</image:title>
     </image:image>
-  </url>`).join('');
+  </url>`;
+  }).join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
