@@ -15,6 +15,9 @@ export interface BaseLayoutOptions {
   publishedTime?: string;
   modifiedTime?: string;
   noindex?: boolean;
+  lang?: 'en' | 'es';
+  hreflangs?: { lang: string; url: string }[];
+  switchUrl?: string;
 }
 
 export function renderBaseLayout(options: BaseLayoutOptions): string {
@@ -30,14 +33,23 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
     publishedTime,
     modifiedTime,
     noindex = false,
+    lang = 'en',
+    hreflangs,
+    switchUrl,
   } = options;
 
   const displayTitle = title.toLowerCase().includes(SITE_CONFIG.name.toLowerCase())
     ? title
     : `${title} | ${SITE_CONFIG.name}`;
 
+  const hreflangTags = hreflangs && hreflangs.length > 0
+    ? hreflangs.map(h => `<link rel="alternate" hreflang="${h.lang}" href="${h.url}" />`).join('\n  ')
+    : `<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />\n  <link rel="alternate" hreflang="en" href="${canonicalUrl}" />`;
+
+  const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+
   return `<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="${lang}" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,8 +57,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <meta name="description" content="${metaDescription}" />
   ${noindex ? '<meta name="robots" content="noindex, nofollow" />\n  <meta name="googlebot" content="noindex, nofollow" />' : `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="${canonicalUrl}" />
-  <link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />
-  <link rel="alternate" hreflang="en" href="${canonicalUrl}" />`}
+  ${hreflangTags}`}
 
   <!-- Critical Edge Asset Preload for Sub-Millisecond LCP -->
   <link rel="preload" as="image" href="/assets/logo.webp" fetchpriority="high" type="image/webp" />
@@ -65,7 +76,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <meta property="og:description" content="${metaDescription}" />
   <meta property="og:url" content="${canonicalUrl}" />
   <meta property="og:type" content="${ogType}" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="${ogLocale}" />
   <meta property="og:image" content="${ogImage}" />
   <meta property="og:image:secure_url" content="${ogImage}" />
   <meta property="og:image:width" content="1200" />
@@ -94,11 +105,11 @@ ${JSON.stringify(schemaJson, null, 2)}
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  ${renderHeader()}
+  ${renderHeader(lang, switchUrl)}
   <main id="main-content">
     ${contentHtml}
   </main>
-  ${renderFooter()}
+  ${renderFooter(lang)}
 </body>
 </html>`;
 }

@@ -7,6 +7,7 @@ import { renderHomePage } from '../templates/pages/home';
 import { renderPillarHubPage } from '../templates/pages/pillar-hub';
 import { renderArticlePage } from '../templates/pages/article';
 import { renderAboutPage } from '../templates/pages/about';
+import { renderSpanishHomePage } from '../templates/pages/spanish-home';
 import { renderEditorialPolicyPage } from '../templates/pages/editorial-policy';
 import { renderReviewBoardPage } from '../templates/pages/review-board';
 import { renderAuthorPage } from '../templates/pages/author';
@@ -15,6 +16,7 @@ import { renderPrivacyPage } from '../templates/pages/privacy';
 import { renderTermsPage } from '../templates/pages/terms';
 import { renderNotFoundPage } from '../templates/pages/not-found';
 import { buildPageSchemaGraph } from '../schemas/graph';
+import { SPANISH_ARTICLES, getSpanishArticleBySlug, ENGLISH_TO_SPANISH_MAP, SPANISH_TO_ENGLISH_MAP } from '../data/spanish-articles';
 import { renderMasterSitemapXml } from '../feeds/sitemap';
 import { renderRobotsTxt } from '../feeds/robots';
 import { renderLlmsTxt } from '../feeds/llms-txt';
@@ -63,7 +65,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
   // 1b. Dynamic Edge OpenGraph Visual Asset Cards (/assets/cards/:slug.svg)
   if (pathname.startsWith('/assets/cards/') && pathname.endsWith('.svg')) {
     const slug = pathname.replace('/assets/cards/', '').replace('.svg', '');
-    const article = getArticleBySlug(slug);
+    const article = getArticleBySlug(slug) || getSpanishArticleBySlug(slug);
     if (article) {
       const svg = generateOpenGraphSvg(article);
       return new Response(svg, {
@@ -123,7 +125,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     return handleAffiliateRedirect(brandSlug);
   }
 
-  // 5. Homepage (/)
+  // 5. English Homepage (/)
   if (pathname === '/' || pathname === '') {
     const canonical = `${SITE_CONFIG.url}/`;
     const homeTitle = 'Aloe Daily: Pure Aloe Vera Science, Skincare Protocols & Plant Care Guides';
@@ -135,6 +137,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
       pageTitle: homeTitle,
       pageDescription: homeDesc,
       pageType: 'WebPage',
+      inLanguage: 'en-US',
     });
 
     const html = renderBaseLayout({
@@ -143,6 +146,46 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
       canonicalUrl: canonical,
       schemaJson: schema,
       contentHtml: renderHomePage(),
+      lang: 'en',
+      hreflangs: [
+        { lang: 'x-default', url: `${SITE_CONFIG.url}/` },
+        { lang: 'en', url: `${SITE_CONFIG.url}/` },
+        { lang: 'es', url: `${SITE_CONFIG.url}/es/` },
+      ],
+      switchUrl: '/es/',
+    });
+
+    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+  }
+
+  // 5b. Spanish Edition Homepage (/es/ or /es)
+  if (pathname === '/es/' || pathname === '/es') {
+    const canonical = `${SITE_CONFIG.url}/es/`;
+    const homeTitle = 'AloeDaily en Español: Ciencia Botánica de la Sábila, Protocolos y Cuidado';
+    const homeDesc = 'Guías clínicas basadas en evidencia sobre la sábila (aloe vera), eliminación segura de aloína, cuidado de la planta, y pruebas caseras de pureza.';
+
+    const schema = buildPageSchemaGraph({
+      breadcrumbs: [{ name: 'Inicio', url: '/es/' }],
+      canonicalUrl: canonical,
+      pageTitle: homeTitle,
+      pageDescription: homeDesc,
+      pageType: 'WebPage',
+      inLanguage: 'es-ES',
+    });
+
+    const html = renderBaseLayout({
+      title: homeTitle,
+      metaDescription: homeDesc,
+      canonicalUrl: canonical,
+      schemaJson: schema,
+      contentHtml: renderSpanishHomePage(),
+      lang: 'es',
+      hreflangs: [
+        { lang: 'x-default', url: `${SITE_CONFIG.url}/` },
+        { lang: 'en', url: `${SITE_CONFIG.url}/` },
+        { lang: 'es', url: `${SITE_CONFIG.url}/es/` },
+      ],
+      switchUrl: '/',
     });
 
     return new Response(html, { status: 200, headers: getCacheHeaders('html') });
@@ -369,6 +412,59 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     }
   }
 
+  // 11b. Spanish Article Spoke Routes (/es/:pillar/:slug/)
+  if (segments.length === 3 && segments[0] === 'es') {
+    const [, pillarSegment, slugSegment] = segments;
+    const article = getSpanishArticleBySlug(slugSegment);
+
+    if (article && article.pillar === pillarSegment) {
+      const canonical = `${SITE_CONFIG.url}/es/${article.pillar}/${article.slug}/`;
+      const enPartner = SPANISH_TO_ENGLISH_MAP[article.slug];
+      const partnerUrl = enPartner ? `${SITE_CONFIG.url}/${enPartner.pillar}/${enPartner.slug}/` : undefined;
+
+      const hreflangs = partnerUrl ? [
+        { lang: 'x-default', url: partnerUrl },
+        { lang: 'en', url: partnerUrl },
+        { lang: 'es', url: canonical },
+      ] : [
+        { lang: 'x-default', url: canonical },
+        { lang: 'es', url: canonical },
+      ];
+
+      const schema = buildPageSchemaGraph({
+        article,
+        breadcrumbs: [
+          { name: 'Inicio', url: '/es/' },
+          { name: article.pillar, url: `/es/` },
+          { name: article.title, url: canonical },
+        ],
+        canonicalUrl: canonical,
+        pageTitle: article.metaTitle,
+        pageDescription: article.metaDescription,
+        inLanguage: 'es-ES',
+      });
+
+      const cardUrl = `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`;
+      const html = renderBaseLayout({
+        title: article.metaTitle,
+        metaDescription: article.metaDescription,
+        canonicalUrl: canonical,
+        schemaJson: schema,
+        contentHtml: renderArticlePage(article),
+        ogType: 'article',
+        ogImage: cardUrl,
+        ogImageAlt: `${article.title} — ${SITE_CONFIG.name}`,
+        publishedTime: `${article.publishedAt}T08:00:00Z`,
+        modifiedTime: `${article.updatedAt}T10:00:00Z`,
+        lang: 'es',
+        hreflangs,
+        switchUrl: partnerUrl || '/',
+      });
+
+      return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+    }
+  }
+
   // 12. Article Spoke Routes (/:pillar/:slug/)
   if (segments.length === 2) {
     const [pillarSegment, slugSegment] = segments;
@@ -377,6 +473,17 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     if (article && article.pillar === pillarSegment) {
       const canonical = `${SITE_CONFIG.url}/${article.pillar}/${article.slug}/`;
       const pillar = PILLARS[article.pillar];
+      const esPartner = ENGLISH_TO_SPANISH_MAP[article.slug];
+      const esUrl = esPartner ? `${SITE_CONFIG.url}/es/${esPartner.pillar}/${esPartner.slug}/` : undefined;
+
+      const hreflangs = esUrl ? [
+        { lang: 'x-default', url: canonical },
+        { lang: 'en', url: canonical },
+        { lang: 'es', url: esUrl },
+      ] : [
+        { lang: 'x-default', url: canonical },
+        { lang: 'en', url: canonical },
+      ];
 
       const schema = buildPageSchemaGraph({
         article,
@@ -402,6 +509,9 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
         ogImageAlt: `${article.title} — ${SITE_CONFIG.name}`,
         publishedTime: `${article.publishedAt}T08:00:00Z`,
         modifiedTime: `${article.updatedAt}T10:00:00Z`,
+        lang: 'en',
+        hreflangs,
+        switchUrl: esUrl || '/es/',
       });
 
       return new Response(html, { status: 200, headers: getCacheHeaders('html') });

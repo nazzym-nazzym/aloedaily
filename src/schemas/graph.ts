@@ -12,16 +12,29 @@ export function buildPageSchemaGraph(options: {
   pageDescription: string;
   pageType?: 'WebPage' | 'AboutPage' | 'CollectionPage' | 'ProfilePage' | 'ContactPage';
   itemListElements?: { name: string; url: string; description?: string }[];
+  inLanguage?: string;
 }) {
-  const { article, breadcrumbs, canonicalUrl, pageTitle, pageDescription, pageType = 'WebPage', itemListElements } = options;
+  const {
+    article,
+    breadcrumbs,
+    canonicalUrl,
+    pageTitle,
+    pageDescription,
+    pageType = 'WebPage',
+    itemListElements,
+    inLanguage = 'en-US',
+  } = options;
 
   const organization = {
     '@type': 'Organization',
     '@id': `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.name,
+    alternateName: ['Aloe Daily', 'AloeDaily', 'Sábila Diario', 'AloeDaily en Español'],
+    disambiguatingDescription: 'AloeDaily is an independent botanical sciences publication and research authority specializing in Aloe barbadensis Miller, phytotherapy, and cosmetic formulation transparency.',
     url: SITE_CONFIG.url,
     publishingPrinciples: `${SITE_CONFIG.url}/editorial-policy/`,
     correctionsPolicy: `${SITE_CONFIG.url}/editorial-policy/#corrections`,
+    knowsLanguage: ['en', 'es'],
     logo: {
       '@type': 'ImageObject',
       url: SITE_CONFIG.logoAbsolute,
@@ -34,13 +47,13 @@ export function buildPageSchemaGraph(options: {
         '@type': 'ContactPoint',
         email: SITE_CONFIG.adminEmail,
         contactType: 'editorial',
-        availableLanguage: 'English',
+        availableLanguage: ['English', 'Spanish'],
       },
       {
         '@type': 'ContactPoint',
         email: SITE_CONFIG.mediaEmail,
         contactType: 'press inquiry',
-        availableLanguage: 'English',
+        availableLanguage: ['English', 'Spanish'],
       },
     ],
     knowsAbout: [
@@ -136,7 +149,7 @@ export function buildPageSchemaGraph(options: {
       isPartOf: { '@id': `${SITE_CONFIG.url}/#website` },
       publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
       breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
-      inLanguage: 'en-US',
+      inLanguage: inLanguage,
     };
 
     if (isYMYL) {
@@ -171,7 +184,7 @@ export function buildPageSchemaGraph(options: {
         height: 630,
       },
       author: author ? { '@id': `${SITE_CONFIG.url}/authors/${author.id}/#person` } : undefined,
-      inLanguage: 'en-US',
+      inLanguage: inLanguage,
       speakable: {
         '@type': 'SpeakableSpecification',
         cssSelector: ['.direct-answer-box', 'h1'],
@@ -274,7 +287,7 @@ export function buildPageSchemaGraph(options: {
       isPartOf: { '@id': `${SITE_CONFIG.url}/#website` },
       publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
       breadcrumb: breadcrumbs.length > 0 ? { '@id': `${canonicalUrl}#breadcrumb` } : undefined,
-      inLanguage: 'en-US',
+      inLanguage: inLanguage,
     });
     // ItemList schema on CollectionPage (pillar hub pages) for rich cluster indexing
     if (pageType === 'CollectionPage' && itemListElements && itemListElements.length > 0) {

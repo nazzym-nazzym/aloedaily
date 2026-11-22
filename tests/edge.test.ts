@@ -395,6 +395,68 @@ async function runTests() {
     assert(body.includes('/assets/cards/aloe-vera-overnight-face-mask.svg'), 'Sitemap contains unique dynamic SVG image URL for articles');
   }
 
+  // Test 34: Spanish Edition Homepage (/es/) & Multilingual Hreflang Tags
+  {
+    const req = new Request('https://aloedaily.com/es/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/es/ returns 200 OK');
+    assert(body.includes('<html lang="es"'), 'Spanish page sets html lang="es"');
+    assert(body.includes('Ciencia Botánica de la Sábila'), 'Spanish homepage renders Spanish hero headline');
+    assert(body.includes('hreflang="es" href="https://aloedaily.com/es/"'), 'Spanish homepage contains self-hreflang');
+    assert(body.includes('hreflang="en" href="https://aloedaily.com/"'), 'Spanish homepage contains English hreflang');
+    assert(body.includes('hreflang="x-default" href="https://aloedaily.com/"'), 'Spanish homepage contains x-default hreflang');
+  }
+
+  // Test 35: Bidirectional Hreflang on English & Spanish Article Spoke Pairs
+  {
+    // English Article
+    const reqEn = new Request('https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/');
+    const resEn = await worker.fetch(reqEn, env, mockCtx);
+    const bodyEn = await resEn.text();
+    assert(bodyEn.includes('hreflang="es" href="https://aloedaily.com/es/skincare/sabila-para-la-cara-toda-la-noche/"'), 'English article links to Spanish partner via hreflang');
+
+    // Spanish Article
+    const reqEs = new Request('https://aloedaily.com/es/skincare/sabila-para-la-cara-toda-la-noche/');
+    const resEs = await worker.fetch(reqEs, env, mockCtx);
+    const bodyEs = await resEs.text();
+    assert(resEs.status === 200, '/es/skincare/sabila-para-la-cara-toda-la-noche/ returns 200 OK');
+    assert(bodyEs.includes('<html lang="es"'), 'Spanish article has html lang="es"');
+    assert(bodyEs.includes('hreflang="en" href="https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/"'), 'Spanish article links back to English partner via hreflang');
+    assert(bodyEs.includes('hreflang="es" href="https://aloedaily.com/es/skincare/sabila-para-la-cara-toda-la-noche/"'), 'Spanish article has self-hreflang');
+  }
+
+  // Test 36: Accessible Multilingual Header Toggle
+  {
+    const reqEn = new Request('https://aloedaily.com/');
+    const resEn = await worker.fetch(reqEn, env, mockCtx);
+    const bodyEn = await resEn.text();
+    assert(bodyEn.includes('href="/es/"') && bodyEn.includes('🇪🇸 ES'), 'English page header includes Spanish switcher link');
+
+    const reqEs = new Request('https://aloedaily.com/es/');
+    const resEs = await worker.fetch(reqEs, env, mockCtx);
+    const bodyEs = await resEs.text();
+    assert(bodyEs.includes('href="/"') && bodyEs.includes('🇺🇸 EN'), 'Spanish page header includes English switcher link');
+  }
+
+  // Test 37: Semantic Entity Building in Organization Schema
+  {
+    const req = new Request('https://aloedaily.com/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('Sábila Diario') && body.includes('AloeDaily en Español'), 'Organization schema includes multilingual alternate names for Entity Graph');
+    assert(body.includes('"knowsLanguage"') && body.includes('"es"'), 'Organization schema defines multilingual competence');
+  }
+
+  // Test 38: Spanish Articles & Hub in Master Sitemap.xml
+  {
+    const req = new Request('https://aloedaily.com/sitemap.xml');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('<loc>https://aloedaily.com/es/</loc>'), 'Sitemap contains Spanish homepage URL');
+    assert(body.includes('<loc>https://aloedaily.com/es/skincare/sabila-para-la-cara-toda-la-noche/</loc>'), 'Sitemap contains Spanish spoke article URLs');
+  }
+
   console.log(`\nTEST SUMMARY: ${passed} Passed, ${failed} Failed`);
   if (failed > 0) process.exit(1);
 }

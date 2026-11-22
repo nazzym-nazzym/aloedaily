@@ -1,4 +1,5 @@
 import { ALL_ARTICLES } from '../data/articles';
+import { SPANISH_ARTICLES } from '../data/spanish-articles';
 import { PILLARS } from '../data/pillars';
 import { SITE_CONFIG } from '../config/site';
 
@@ -17,6 +18,7 @@ export function renderMasterSitemapXml(): string {
 
   const staticUrls = [
     { loc: `${SITE_CONFIG.url}/`, changefreq: 'daily', priority: '1.0' },
+    { loc: `${SITE_CONFIG.url}/es/`, changefreq: 'daily', priority: '0.95', title: 'AloeDaily en Español' },
     { loc: `${SITE_CONFIG.url}/about/`, changefreq: 'monthly', priority: '0.85' },
     { loc: `${SITE_CONFIG.url}/editorial-policy/`, changefreq: 'monthly', priority: '0.85' },
     { loc: `${SITE_CONFIG.url}/review-board/`, changefreq: 'monthly', priority: '0.85' },
@@ -44,7 +46,16 @@ export function renderMasterSitemapXml(): string {
     imageUrl: `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`,
   }));
 
-  const allEntries = [...staticUrls, ...articleUrls];
+  const spanishArticleUrls = SPANISH_ARTICLES.map((article) => ({
+    loc: `${SITE_CONFIG.url}/es/${article.pillar}/${article.slug}/`,
+    lastmod: article.updatedAt,
+    changefreq: 'weekly',
+    priority: '0.85',
+    title: article.title,
+    imageUrl: `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`,
+  }));
+
+  const allEntries = [...staticUrls, ...articleUrls, ...spanishArticleUrls];
 
   const urlXml = allEntries.map((e) => {
     const titleVal = ('title' in e && typeof e.title === 'string' && e.title) ? e.title : SITE_CONFIG.name;

@@ -1,7 +1,7 @@
 import { FOOTER_NAV } from '../../config/navigation';
 import { SITE_CONFIG } from '../../config/site';
 
-export function renderFooter(): string {
+export function renderFooter(lang: 'en' | 'es' = 'en'): string {
   const pillarsHtml = FOOTER_NAV.pillars.map(
     (item) => `<li><a href="${item.href}">${item.label}</a></li>`
   ).join('');
