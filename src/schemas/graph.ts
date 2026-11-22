@@ -11,14 +11,17 @@ export function buildPageSchemaGraph(options: {
   pageTitle: string;
   pageDescription: string;
   pageType?: 'WebPage' | 'AboutPage' | 'CollectionPage' | 'ProfilePage' | 'ContactPage';
+  itemListElements?: { name: string; url: string; description?: string }[];
 }) {
-  const { article, breadcrumbs, canonicalUrl, pageTitle, pageDescription, pageType = 'WebPage' } = options;
+  const { article, breadcrumbs, canonicalUrl, pageTitle, pageDescription, pageType = 'WebPage', itemListElements } = options;
 
   const organization = {
     '@type': 'Organization',
     '@id': `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
+    publishingPrinciples: `${SITE_CONFIG.url}/editorial-policy/`,
+    correctionsPolicy: `${SITE_CONFIG.url}/editorial-policy/#corrections`,
     logo: {
       '@type': 'ImageObject',
       url: SITE_CONFIG.logoAbsolute,
@@ -61,6 +64,14 @@ export function buildPageSchemaGraph(options: {
     name: SITE_CONFIG.name,
     description: SITE_CONFIG.description,
     publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_CONFIG.url}/?s={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   const graph: any[] = [organization, website];
@@ -155,7 +166,7 @@ export function buildPageSchemaGraph(options: {
       publisher: { '@id': `${SITE_CONFIG.url}/#organization` },
       image: {
         '@type': 'ImageObject',
-        url: SITE_CONFIG.logoAbsolute,
+        url: `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`,
         width: 1200,
         height: 630,
       },
@@ -265,6 +276,23 @@ export function buildPageSchemaGraph(options: {
       breadcrumb: breadcrumbs.length > 0 ? { '@id': `${canonicalUrl}#breadcrumb` } : undefined,
       inLanguage: 'en-US',
     });
+    // ItemList schema on CollectionPage (pillar hub pages) for rich cluster indexing
+    if (pageType === 'CollectionPage' && itemListElements && itemListElements.length > 0) {
+      graph.push({
+        '@type': 'ItemList',
+        '@id': `${canonicalUrl}#itemlist`,
+        name: pageTitle,
+        description: pageDescription,
+        numberOfItems: itemListElements.length,
+        itemListElement: itemListElements.map((item, idx) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          name: item.name,
+          url: item.url,
+          description: item.description,
+        })),
+      });
+    }
   }
 
   return {

@@ -277,6 +277,124 @@ async function runTests() {
     assert(body.includes('<ol') && body.includes('aria-current="page"'), 'Breadcrumb uses semantic ol with aria-current="page"');
   }
 
+  // Test 24: Legacy URL 301 Redirects (Fixing 404s identified in SEO audit)
+  {
+    const req1 = new Request('https://aloedaily.com/health/aloe-vera-juice-daily-intake-safety/');
+    const res1 = await worker.fetch(req1, env, mockCtx);
+    assert(res1.status === 301, 'Legacy URL /health/aloe-vera-juice-daily-intake-safety/ redirects 301');
+    assert(res1.headers.get('Location') === 'https://aloedaily.com/health/aloe-vera-juice-dosage-calculator/', 'Redirect points to dosage calculator');
+
+    const req2 = new Request('https://aloedaily.com/skincare/can-you-leave-aloe-vera-on-face-overnight/');
+    const res2 = await worker.fetch(req2, env, mockCtx);
+    assert(res2.status === 301, 'Legacy URL /skincare/can-you-leave-aloe-vera-on-face-overnight/ redirects 301');
+    assert(res2.headers.get('Location') === 'https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/', 'Redirect points to overnight face mask');
+  }
+
+  // Test 25: Dedicated Editorial & Fact-Checking Policy Route (/editorial-policy/)
+  {
+    const req = new Request('https://aloedaily.com/editorial-policy/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/editorial-policy/ returns 200 OK');
+    assert(body.includes('Editorial & Fact-Checking Policy'), 'Editorial policy page renders correct heading');
+    assert(body.includes('Primary Scientific Literature Requirement'), 'Editorial policy contains PubMed literature standards');
+  }
+
+  // Test 26: Dedicated Medical & Botanical Review Board Route (/review-board/)
+  {
+    const req = new Request('https://aloedaily.com/review-board/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/review-board/ returns 200 OK');
+    assert(body.includes('Medical & Botanical Review Board'), 'Review board page renders correct heading');
+    assert(body.includes('Clinical Review Protocol for YMYL Content'), 'Review board renders YMYL clinical framework');
+  }
+
+  // Test 27: Homepage Schema includes SearchAction & Organization Publishing Principles
+  {
+    const req = new Request('https://aloedaily.com/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('"@type": "SearchAction"'), 'Homepage schema includes SearchAction sitelinks query input');
+    assert(body.includes('publishingPrinciples'), 'Organization schema references publishingPrinciples URL');
+  }
+
+  // Test 28: Pillar Hub Schema includes ItemList & Optimized SEO Titles
+  {
+    const req = new Request('https://aloedaily.com/skincare/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('"@type": "ItemList"'), 'Pillar hub schema contains ItemList for child article spokes');
+    assert(body.includes('Aloe Vera Skincare Guide: Clinical Protocols for Acne, Barrier Repair & Anti-Aging'), 'Pillar hub title uses intent-focused search queries');
+  }
+
+  // Test 29: Dynamic Edge OpenGraph Visual Asset Cards (/assets/cards/:slug.svg)
+  {
+    const req = new Request('https://aloedaily.com/assets/cards/aloe-vera-overnight-face-mask.svg');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(res.status === 200, '/assets/cards/:slug.svg returns 200 OK');
+    assert(res.headers.get('Content-Type')?.includes('image/svg+xml') === true, 'Card served as modern image/svg+xml');
+    assert(res.headers.get('Cache-Control')?.includes('immutable') === true, 'Card has immutable edge cache header');
+    assert(body.includes('<svg') && body.includes('AloeDaily') && body.includes('Can You Leave Aloe Vera'), 'Card SVG renders branded title and graphics');
+  }
+
+  // Test 30: Article Spoke renders Unique OG Card & Mid-Article Companion Callout
+  {
+    const req = new Request('https://aloedaily.com/skincare/aloe-vera-overnight-face-mask/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('content="https://aloedaily.com/assets/cards/aloe-vera-overnight-face-mask.svg"'), 'Article renders unique dynamic OG card URL in meta');
+    assert(body.includes('Recommended Companion Protocol'), 'Article contains mid-article companion guide callout');
+    assert(body.includes('Master Hub:'), 'Article contains master hub authority link');
+  }
+
+  // Test 31: Newly Added High-Volume Keyword Gap Articles Return 200 OK
+  {
+    const req1 = new Request('https://aloedaily.com/skincare/aloe-vera-for-stretch-marks/');
+    const res1 = await worker.fetch(req1, env, mockCtx);
+    const body1 = await res1.text();
+    assert(res1.status === 200, '/skincare/aloe-vera-for-stretch-marks/ returns 200 OK');
+    assert(body1.includes('The Dermal Histology of Stretch Marks'), 'Stretch marks article renders clinical histology section');
+
+    const req2 = new Request('https://aloedaily.com/cultivation/aloe-vera-plant-not-growing-stunted-fix/');
+    const res2 = await worker.fetch(req2, env, mockCtx);
+    const body2 = await res2.text();
+    assert(res2.status === 200, '/cultivation/aloe-vera-plant-not-growing-stunted-fix/ returns 200 OK');
+    assert(body2.includes('The 4 Primary Culprits Behind Stalled Growth'), 'Stunted growth article renders horticultural diagnostic section');
+  }
+
+  // Test 32: Short High-Volume Keyword Query 301 Redirects
+  {
+    const reqEczema = new Request('https://aloedaily.com/skincare/aloe-vera-for-eczema/');
+    const resEczema = await worker.fetch(reqEczema, env, mockCtx);
+    assert(resEczema.status === 301, '/skincare/aloe-vera-for-eczema/ redirects 301');
+    assert(resEczema.headers.get('Location') === 'https://aloedaily.com/skincare/aloe-vera-eczema-flareup-relief/', 'Eczema query redirects to dedicated flareup guide');
+
+    const reqSunburn = new Request('https://aloedaily.com/skincare/aloe-vera-for-sunburn/');
+    const resSunburn = await worker.fetch(reqSunburn, env, mockCtx);
+    assert(resSunburn.status === 301, '/skincare/aloe-vera-for-sunburn/ redirects 301');
+    assert(resSunburn.headers.get('Location') === 'https://aloedaily.com/skincare/aloe-vera-sunburn-healing-timeline/', 'Sunburn query redirects to dedicated timeline guide');
+
+    const reqHA = new Request('https://aloedaily.com/skincare/aloe-vera-vs-hyaluronic-acid/');
+    const resHA = await worker.fetch(reqHA, env, mockCtx);
+    assert(resHA.status === 301, '/skincare/aloe-vera-vs-hyaluronic-acid/ redirects 301');
+    assert(resHA.headers.get('Location') === 'https://aloedaily.com/skincare/aloe-vera-hyaluronic-acid-comparison/', 'HA query redirects to comparison guide');
+
+    const reqStunted = new Request('https://aloedaily.com/cultivation/aloe-vera-plant-not-growing/');
+    const resStunted = await worker.fetch(reqStunted, env, mockCtx);
+    assert(resStunted.status === 301, '/cultivation/aloe-vera-plant-not-growing/ redirects 301');
+    assert(resStunted.headers.get('Location') === 'https://aloedaily.com/cultivation/aloe-vera-plant-not-growing-stunted-fix/', 'Stunted plant query redirects to revival guide');
+  }
+
+  // Test 33: Sitemap contains Unique SVG Image Nodes for Articles
+  {
+    const req = new Request('https://aloedaily.com/sitemap.xml');
+    const res = await worker.fetch(req, env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('/assets/cards/aloe-vera-overnight-face-mask.svg'), 'Sitemap contains unique dynamic SVG image URL for articles');
+  }
+
   console.log(`\nTEST SUMMARY: ${passed} Passed, ${failed} Failed`);
   if (failed > 0) process.exit(1);
 }

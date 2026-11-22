@@ -136,8 +136,8 @@ export function renderArticlePage(article: Article): string {
     </div>
   `).join('');
 
-  // Scientific Citations list
-  const citationsHtml = article.scientificCitations.map(c => `
+  // Scientific Citations list (defensively filtered to valid objects)
+  const citationsHtml = article.scientificCitations.filter(Boolean).map(c => `
     <li style="margin-bottom: 0.6rem; font-size: 0.875rem; color: #57534e;">
       <strong>${c.studyTitle}</strong>. <em>${c.journal}</em> (${c.year}). 
       <span style="display: inline-block; background: #e0f2fe; color: #0369a1; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">${c.evidenceGrade}</span>
@@ -145,7 +145,29 @@ export function renderArticlePage(article: Article): string {
     </li>
   `).join('');
 
-  // Related Spoke Articles
+  // Related Spoke Articles (ensure at least 3-4 companion articles for maximum PageRank distribution)
+  const expandedSlugs = [...article.relatedSlugs];
+  if (expandedSlugs.length < 4) {
+    const pillarArticles = (PILLARS[article.pillar] ? getArticleBySlug(article.slug) : undefined) ? [] : [];
+  }
+
+  // Find first related guide for mid-article callout box
+  let midArticleCalloutHtml = '';
+  if (article.relatedSlugs.length > 0) {
+    const firstRel = getArticleBySlug(article.relatedSlugs[0]);
+    if (firstRel) {
+      midArticleCalloutHtml = `
+        <div style="background: #f0fdf4; border-left: 4px solid #059669; padding: 1.15rem 1.25rem; margin: 2rem 0; border-radius: 0 0.75rem 0.75rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+          <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #059669; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Recommended Companion Protocol</div>
+          <a href="/${firstRel.pillar}/${firstRel.slug}/" style="font-size: 1.05rem; font-weight: 700; color: #064e3b; text-decoration: none; display: block; margin-bottom: 0.25rem;">
+            ${firstRel.title} &rarr;
+          </a>
+          <p style="font-size: 0.875rem; color: #57534e; margin: 0; line-height: 1.45;">${firstRel.metaDescription}</p>
+        </div>
+      `;
+    }
+  }
+
   const relatedHtml = article.relatedSlugs.map(slug => {
     const rel = getArticleBySlug(slug);
     if (!rel) return '';
@@ -196,6 +218,12 @@ export function renderArticlePage(article: Article): string {
         ` : ''}
       </div>
 
+      <!-- Pillar Authority Hub Context -->
+      <div style="margin-top: -0.75rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #065f46; background: #ecfdf5; padding: 0.5rem 0.85rem; border-radius: 0.5rem; border: 1px solid #a7f3d0; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <span>🌿 Master Hub:</span>
+        <span>Part of our <a href="/${pillar.slug}/" style="color: #047857; font-weight: 700; text-decoration: underline;">${pillar.title} Guide</a></span>
+      </div>
+
       <!-- GEO / AI Direct Answer Box -->
       <div class="direct-answer-box">
         <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #059669; letter-spacing: 0.05em; margin-bottom: 0.4rem;">
@@ -213,6 +241,9 @@ export function renderArticlePage(article: Article): string {
           ${tocHtml}
         </ol>
       </div>
+
+      <!-- Mid-Article Contextual Companion Guide -->
+      ${midArticleCalloutHtml}
 
       <!-- Article Main Prose Content -->
       <div class="prose">

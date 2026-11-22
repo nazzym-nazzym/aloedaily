@@ -389,5 +389,106 @@ export const CULTIVATION_RECOVERY_ARTICLES: Article[] = [
       { question: 'Can I reuse the old pot and soil after an aloe had root rot?', answer: 'Discard the infected soil immediately; wash and soak the pot in a 1:9 bleach-to-water solution for 30 minutes before reusing.' },
     ],
     relatedSlugs: ['fix-soft-mushy-aloe-leaves', 'overwatered-vs-underwatered-aloe-plant-diagnostic', 'best-soil-mix-for-aloe-vera-drainage-formula']
+  },
+  {
+    slug: 'aloe-vera-plant-not-growing-stunted-fix',
+    pillar: 'cultivation',
+    title: 'Why Is My Aloe Vera Plant Not Growing? The Stunted Growth Diagnostic & Revival Protocol',
+    metaTitle: 'Why Is My Aloe Plant Not Growing? Causes & Stunted Growth Fix',
+    metaDescription: 'Is your aloe vera plant completely stalled or refusing to grow new center leaves? Identify root bound strangulation, winter dormancy, light deficit, and soil lockout.',
+    publishedAt: '2025-02-19',
+    updatedAt: '2025-02-22',
+    readTimeMinutes: 8,
+    authorId: 'horticulture-desk',
+    reviewedById: 'botanical-research-desk',
+    badge: 'Horticulture Diagnostic',
+    directAnswer: 'An aloe vera plant stops growing primarily due to four environmental stress factors: a root-bound root ball choking off oxygen and moisture, insufficient light intensity below 10,000 lux (aloes stall in dim rooms), chronic underwatering causing root dormancy, or cold seasonal dormancy below 55°F (13°C). To restart active growth: unpot to check for root compaction, repot into a gritty 3:2:1 pumice-perlite mineral mix, move to a south-facing window, and provide a light feeding of balanced succulent fertilizer during spring.',
+    tableOfContents: [
+      { id: 'the-growth-diagnostic', title: 'The 4 Primary Culprits Behind Stalled Growth', level: 2 },
+      { id: 'rootbound-root-hypoxia', title: 'Root-Bound Strangulation: When Roots Consume All Soil', level: 2 },
+      { id: 'light-energy-thresholds', title: 'Light Energy Deficits: PPFD & Lux Requirements', level: 2 },
+      { id: 'winter-dormancy-vs-distress', title: 'Seasonal Dormancy vs. Actual Plant Distress', level: 2 },
+      { id: 'the-5-step-revival-protocol', title: 'The 5-Step Stunted Aloe Revival Protocol', level: 2 },
+      { id: 'faqs', title: 'Frequently Asked Questions', level: 2 },
+    ],
+    htmlContent: `
+      <section id="the-growth-diagnostic">
+        <h2>The 4 Primary Culprits Behind Stalled Growth</h2>
+        <p>In temperate indoor environments, a healthy <em>Aloe barbadensis Miller</em> exhibits a predictable vegetative rhythm: emerging new leaves unfurl from the central apical meristem every 2 to 4 weeks during peak spring and summer. When a specimen remains frozen in time for six months or longer with zero new central foliage, physiological stasis has occurred.</p>
+        <p>Succulent xerophytes possess survival mechanisms evolved to survive prolonged drought in harsh desert terrain. When environmental parameters drift outside biological comfort zones, the plant deliberately shuts down cellular division in the shoot apical meristem to conserve carbohydrates and water. The four most common triggers are:</p>
+        <ul>
+          <li><strong>Root-Bound Pot Strangulation:</strong> Roots have circled the interior container wall so densely that zero substrate remains to hold moisture or deliver micronutrients.</li>
+          <li><strong>Sub-Threshold Photosynthetic Radiation:</strong> The plant receives less than 200 µmol/m²/s of photosynthetically active radiation (PAR), forcing it to enter light-starved survival stasis.</li>
+          <li><strong>Chronic Root Desiccation:</strong> In extreme fear of root rot, owners give mere sips of water that never penetrate the bottom root zone, causing fibrous feeder roots to shrivel and die.</li>
+          <li><strong>Thermal Lows & Substrate Compaction:</strong> Ambient temperatures below 55°F (13°C) or old hydrophobic peat that repels moisture.</li>
+        </ul>
+      </section>
+
+      <section id="rootbound-root-hypoxia">
+        <h2>Root-Bound Strangulation: When Roots Consume All Soil</h2>
+        <p>Because aloe vera develops an extensive, fibrous subterranean network designed to anchor heavy succulent leaves against desert winds, plants frequently become severely root-bound within 18 to 24 months of repotting. When you lift a stalled aloe from its nursery pot, you will often find an impenetrable, solid brick of spiraling yellow-orange roots with virtually all soil particles vanished.</p>
+        <p>In this compacted state, root hairs cannot respire. Water poured into the pot simply cascades down the narrow gap between the root ball and the pot wall, escaping out the drainage hole without hydrating the inner core. As detailed in our guide to <a href="/cultivation/fix-soft-mushy-aloe-leaves/">rescuing soft aloe leaves and root systems</a>, root health dictates foliar expansion.</p>
+      </section>
+
+      <section id="light-energy-thresholds">
+        <h2>Light Energy Deficits: PPFD & Lux Requirements</h2>
+        <p>Human eyes adapt dynamically to dim rooms, leading many plant enthusiasts to believe an interior space is "bright" when a photosynthetic light meter reveals severe darkness. In nature, aloes receive direct, unfiltered solar radiation on arid limestone cliffs.</p>
+        <p>Indoors, an aloe vera requires a minimum of <strong>10,000 to 20,000 Lux</strong> (roughly 250 to 400 PPFD) for active vegetative growth. When relegated to a north-facing window or dark corner receiving under 2,000 Lux, the plant cannot synthesize sufficient glucose via Crassulacean Acid Metabolism (CAM) photosynthesis to fuel new cell wall construction. Growth halts entirely, or the plant becomes pale and leggy.</p>
+      </section>
+
+      <section id="winter-dormancy-vs-distress">
+        <h2>Seasonal Dormancy vs. Actual Plant Distress</h2>
+        <p>Before initiating emergency repotting or intense fertilization, verify the calendar season. Like many arid xerophytes, <em>Aloe barbadensis Miller</em> exhibits a facultative semi-dormancy during late autumn and winter when photoperiods drop below 10 hours daily and indoor room temperatures cool down.</p>
+        <p>Winter dormancy is a completely natural biological rest period. The leaves will remain firm, turgid, and plump, but no new spear will emerge from the center. Do not attempt to force growth in mid-winter with heavy watering or fertilizers, which invites fungal root rot. Maintain bright light and allow the natural spring warmth to awaken cellular division.</p>
+      </section>
+
+      <section id="the-5-step-revival-protocol">
+        <h2>The 5-Step Stunted Aloe Revival Protocol</h2>
+        <p>If your aloe is stalled during active spring or summer, execute this step-by-step revival protocol to break dormancy, aerate roots, and reboot shoot growth.</p>
+        <p>Always repot into our recommended <a href="/cultivation/best-soil-mix-for-aloe-vera-drainage-formula/">gritty 3:2:1 mineral succulent soil</a> consisting of pumice, coarse granite grit, and organic matter, housed within a porous unglazed terracotta container.</p>
+      </section>
+    `,
+    scientificCitations: [],
+    howToSteps: [
+      {
+        name: 'Step 1: Unpot & Inspect the Root Architecture',
+        text: 'Gently squeeze the container walls and invert the aloe, sliding the root ball free. Examine the subterranean system: healthy roots are thick, firm, and cream-white to pale orange, while stalled plants show tightly bound spiraling coils.'
+      },
+      {
+        name: 'Step 2: Unfurl Root Bound Knots & Prune Dead Strands',
+        text: 'Using your fingers or a sterilized chopstick, tease apart the tightly coiled root ball. Prune away hollow, papery, or dead brown feeder roots back to healthy, firm vascular tissue.'
+      },
+      {
+        name: 'Step 3: Upgrade to an Unglazed Terracotta Pot',
+        text: 'Select a terracotta container with a generous drainage hole that is 1 to 2 inches wider in diameter than the loosened root ball. Terracotta ceramic allows radial airflow that prevents root hypoxia.'
+      },
+      {
+        name: 'Step 4: Backfill with a High-Mineral Gritty Substrate',
+        text: 'Seat the plant in the pot and backfill with a fast-draining 3:2:1 mixture of horticultural pumice, crushed granite grit, and low-peat potting soil. Tap the sides to eliminate air pockets.'
+      },
+      {
+        name: 'Step 5: Transition into High-Intensity Bright Light',
+        text: 'Position the repotted aloe within 2 feet of an unobstructed south-facing or west-facing window, or under a 30W full-spectrum LED grow light at 12 inches for 12 hours daily. Wait 7 days before the first thorough soaking.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'How fast should an indoor aloe vera plant grow?',
+        answer: 'Under optimal indoor conditions (bright indirect light, gritty soil, warm temperatures), a mature aloe vera plant produces approximately 1 new leaf every 2 to 4 weeks during spring and summer, adding 4 to 8 inches of foliage per year.'
+      },
+      {
+        question: 'Does aloe vera stop growing in the winter?',
+        answer: 'Yes. In temperate climates with short day lengths and cooler indoor temperatures, aloes enter semi-dormancy. Foliage remains static until rising spring daylight and temperatures awaken apical meristem division.'
+      },
+      {
+        question: 'Can fertilizer restart growth in a stalled aloe?',
+        answer: 'Only if the plant is not root-bound or light-starved. If environmental factors are met, a dilute (half-strength) feeding of a balanced 10-10-10 organic succulent fertilizer in early spring provides the nitrogen and phosphorus needed for rapid cell synthesis.'
+      },
+      {
+        question: 'What if outer leaves grow but the center is completely frozen?',
+        answer: 'If outer leaves expand while no new center leaf appears, inspect the central apical meristem with a magnifying glass for physical trauma, water damage, or mealybug infestations that destroy young meristematic tissue.'
+      }
+    ],
+    relatedSlugs: ['fix-soft-mushy-aloe-leaves', 'best-soil-mix-for-aloe-vera-drainage-formula', 'indoor-aloe-vera-sunlight-requirements-lux-levels']
   }
 ];

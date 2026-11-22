@@ -1,12 +1,14 @@
 import { PILLARS } from '../data/pillars';
 import { PillarId } from '../data/types';
-import { getArticleBySlug, getArticlesByAuthor, getArticlesByReviewer } from '../data/articles';
+import { getArticleBySlug, getArticlesByAuthor, getArticlesByReviewer, getArticlesByPillar } from '../data/articles';
 import { AUTHORS } from '../data/authors';
 import { renderBaseLayout } from '../templates/layouts/base';
 import { renderHomePage } from '../templates/pages/home';
 import { renderPillarHubPage } from '../templates/pages/pillar-hub';
 import { renderArticlePage } from '../templates/pages/article';
 import { renderAboutPage } from '../templates/pages/about';
+import { renderEditorialPolicyPage } from '../templates/pages/editorial-policy';
+import { renderReviewBoardPage } from '../templates/pages/review-board';
 import { renderAuthorPage } from '../templates/pages/author';
 import { renderContactPage } from '../templates/pages/contact';
 import { renderPrivacyPage } from '../templates/pages/privacy';
@@ -20,6 +22,7 @@ import { renderRssFeed } from '../feeds/rss';
 import { handleContactSubmission } from '../api/contact';
 import { handleAffiliateRedirect, handleLeadCapture } from '../api/affiliate-redirect';
 import { LOGO_WEBP_BYTES, LOGO_WEBP_96_BYTES, FAVICON_PNG_BYTES } from '../assets/logo-helper';
+import { generateOpenGraphSvg } from '../assets/og-card';
 import { getCacheHeaders } from './cache';
 import { SITE_CONFIG } from '../config/site';
 
@@ -55,6 +58,22 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
         'Cache-Control': 'public, max-age=31536000, immutable',
       },
     });
+  }
+
+  // 1b. Dynamic Edge OpenGraph Visual Asset Cards (/assets/cards/:slug.svg)
+  if (pathname.startsWith('/assets/cards/') && pathname.endsWith('.svg')) {
+    const slug = pathname.replace('/assets/cards/', '').replace('.svg', '');
+    const article = getArticleBySlug(slug);
+    if (article) {
+      const svg = generateOpenGraphSvg(article);
+      return new Response(svg, {
+        status: 200,
+        headers: {
+          'Content-Type': 'image/svg+xml; charset=utf-8',
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+      });
+    }
   }
 
   // 2. Virtual Feeds, RSS & Robots
@@ -107,17 +126,20 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
   // 5. Homepage (/)
   if (pathname === '/' || pathname === '') {
     const canonical = `${SITE_CONFIG.url}/`;
+    const homeTitle = 'Aloe Daily: Pure Aloe Vera Science, Skincare Protocols & Plant Care Guides';
+    const homeDesc = 'Evidence-based protocols for pure aloe vera skincare, ingestible safety, plant cultivation, and independent product audits. Backed by peer-reviewed clinical science.';
+
     const schema = buildPageSchemaGraph({
       breadcrumbs: [],
       canonicalUrl: canonical,
-      pageTitle: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
-      pageDescription: SITE_CONFIG.description,
+      pageTitle: homeTitle,
+      pageDescription: homeDesc,
       pageType: 'WebPage',
     });
 
     const html = renderBaseLayout({
-      title: `${SITE_CONFIG.name} - Botanical Skincare & Aloe Vera Science`,
-      metaDescription: SITE_CONFIG.description,
+      title: homeTitle,
+      metaDescription: homeDesc,
       canonicalUrl: canonical,
       schemaJson: schema,
       contentHtml: renderHomePage(),
@@ -143,6 +165,58 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
       canonicalUrl: canonical,
       schemaJson: schema,
       contentHtml: renderAboutPage(),
+    });
+
+    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+  }
+
+  // 6b. Dedicated Editorial & Fact-Checking Policy (/editorial-policy/)
+  if (pathname === '/editorial-policy/' || pathname === '/editorial-policy') {
+    const canonical = `${SITE_CONFIG.url}/editorial-policy/`;
+    const schema = buildPageSchemaGraph({
+      breadcrumbs: [
+        { name: 'Home', url: '/' },
+        { name: 'About AloeDaily', url: '/about/' },
+        { name: 'Editorial & Fact-Checking Policy', url: '/editorial-policy/' },
+      ],
+      canonicalUrl: canonical,
+      pageTitle: `Editorial & Fact-Checking Policy | ${SITE_CONFIG.name}`,
+      pageDescription: 'Our rigorous scientific standard for botanical medicine, clinical citations, and zero-sponsored product reviews.',
+      pageType: 'AboutPage',
+    });
+
+    const html = renderBaseLayout({
+      title: `Editorial & Fact-Checking Policy | ${SITE_CONFIG.name}`,
+      metaDescription: 'Our rigorous scientific standard for botanical medicine, clinical citations, and zero-sponsored product reviews.',
+      canonicalUrl: canonical,
+      schemaJson: schema,
+      contentHtml: renderEditorialPolicyPage(),
+    });
+
+    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+  }
+
+  // 6c. Dedicated Medical & Botanical Review Board (/review-board/)
+  if (pathname === '/review-board/' || pathname === '/review-board') {
+    const canonical = `${SITE_CONFIG.url}/review-board/`;
+    const schema = buildPageSchemaGraph({
+      breadcrumbs: [
+        { name: 'Home', url: '/' },
+        { name: 'About AloeDaily', url: '/about/' },
+        { name: 'Review Board', url: '/review-board/' },
+      ],
+      canonicalUrl: canonical,
+      pageTitle: `Medical & Botanical Review Board | ${SITE_CONFIG.name}`,
+      pageDescription: 'Meet the clinical and botanical research desks that peer-review all medical, skincare, and horticultural protocols on AloeDaily.',
+      pageType: 'AboutPage',
+    });
+
+    const html = renderBaseLayout({
+      title: `Medical & Botanical Review Board | ${SITE_CONFIG.name}`,
+      metaDescription: 'Meet the clinical and botanical research desks that peer-review all medical, skincare, and horticultural protocols on AloeDaily.',
+      canonicalUrl: canonical,
+      schemaJson: schema,
+      contentHtml: renderReviewBoardPage(),
     });
 
     return new Response(html, { status: 200, headers: getCacheHeaders('html') });
@@ -249,6 +323,14 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
   }
 
   // 11. Pillar Hub Routes (/:pillar/)
+  const PILLAR_SEO_TITLES: Record<PillarId, string> = {
+    skincare: 'Aloe Vera Skincare Guide: Clinical Protocols for Acne, Barrier Repair & Anti-Aging',
+    'hair-care': 'Aloe Vera for Hair & Scalp: Follicle Restoration & Biome Protocols',
+    health: 'Aloe Vera Juice Health Science: Aloin Safety Limits, Digestion & Dosage',
+    cultivation: 'Aloe Vera Plant Care & Cultivation: Harvesting, Soil & Emergency Rot Rescue',
+    audits: 'Best Pure Aloe Vera Gel Audits & Lab Tests: Purity Index™ Reviews',
+  };
+
   const segments = pathname.replace(/^\/+|\/+$/g, '').split('/');
   
   if (segments.length === 1) {
@@ -257,16 +339,26 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
 
     if (pillar) {
       const canonical = `${SITE_CONFIG.url}/${pillar.slug}/`;
+      const articles = getArticlesByPillar(pillar.id);
+      const itemListElements = articles.map(a => ({
+        name: a.title,
+        url: `${SITE_CONFIG.url}/${a.pillar}/${a.slug}/`,
+        description: a.metaDescription,
+      }));
+
+      const pageSeoTitle = PILLAR_SEO_TITLES[pillar.id] || pillar.title;
+
       const schema = buildPageSchemaGraph({
         breadcrumbs: [{ name: 'Home', url: '/' }, { name: pillar.shortTitle, url: `/${pillar.slug}/` }],
         canonicalUrl: canonical,
-        pageTitle: `${pillar.title} | ${SITE_CONFIG.name}`,
+        pageTitle: `${pageSeoTitle} | ${SITE_CONFIG.name}`,
         pageDescription: pillar.metaDescription,
         pageType: 'CollectionPage',
+        itemListElements,
       });
 
       const html = renderBaseLayout({
-        title: `${pillar.title} - Definitive Pillar Guide`,
+        title: pageSeoTitle,
         metaDescription: pillar.metaDescription,
         canonicalUrl: canonical,
         schemaJson: schema,
@@ -298,6 +390,7 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
         pageDescription: article.metaDescription,
       });
 
+      const cardUrl = `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`;
       const html = renderBaseLayout({
         title: article.metaTitle,
         metaDescription: article.metaDescription,
@@ -305,6 +398,8 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
         schemaJson: schema,
         contentHtml: renderArticlePage(article),
         ogType: 'article',
+        ogImage: cardUrl,
+        ogImageAlt: `${article.title} — ${SITE_CONFIG.name}`,
         publishedTime: `${article.publishedAt}T08:00:00Z`,
         modifiedTime: `${article.updatedAt}T10:00:00Z`,
       });

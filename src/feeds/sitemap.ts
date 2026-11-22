@@ -18,6 +18,8 @@ export function renderMasterSitemapXml(): string {
   const staticUrls = [
     { loc: `${SITE_CONFIG.url}/`, changefreq: 'daily', priority: '1.0' },
     { loc: `${SITE_CONFIG.url}/about/`, changefreq: 'monthly', priority: '0.85' },
+    { loc: `${SITE_CONFIG.url}/editorial-policy/`, changefreq: 'monthly', priority: '0.85' },
+    { loc: `${SITE_CONFIG.url}/review-board/`, changefreq: 'monthly', priority: '0.85' },
     { loc: `${SITE_CONFIG.url}/contact/`, changefreq: 'monthly', priority: '0.8' },
     { loc: `${SITE_CONFIG.url}/privacy/`, changefreq: 'yearly', priority: '0.5' },
     { loc: `${SITE_CONFIG.url}/terms/`, changefreq: 'yearly', priority: '0.5' },
@@ -39,12 +41,16 @@ export function renderMasterSitemapXml(): string {
     changefreq: 'weekly',
     priority: '0.85',
     title: article.title,
+    imageUrl: `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`,
   }));
 
   const allEntries = [...staticUrls, ...articleUrls];
 
   const urlXml = allEntries.map((e) => {
     const titleVal = ('title' in e && typeof e.title === 'string' && e.title) ? e.title : SITE_CONFIG.name;
+    const imageLoc = ('imageUrl' in e && typeof e.imageUrl === 'string' && e.imageUrl)
+      ? e.imageUrl
+      : SITE_CONFIG.logoAbsolute;
     const lastmodVal = ('lastmod' in e && typeof e.lastmod === 'string' && e.lastmod)
       ? e.lastmod
       : new Date().toISOString().split('T')[0];
@@ -55,7 +61,7 @@ export function renderMasterSitemapXml(): string {
     <changefreq>${e.changefreq}</changefreq>
     <priority>${e.priority}</priority>
     <image:image>
-      <image:loc>${escapeXml(SITE_CONFIG.logoAbsolute)}</image:loc>
+      <image:loc>${escapeXml(imageLoc)}</image:loc>
       <image:title>${escapeXml(titleVal)}</image:title>
     </image:image>
   </url>`;
