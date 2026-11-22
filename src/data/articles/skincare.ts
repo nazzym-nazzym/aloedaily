@@ -1,7 +1,11 @@
 import { Article } from '../types';
 import { CLINICAL_STUDIES } from '../studies';
+import { SKINCARE_ACNE_ARTICLES } from './skincare-acne';
+import { SKINCARE_BARRIER_ARTICLES } from './skincare-barrier';
+import { SKINCARE_SUN_ARTICLES } from './skincare-sun';
+import { SKINCARE_ADVANCED_ARTICLES } from './skincare-advanced';
 
-export const SKINCARE_ARTICLES: Article[] = [
+const CORE_SKINCARE_ARTICLES: Article[] = [
   {
     slug: 'aloe-vera-overnight-face-mask',
     pillar: 'skincare',
@@ -159,24 +163,32 @@ export const SKINCARE_ARTICLES: Article[] = [
     htmlContent: `
       <section id="the-retinol-problem">
         <h2>Why Retinization Knocks Skin Off Balance</h2>
-        <p>Retinoids—ranging from over-the-counter retinol to prescription tretinoin—are well-established in dermatological literature for accelerating keratinocyte turnover and stimulating procollagen synthesis. However, the initial 4 to 6 weeks of retinoid introduction commonly induces <strong>retinoid dermatitis</strong>.</p>
-        <p>As cell turnover accelerates, the stratum corneum sheds prematurely before mature lipid lamellae are fully assembled. This transiently compromises barrier function, leading to erythema, stinging, and micro-flaking.</p>
+        <p>Topical retinoids (including OTC retinol, retinaldehyde, and prescription tretinoin) represent the dermatological gold standard for cellular turnover and collagen synthesis. However, the initial 4 to 8 weeks—known clinically as <strong>retinization</strong>—frequently triggers severe barrier disruption: erythema, peeling, stinging, and micro-fissuring.</p>
+        <p>This irritation occurs because retinoids accelerate corneocyte shedding faster than the skin can synthesize replacement intercellular lipids (ceramides, cholesterol, and free fatty acids). The resulting barrier compromise causes high patient abandonment rates.</p>
       </section>
 
       <section id="why-aloe-works">
         <h2>How Aloe Vera Calms the Vitamin A Storm</h2>
-        <p>Pure inner-fillet aloe vera provides beneficial support during retinization. Aloe contains <strong>phytosterols (including campesterol, β-sitosterol, and lupeol)</strong> along with bradykinase enzymes that modulate localized cutaneous inflammatory mediators. Unlike heavy petrolatum-based ointments that can occlude retinoids and inadvertently increase irritation spikes, aloe delivers non-comedogenic, aqueous hydration that mitigates surface irritation.</p>
+        <p>Pure inner-fillet aloe vera addresses retinoid irritation via multiple biological pathways:</p>
+        <ul>
+          <li><strong>Enzymatic Inflammation Modulation:</strong> Aloe provides <em>bradykinase</em>, an enzyme that hydrolyzes bradykinin (a key peptide driver of inflammatory vascular dilation). This calms retinoid-induced facial erythema.</li>
+          <li><strong>Sterol-Mediated Barrier Soothing:</strong> Natural plant sterols (lupeol, campesterol, and beta-sitosterol) deliver soothing effects comparable to mild topical hydrocortisone, without the risk of cutaneous atrophy.</li>
+          <li><strong>Zero Comedogenic Interference:</strong> Unlike heavy petrolatum-based ointments that can trap retinol and increase penetration unpredictably, aloe provides pure water-phase humectancy with a comedogenic rating of 0.</li>
+        </ul>
       </section>
 
       <section id="never-mix-in-palm">
         <h2>Why You Must Never Mix Them in Your Hand</h2>
-        <p>A common consumer mistake is mixing retinol and aloe vera together in the palm before application. <strong>This disrupts product formulation integrity.</strong></p>
-        <p>Retinoids are lipophilic molecules formulated in specialized, stabilized emulsions designed for controlled release. Mixing a retinoid formulation with a water-heavy aloe gel can destabilize the carrier emulsion, leading to uneven phase separation and inconsistent dermal absorption. Retinol and aloe should always be applied in deliberate, separated layers.</p>
+        <p>A widespread skincare mistake is pumping retinol and aloe vera into the palm simultaneously and blending them together. This is problematic for two formulation reasons:</p>
+        <ol>
+          <li><strong>Emulsion Destabilization:</strong> Most retinol serums are stabilized oil-in-water emulsions with specialized encapsulation systems. Introducing water-heavy aloe gel directly destabilizes the preservative system and compromises retinol potency.</li>
+          <li><strong>Uneven Penetration:</strong> Premixing creates an uneven suspension, causing unpredictable hotspot delivery across the face.</li>
+        </ol>
       </section>
 
       <section id="the-sandwich-protocol">
         <h2>The "Aloe Buffer Sandwich" Protocol</h2>
-        <p>To minimize retinoid dermatitis while preserving active efficacy, follow this sequential buffering protocol:</p>
+        <p>Acclimating sensitive or reactive skin to prescription tretinoin or over-the-counter retinol without experiencing retinoid dermatitis requires sequential barrier buffering. Rather than applying vitamin A directly to naked skin, deploy the clinical "aloe sandwich" technique. Begin by smoothing a sheer layer of pure aloe vera gel over freshly cleansed skin and letting it dry completely for three to five minutes; this baseline polysaccharide film slows retinoic acid trans-epidermal flux without inhibiting cellular receptor uptake. Next, dispense a pea-sized dose of retinoid evenly across the face. Finally, seal the treatment with your favorite barrier cream or another layer of aloe vera, preventing transepidermal water loss and completely eliminating flaking and peeling.</p>
       </section>
     `,
     scientificCitations: [
@@ -185,16 +197,16 @@ export const SKINCARE_ARTICLES: Article[] = [
     ],
     howToSteps: [
       {
-        name: 'Layer 1: The Aloe Base Buffer',
-        text: 'On thoroughly clean, dry skin, apply a sheer layer of pure cold-pressed aloe vera gel. Allow 3 to 4 minutes to dry. This creates a light humectant layer that moderates the initial penetration surge of vitamin A.'
+        name: 'Step 1: Cleanse & Apply Thin Aloe Layer (First Buffer)',
+        text: 'Cleanse face gently with a non-stripping cleanser. Apply a nickel-sized amount of pure, cold-pressed aloe vera gel. Allow 3 to 5 minutes to dry completely; applying retinoids to damp skin increases irritation.'
       },
       {
-        name: 'Layer 2: The Retinoid Application',
-        text: 'Dispense a pea-sized amount of retinol or tretinoin. Dot onto the forehead, cheeks, and chin, then smooth evenly across the buffered surface.'
+        name: 'Step 2: Apply Pea-Sized Retinoid Dose',
+        text: 'Dispense a strict pea-sized amount of retinol or tretinoin. Dot evenly across forehead, cheeks, and chin, then smooth outward, avoiding the immediate eyelid margin and nasolabial creases.'
       },
       {
-        name: 'Layer 3: The Barrier Moisture Seal',
-        text: 'Allow 5 minutes for the retinoid to settle. Finish with a gentle ceramide barrier moisturizer or a second light layer of aloe sealed with two drops of squalane oil.'
+        name: 'Step 3: Seal with Ceramide Moisturizer (Top Buffer)',
+        text: 'Wait 3 minutes for the retinoid to bind to cellular receptors, then apply a lipid-rich ceramide moisturizer or 2 drops of pure squalane to seal the barrier.'
       }
     ],
     faqs: [
@@ -273,4 +285,12 @@ export const SKINCARE_ARTICLES: Article[] = [
     ],
     relatedSlugs: ['aloe-vera-overnight-face-mask', 'aloe-vera-and-retinol-layering', 'best-pure-aloe-vera-gels-reviewed']
   }
+];
+
+export const SKINCARE_ARTICLES: Article[] = [
+  ...CORE_SKINCARE_ARTICLES,
+  ...SKINCARE_ACNE_ARTICLES,
+  ...SKINCARE_BARRIER_ARTICLES,
+  ...SKINCARE_SUN_ARTICLES,
+  ...SKINCARE_ADVANCED_ARTICLES,
 ];

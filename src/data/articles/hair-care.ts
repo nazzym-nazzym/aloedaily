@@ -1,7 +1,11 @@
 import { Article } from '../types';
 import { CLINICAL_STUDIES } from '../studies';
+import { HAIR_CARE_SCALP_ARTICLES } from './hair-care-scalp';
+import { HAIR_CARE_GROWTH_ARTICLES } from './hair-care-growth';
+import { HAIR_CARE_TYPES_ARTICLES } from './hair-care-types';
+import { HAIR_CARE_TREATMENTS_ARTICLES } from './hair-care-treatments';
 
-export const HAIR_CARE_ARTICLES: Article[] = [
+const CORE_HAIR_CARE_ARTICLES: Article[] = [
   {
     slug: 'aloe-vera-for-hair-growth-science',
     pillar: 'hair-care',
@@ -55,7 +59,8 @@ export const HAIR_CARE_ARTICLES: Article[] = [
 
       <section id="the-pre-poo-ritual">
         <h2>Our 20-Minute Pre-Shampoo Scalp Ritual</h2>
-        <p>Follow this weekly protocol to relieve scalp flaking and product residue:</p>
+        <p>In clinical trichology, successful hair retention starts with a clear follicular ostium. Traditional heavy pre-poo oils (like castor or coconut oil) often suffocate the scalp and demand harsh clarifying sulfates to remove, leaving fragile lengths brittle. A pure aloe pre-wash ritual provides water-phase enzymatic exfoliation without lipid residue.</p>
+        <p>Divide dry, unwashed hair into four clean quadrants using a tail comb. Dispense 2 to 3 tablespoons of cold-pressed, <a href="/audits/seven-minerals-aloe-vera-gel-lab-audit-review/">unthickened aloe vera gel</a> directly along the exposed scalp partings. Massage for 3 full minutes using the fleshy pads of your fingertips in small circular motions to stimulate perifollicular microcirculation. Cover your hair with a reusable shower cap for 20 minutes; trapped scalp body heat activates aloe's natural proteolytic enzymes, dissolving stubborn sebum plugs and desquamated dandruff flakes before you rinse clean with a sulfate-free shampoo.</p>
       </section>
     `,
     scientificCitations: [
@@ -100,60 +105,78 @@ export const HAIR_CARE_ARTICLES: Article[] = [
     authorId: 'formulation-desk',
     reviewedById: 'botanical-research-desk',
     badge: 'Clinical Protocol',
-    directAnswer: 'Aloe vera delivers rapid relief from dandruff and itchy scalp through a proven biological mechanism: its natural saponins and cinnamic acid suppress the growth of Malassezia yeast, while its natural 5.0 pH re-acidifies the scalp barrier. In a landmark double-blind clinical trial, aloe vera emulsion produced significant reductions in flaking, pruritus, and erythema in seborrheic dermatitis patients.',
+    directAnswer: 'In double-blind clinical trials (Vardy et al.), an aloe vera emulsion significantly reduced scalp flaking, pruritus, and erythema in patients suffering from seborrheic dermatitis. Aloe works because it supplies natural anti-inflammatory sterols and proteolytic enzymes that loosen adherent scales, while starving lipophilic Malassezia yeast of the heavy plant oils they require to multiply.',
     tableOfContents: [
-      { id: 'why-scalps-flake', title: 'Why Your Scalp is Flaking: Dryness vs. True Dandruff', level: 2 },
-      { id: 'how-aloe-fights-dandruff', title: 'How Aloe Vera Tames the Yeast Without Stripping Hair', level: 2 },
-      { id: 'the-tea-tree-booster', title: 'The Antimicrobial Tea Tree & Aloe Scalp Protocol', level: 2 },
+      { id: 'dandruff-vs-dry-scalp', title: 'Dandruff vs. Dry Scalp: Diagnosing Your Flakes', level: 2 },
+      { id: 'malassezia-mechanism', title: 'The Malassezia Mechanism: Why Oils Make It Worse', level: 2 },
+      { id: 'clinical-proof', title: 'The Clinical Evidence Behind Aloe for Flaking', level: 2 },
+      { id: 'the-soothing-scalp-soak', title: 'The Soothing Scalp Soak Protocol', level: 2 },
       { id: 'faqs', title: 'Frequently Asked Questions', level: 2 }
     ],
     htmlContent: `
-      <section id="why-scalps-flake">
-        <h2>Why Your Scalp is Flaking: Dryness vs. True Dandruff</h2>
-        <p>Accurate scalp treatment requires distinguishing between two distinct physiological conditions:</p>
+      <section id="dandruff-vs-dry-scalp">
+        <h2>Dandruff vs. Dry Scalp: Diagnosing Your Flakes</h2>
+        <p>Before treating your scalp, you must distinguish between simple xerosis (dry scalp) and true pityriasis capitis (dandruff/seborrheic dermatitis):</p>
         <ul>
-          <li><strong>Dry Scalp (Asteatosis):</strong> Small, powdery white flakes triggered by dry winter air, hot water exposure, or harsh surfactant cleansing. The scalp feels tight and dehydrated.</li>
-          <li><strong>Seborrheic Dermatitis (Dandruff):</strong> Larger, oily, yellowish scales accompanied by erythema and intense pruritus. This condition is driven by opportunistic colonization by <em>Malassezia</em> species feeding on hydrolyzed sebum triglycerides.</li>
+          <li><strong>Dry Scalp:</strong> Characterized by small, white, powdery flakes that shed easily onto dark clothing. Caused by dry indoor air, dehydration, or harsh alkaline detergents. Responds readily to simple humectants.</li>
+          <li><strong>Dandruff / Seborrheic Dermatitis:</strong> Characterized by larger, oily, yellowish scales that cling tenaciously to the hair roots and are accompanied by intense pruritus (itching) and perifollicular erythema (redness). Driven by an inflammatory reaction to the metabolic byproducts of <em>Malassezia</em> yeast.</li>
         </ul>
-        <p>Pure aloe vera provides dual therapeutic utility: it hydrates parched stratum corneum in dry scalp conditions while delivering natural antimicrobial polyphenols that inhibit <em>Malassezia</em> overgrowth in seborrheic dermatitis.</p>
       </section>
 
-      <section id="how-aloe-fights-dandruff">
-        <h2>How Aloe Vera Tames the Yeast Without Stripping Hair</h2>
-        <p>Traditional anti-dandruff shampoos containing selenium sulfide, coal tar, or high-strength zinc pyrithione can severely dehydrate hair shafts with frequent use. In contrast, double-blind trials (such as Vardy et al., 1999) documented significant improvements in seborrheic dermatitis flaking and redness using topical aloe vera emulsion.</p>
-        <p>Aloe contains natural plant <strong>saponins</strong> (gentle surface-active glycosides) that clear sebum buildup without stripping lipid barriers, alongside lupeol and salicylic compounds that alleviate inflammation.</p>
+      <section id="malassezia-mechanism">
+        <h2>The Malassezia Mechanism: Why Oils Make It Worse</h2>
+        <p>A widespread and damaging home remedy is massaging warm olive, coconut, or castor oil into an itchy, flaking scalp. While this temporarily conceals flakes by plastering them down, it exacerbates the underlying pathology.</p>
+        <p><em>Malassezia</em> yeasts are lipid-dependent organisms that lack fatty acid synthase. They feed directly on medium-to-long chain fatty acids (C11–C24). Applying plant oils gives the fungal colony an abundant food source, prompting rapid yeast proliferation and an intensified inflammatory response.</p>
+        <p>Pure aloe vera provides the exact opposite profile: high-volume water-phase humectancy with zero C11–C24 lipids. It delivers intense cooling hydration and loosens adherent scales without feeding the microbial drivers of dandruff.</p>
       </section>
 
-      <section id="the-tea-tree-booster">
-        <h2>The Antimicrobial Tea Tree & Aloe Scalp Protocol</h2>
-        <p>For recurrent or persistent flaking, our formulation desk recommends this evidence-based botanical blend:</p>
-        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 0.75rem; padding: 1.25rem; margin: 1.5rem 0;">
-          <h4 style="color: #064e3b; margin-top: 0; font-size: 1.1rem;">The Evidence-Based Botanical Scalp Elixir</h4>
-          <ul style="color: #065f46; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            <li><strong>3 tablespoons</strong> pure cold-pressed aloe vera gel (aloin-free)</li>
-            <li><strong>2 to 3 drops</strong> 100% pure Melaleuca alternifolia (tea tree) essential oil (diluted below 1% to prevent contact sensitization)</li>
-            <li><strong>1 teaspoon</strong> distilled rosewater or purified water</li>
-          </ul>
-          <p style="color: #047857; font-size: 0.875rem; margin: 0;">
-            Blend thoroughly in a clean glass bowl. Section hair and apply directly to affected areas with a dropper or applicator brush. Leave on for 20 minutes before washing with a mild cleanser. Repeat twice weekly.
-          </p>
-        </div>
+      <section id="clinical-proof">
+        <h2>The Clinical Evidence Behind Aloe for Flaking</h2>
+        <p>In a landmark double-blind, placebo-controlled study conducted by Vardy et al. (1999), 44 patients with seborrheic dermatitis applied either a topical aloe vera emulsion or a placebo vehicle twice daily. Patients using the aloe vera treatment demonstrated statistically significant improvements in flaking, redness, and scalp surface area affected, with zero reported contact dermatitis reactions.</p>
+      </section>
+
+      <section id="the-soothing-scalp-soak">
+        <h2>The Soothing Scalp Soak Protocol</h2>
+        <p>When an acute seborrheic flare-up strikes, aggressive mechanical scrubbing with fingernails or salt scrubs only damages the fragile scalp barrier, causing micro-lacerations that bleed and trigger worse secondary inflammation. The secret to breaking the itch-scratch cycle is chemical loosening and thermal cooling.</p>
+        <p>Part your hair into narrow 1-inch rows across the entire head and apply chilled, pure decolorized aloe vera gel directly to the affected plaques. The cooling sensation is immediate, providing neurosensory relief from burning pruritus within 60 seconds. Let the gel dwell for 30 minutes under a shower cap while natural plant sterols and bradykinase calm microvascular erythema. Rinse thoroughly with lukewarm water, and follow with our <a href="/hair-care/aloe-vera-tea-tree-oil-dandruff-rinse/">antifungal tea tree rinse</a> for stubborn Malassezia overgrowth.</p>
       </section>
     `,
     scientificCitations: [
       CLINICAL_STUDIES['seborrheic-dermatitis-vardy-1999'],
       CLINICAL_STUDIES['dermatology-review-surjushe-2008']
     ],
-    faqs: [
+    howToSteps: [
       {
-        question: 'How quickly will the itching stop?',
-        answer: 'Most users experience relief from itching within minutes of application. Aloe\'s evaporative cooling effect, combined with natural bradykinase anti-inflammatory enzymes, rapidly soothes irritated nerve endings in the scalp epidermis.'
+        name: 'Step 1: Section Dry Hair Thoroughly',
+        text: 'Part dry, unwashed hair into narrow 1-inch rows across the entire scalp using a tail comb.'
       },
       {
-        question: 'Can I put aloe on my scalp if it is raw or scratched open?',
-        answer: 'Pure, sterile inner-fillet aloe is suitable for compromised skin; however, if the scalp has open excoriations from scratching, omit essential oils like tea tree, which can cause stinging and contact irritation on broken skin.'
+        name: 'Step 2: Apply Pure Aloe Directly to the Scalp Surface',
+        text: 'Apply 3 tablespoons of cold-pressed, decolorized aloe vera gel directly to exposed scalp skin using a nozzle applicator or clean fingertips. Gently press into the scalp without aggressive fingernail scratching.'
+      },
+      {
+        name: 'Step 3: Allow 30 Minutes Dwell Time & Cleanse',
+        text: 'Allow the gel to dwell on the scalp for 30 minutes to permit proteolytic enzymes to loosen scaling. Rinse thoroughly with lukewarm water, then wash with a gentle, sulfate-free balancing shampoo.'
       }
     ],
-    relatedSlugs: ['aloe-vera-for-hair-growth-science', 'aloe-vera-fungal-acne']
+    faqs: [
+      {
+        question: 'Can I leave aloe vera on my dandruff overnight?',
+        answer: 'Yes. Allowing pure aloe vera gel to dry on the scalp overnight before washing in the morning is safe and provides extended soothing contact time. Ensure no synthetic fragrances or drying alcohols are present in the formula.'
+      },
+      {
+        question: 'Can I add tea tree oil to aloe vera for stubborn dandruff?',
+        answer: 'Yes. Adding 2 to 3 drops of pure tea tree essential oil per 2 tablespoons of aloe gel provides synergistic antifungal support against Malassezia. Always patch test first, as essential oils can irritate sensitized scalps.'
+      }
+    ],
+    relatedSlugs: ['aloe-vera-for-hair-growth-science', 'aloe-vera-fungal-acne', 'best-pure-aloe-vera-gels-reviewed']
   }
+];
+
+export const HAIR_CARE_ARTICLES: Article[] = [
+  ...CORE_HAIR_CARE_ARTICLES,
+  ...HAIR_CARE_SCALP_ARTICLES,
+  ...HAIR_CARE_GROWTH_ARTICLES,
+  ...HAIR_CARE_TYPES_ARTICLES,
+  ...HAIR_CARE_TREATMENTS_ARTICLES,
 ];

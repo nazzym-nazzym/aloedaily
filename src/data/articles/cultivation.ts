@@ -1,6 +1,10 @@
 import { Article } from '../types';
+import { CULTIVATION_RECOVERY_ARTICLES } from './cultivation-recovery';
+import { CULTIVATION_PROPAGATION_ARTICLES } from './cultivation-propagation';
+import { CULTIVATION_ENVIRONMENT_ARTICLES } from './cultivation-environment';
+import { CULTIVATION_BOTANY_ARTICLES } from './cultivation-botany';
 
-export const CULTIVATION_ARTICLES: Article[] = [
+const CORE_CULTIVATION_ARTICLES: Article[] = [
   {
     slug: 'how-to-harvest-aloe-leaf-without-killing-plant',
     pillar: 'cultivation',
@@ -35,7 +39,7 @@ export const CULTIVATION_ARTICLES: Article[] = [
 
       <section id="which-leaves-to-pick">
         <h2>How to Identify the Perfect Harvest-Ready Leaf</h2>
-        <p>Look for an outer leaf that meets these three horticultural criteria:</p>
+        <p>Selecting the optimal leaf ensures you harvest dense, acemannan-rich therapeutic gel without setting back the plant's photosynthetic vitality. Always bypass the tender upright inner leaves—which constitute the vegetative engine of the plant—and focus exclusively on the lowest, horizontal outer ring. A prime harvest-ready leaf displays distinctive morphological characteristics: plump turgidity that resists gentle thumb pressure, an intact jade-green cuticle free from sunken brown necrotic spots, and a substantial baseline breadth measuring at least three-quarters of an inch thick at its widest midpoint. Harvesting leaves that satisfy these botanical markers guarantees maximal nutrient density while encouraging the rosette to channel energy into apical leaf emergence.</p>
         <ul>
           <li><strong>Thickness:</strong> At least three-quarters of an inch thick at the widest midpoint. It should feel firm like a cold cucumber, not hollow or squishy.</li>
           <li><strong>Coloration:</strong> Deep, rich jade green without pale yellowing or translucent water blisters.</li>
@@ -45,7 +49,7 @@ export const CULTIVATION_ARTICLES: Article[] = [
 
       <section id="the-clean-cut">
         <h2>The 4-Step Surgical Harvest Technique</h2>
-        <p>Follow these four standardized steps using a sterilized blade to preserve plant health:</p>
+        <p>Executing a clean, surgical cut preserves the vascular integrity of the central rosette and minimizes opportunistic fungal inoculation. Always equip yourself with a razor-sharp horticultural knife or utility blade sterilized with 70% isopropyl alcohol—ragged shears crush vascular bundles and delay wound healing. Make a precise incision right at the leaf sheath insertion point, angling slightly away from the central trunk to avoid gouging adjacent tissues. As the outer parenchyma separates, the plant's defensive yellow aloin sap will bead along the perimeter; allow the wound to air dry and suberize in indirect light for 48 hours without irrigation, establishing a tough, callused protective barrier.</p>
       </section>
     `,
     scientificCitations: [],
@@ -147,12 +151,12 @@ export const CULTIVATION_ARTICLES: Article[] = [
 
       <section id="emergency-cinnamon-surgery">
         <h2>The 4-Step Emergency Cinnamon Repotting Protocol</h2>
-        <p>If your plant exhibits soft, waterlogged foliage, immediate horticultural intervention is required:</p>
+        <p>When chronic overwatering induces hypoxic root collapse, rapid intervention is essential to prevent anaerobic pathogens from ascending into the central stem. Unpot the aloe immediately, gently shaking loose the soggy compost to expose the subterranean architecture. Use sterilized shears to excise all blackened, hollow, or slimy root strands until only firm, creamy-white or pale yellow vascular cords remain. Dust every surgical wound liberally with ground Ceylon cinnamon—a natural horticultural fungicide rich in cinnamaldehyde that suppresses <em>Fusarium</em> and <em>Pythium</em> spores—before allowing the root system to air dry on dry paper towels for 24 to 36 hours prior to repotting.</p>
       </section>
 
       <section id="the-gritty-mix-recipe">
         <h2>The Mineral-Rich 3:2:1 Gritty Substrate Recipe</h2>
-        <p>When repotting, use a porous, inorganic-dominant substrate:</p>
+        <p>Replicating the arid, fractured limestone terrain of the Arabian Peninsula is the single most effective defense against recurrent root rot. Discard moisture-retentive peat blends in favor of an open, fast-draining mineral substrate that allows irrigation water to cascade freely past succulent roots within seconds while maintaining oxygen-rich macropores. Mix three parts porous horticultural pumice or perlite, two parts coarse non-clumping granite grit or calcined clay (such as Turface), and one part low-peat organic potting soil. This inorganic-dominant matrix dries evenly within 48 to 72 hours, stimulating vigorous lateral root branching and eliminating the soggy conditions where root pathogens proliferate.</p>
         <ul>
           <li><strong>3 Parts:</strong> Coarse horticultural pumice or perlite (provides permanent aeration macropores).</li>
           <li><strong>2 Parts:</strong> Coarse crushed granite grit or calcined clay (NOT fine playground sand, which compacts).</li>
@@ -193,3 +197,12 @@ export const CULTIVATION_ARTICLES: Article[] = [
     relatedSlugs: ['how-to-harvest-aloe-leaf-without-killing-plant']
   }
 ];
+
+export const CULTIVATION_ARTICLES: Article[] = [
+  ...CORE_CULTIVATION_ARTICLES,
+  ...CULTIVATION_RECOVERY_ARTICLES,
+  ...CULTIVATION_PROPAGATION_ARTICLES,
+  ...CULTIVATION_ENVIRONMENT_ARTICLES,
+  ...CULTIVATION_BOTANY_ARTICLES,
+];
+

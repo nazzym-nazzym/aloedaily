@@ -1,7 +1,10 @@
 import { Article } from '../types';
 import { TESTED_PRODUCTS } from '../products';
+import { AUDITS_FORMULATIONS_ARTICLES } from './audits-formulations';
+import { AUDITS_TESTS_ARTICLES } from './audits-tests';
+import { AUDITS_REVIEWS_ARTICLES } from './audits-reviews';
 
-export const AUDIT_ARTICLES: Article[] = [
+const CORE_AUDIT_ARTICLES: Article[] = [
   {
     slug: 'how-to-spot-fake-aloe-vera-gel',
     pillar: 'audits',
@@ -146,3 +149,11 @@ export const AUDIT_ARTICLES: Article[] = [
     relatedSlugs: ['how-to-spot-fake-aloe-vera-gel', 'aloe-vera-overnight-face-mask']
   }
 ];
+
+export const AUDIT_ARTICLES: Article[] = [
+  ...CORE_AUDIT_ARTICLES,
+  ...AUDITS_FORMULATIONS_ARTICLES,
+  ...AUDITS_TESTS_ARTICLES,
+  ...AUDITS_REVIEWS_ARTICLES,
+];
+
