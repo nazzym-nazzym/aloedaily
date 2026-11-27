@@ -5,6 +5,7 @@ import { routeRequest } from './core/router';
 export interface Env {
   ENVIRONMENT?: string;
   SITE_URL?: string;
+  INDEXNOW_KEY?: string;
 }
 
 export default {
@@ -37,7 +38,7 @@ export default {
 
     // 2. Dispatch request to edge router
     try {
-      const response = await routeRequest(request, url);
+      const response = await routeRequest(request, url, env);
       const headers = new Headers(response.headers);
       applySecurityHeaders(headers);
 

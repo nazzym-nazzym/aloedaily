@@ -26,9 +26,10 @@ import { handleAffiliateRedirect, handleLeadCapture } from '../api/affiliate-red
 import { LOGO_WEBP_BYTES, LOGO_WEBP_96_BYTES, FAVICON_PNG_BYTES } from '../assets/logo-helper';
 import { generateOpenGraphSvg } from '../assets/og-card';
 import { getCacheHeaders } from './cache';
+import { handleIndexNowApi } from './indexnow';
 import { SITE_CONFIG } from '../config/site';
 
-export async function routeRequest(request: Request, url: URL): Promise<Response> {
+export async function routeRequest(request: Request, url: URL, env?: any): Promise<Response> {
   const pathname = url.pathname;
 
   // 1. Direct Edge-Native In-Memory Logo & Favicon Assets (Zero Outbound Latency)
@@ -110,6 +111,24 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
     });
   }
 
+  // 2b. IndexNow Key Verification Route for Bing & Search Engines
+  const indexNowKey = env?.INDEXNOW_KEY || SITE_CONFIG.indexNowKey;
+  if (
+    pathname === `/${indexNowKey}.txt` ||
+    pathname === '/indexnow.txt' ||
+    pathname === '/indexnow-key.txt' ||
+    pathname === '/.well-known/indexnow-key.txt'
+  ) {
+    return new Response(indexNowKey, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400',
+        'X-Robots-Tag': 'noindex',
+      },
+    });
+  }
+
   // 3. Edge API Endpoints
   if (pathname === '/api/contact') {
     return handleContactSubmission(request);
@@ -117,6 +136,10 @@ export async function routeRequest(request: Request, url: URL): Promise<Response
 
   if (pathname === '/api/lead-capture') {
     return handleLeadCapture(request);
+  }
+
+  if (pathname === '/api/indexnow') {
+    return handleIndexNowApi(request, env);
   }
 
   // 4. Outbound Affiliate Referral Redirects (/out/{brand})

@@ -484,6 +484,53 @@ async function runTests() {
     }
   }
 
+  // Test 40: IndexNow Key Verification Route for Bing & Search Engines
+  {
+    const expectedKey = SITE_CONFIG.indexNowKey;
+    assert(typeof expectedKey === 'string' && expectedKey.length === 32, 'SITE_CONFIG has valid 32-char hex IndexNow key');
+
+    // Canonical key file route: /<key>.txt
+    const canonicalReq = new Request(`https://aloedaily.com/${expectedKey}.txt`);
+    const canonicalRes = await worker.fetch(canonicalReq, env, mockCtx);
+    const canonicalBody = await canonicalRes.text();
+    assert(canonicalRes.status === 200, `/${expectedKey}.txt returns 200 OK`);
+    assert(canonicalBody === expectedKey, `/${expectedKey}.txt returns exact key text`);
+    assert(canonicalRes.headers.get('Content-Type')?.includes('text/plain') === true, `Key served as text/plain`);
+    assert(canonicalRes.headers.get('X-Robots-Tag')?.includes('noindex') === true, `Key has noindex robots tag`);
+
+    // Friendly fallback key file routes
+    const friendlyUrls = [
+      'https://aloedaily.com/indexnow.txt',
+      'https://aloedaily.com/indexnow-key.txt',
+      'https://aloedaily.com/.well-known/indexnow-key.txt',
+    ];
+
+    for (const url of friendlyUrls) {
+      const req = new Request(url);
+      const res = await worker.fetch(req, env, mockCtx);
+      const body = await res.text();
+      assert(res.status === 200, `${url} returns 200 OK`);
+      assert(body === expectedKey, `${url} returns exact key text`);
+    }
+  }
+
+  // Test 41: IndexNow Edge API Auth & Method Guard
+  {
+    // GET should be rejected (405)
+    const getReq = new Request('https://aloedaily.com/api/indexnow');
+    const getRes = await worker.fetch(getReq, env, mockCtx);
+    assert(getRes.status === 405, '/api/indexnow rejects GET with 405 Method Not Allowed');
+
+    // Unauthorized POST should be rejected (401)
+    const unauthReq = new Request('https://aloedaily.com/api/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ urls: ['https://aloedaily.com/'] }),
+    });
+    const unauthRes = await worker.fetch(unauthReq, env, mockCtx);
+    assert(unauthRes.status === 401, '/api/indexnow rejects unauthenticated POST with 401');
+  }
+
   console.log(`\nTEST SUMMARY: ${passed} Passed, ${failed} Failed`);
   if (failed > 0) process.exit(1);
 }
