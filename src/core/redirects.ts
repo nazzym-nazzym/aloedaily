@@ -19,6 +19,27 @@ const GONE_URL_PATTERNS = [
   /^\/wp-includes/i,
   /^\/xmlrpc\.php/i,
   /\.php$/i,
+  // Legacy e-commerce store & checkout funnel URLs (WordPress/WooCommerce/CartFlows)
+  /^\/product(\/|$)/i,
+  /^\/products(\/|$)/i,
+  /^\/product-category(\/|$)/i,
+  /^\/product-tag(\/|$)/i,
+  /^\/categories(\/|$)/i,
+  /^\/step(\/|$)/i,
+  /^\/cart(\/|$)/i,
+  /^\/checkout(\/|$)/i,
+  /^\/shop(\/|$)/i,
+  /^\/store(\/|$)/i,
+  /^\/my-account(\/|$)/i,
+  /^\/order(\/|$)/i,
+  /^\/orders(\/|$)/i,
+  /^\/order-received(\/|$)/i,
+  /^\/basket(\/|$)/i,
+  /^\/wc-api(\/|$)/i,
+  /^\/brand(\/|$)/i,
+  /^\/brands(\/|$)/i,
+  /^\/item(\/|$)/i,
+  /^\/items(\/|$)/i,
 ];
 
 const LEGACY_URL_REDIRECTS: Record<string, string> = {

@@ -457,6 +457,33 @@ async function runTests() {
     assert(body.includes('<loc>https://aloedaily.com/es/skincare/sabila-para-la-cara-toda-la-noche/</loc>'), 'Sitemap contains Spanish spoke article URLs');
   }
 
+  // Test 39: Google Search Console - Legacy Store URLs return 410 Gone (no redirect)
+  {
+    const legacyUrls = [
+      'https://aloedaily.com/step/organic-store-checkout/',
+      'https://aloedaily.com/product-category/personalcare/',
+      'https://aloedaily.com/product/aloe-jojoba-shampoo/',
+      'https://aloedaily.com/product/aloe-jojoba-shampoo', // without trailing slash MUST NOT 301 redirect
+      'https://aloedaily.com/product/forever-alofa-fine-fragrance/',
+      'https://aloedaily.com/product/forever-absorbent-c/',
+      'https://aloedaily.com/product/c9-aloe-peaches-chocolate-nl/',
+      'https://aloedaily.com/product/aloe-body-lotion/',
+      'https://aloedaily.com/product/vital5-box-aloe-berry-nectar-nl/',
+      'https://aloedaily.com/product/forever-freedom/',
+      'https://aloedaily.com/product/forever-bee-propolis/',
+      'https://aloedaily.com/cart/',
+      'https://aloedaily.com/checkout/',
+      'https://aloedaily.com/shop/',
+    ];
+
+    for (const url of legacyUrls) {
+      const req = new Request(url);
+      const res = await worker.fetch(req, env, mockCtx);
+      assert(res.status === 410, `Legacy store URL ${url} returns 410 Gone directly (no 301 redirect)`);
+      assert(res.headers.get('X-Robots-Tag')?.includes('noindex, nofollow') === true, `410 header contains noindex, nofollow for ${url}`);
+    }
+  }
+
   console.log(`\nTEST SUMMARY: ${passed} Passed, ${failed} Failed`);
   if (failed > 0) process.exit(1);
 }
