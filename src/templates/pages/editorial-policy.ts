@@ -56,7 +56,7 @@ export function renderEditorialPolicyPage(): string {
           3. Independent Product Auditing & Zero Sponsored Ratings
         </h2>
         <p class="prose" style="font-size: 1.05rem; line-height: 1.7; color: #292524;">
-          Commercial products evaluated under <em>The AloeDaily Purity Index™</em> are sourced independently through retail channels. Brands and manufacturers are never permitted to:
+          Commercial products evaluated under <em>The AloeDaily Purity Index™</em> are assessed independently using public INCI ingredient statements, published regulatory filings, and verifiable third-party certification registries. Brands and manufacturers are never permitted to:
         </p>
         <ul style="font-size: 1.05rem; line-height: 1.7; color: #292524; padding-left: 1.5rem; margin-bottom: 1.5rem;">
           <li>Pay for guaranteed inclusion in reviews or scorecards</li>

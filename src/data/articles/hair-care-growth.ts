@@ -238,16 +238,18 @@ export const HAIR_CARE_GROWTH_ARTICLES: Article[] = [
     ],
     htmlContent: `
       <section id="traction-alopecia-edges">
-        <h2>Traction Stress & Hairline Follicle Fragility</h2>
-        <p>The hair follicles along the frontotemporal hairline and temples have the shallowest root depths on the scalp. Chronic mechanical tension from tight braids, ponytails, or lace front adhesives causes traction folliculitis and progressive thinning.</p>
+        <h2>Traction Stress &amp; Hairline Follicle Fragility</h2>
+        <p>The vellus and terminal hair follicles along the frontotemporal hairline and temples sit at shallower dermal depths than crown follicles and experience constant mechanical pull from tight braids, slicked-back ponytails, weaves, or lace-front adhesives. Left unchecked, repetitive tension triggers perifollicular inflammation (traction folliculitis) and gradual miniaturization.</p>
+        <p>The first rule of edge recovery is releasing mechanical tension immediately; topical serums can only support follicles that are no longer being pulled under daily strain.</p>
       </section>
       <section id="ricinoleic-acid-and-aloe">
-        <h2>Ricinoleic Acid & Acemannan Synergy</h2>
-        <p>Castor oil contains ricinoleic acid, a monounsaturated fatty acid that stimulates prostaglandin E2 (PGE2) synthesis to support blood flow. Pure aloe vera acts as a lightweight aqueous vehicle, cutting the thick viscosity of castor oil and delivering cooling water hydration.</p>
+        <h2>Ricinoleic Acid &amp; Acemannan Synergy</h2>
+        <p>Cold-pressed castor oil is rich in <strong>ricinoleic acid</strong>, a viscous monounsaturated fatty acid valued for occlusive moisture retention and prostaglandin pathway activity around the follicle. However, applying thick, honey-like castor oil directly to fragile edges often tugs delicate baby hairs during rubbing and leaves sticky residue on pillowcases and forehead pores.</p>
+        <p>Pure inner-fillet aloe vera solves both problems: it acts as a water-rich, acid-mantle-balanced (pH 4.5–5.5) botanical carrier that thins castor oil's drag, cools inflamed skin, and delivers lightweight humectancy.</p>
       </section>
       <section id="the-2-to-1-emulsion-ratio">
         <h2>The 2:1 Aloe-to-Castor Emulsion Formula</h2>
-        <p>Whisk 2 tablespoons of pure aloe vera gel with 1 tablespoon of Jamaican black or cold-pressed castor oil until an opaque, creamy serum forms.</p>
+        <p>Whisk 2 tablespoons of pure, alcohol-free aloe vera gel with 1 tablespoon of cold-pressed or Jamaican black castor oil in a clean glass bowl for 45 seconds until a smooth, milky emulsion forms. Because it contains water and oil without chemical emulsifiers, prepare small weekly batches and store refrigerated for up to 7 days.</p>
       </section>
     `,
     scientificCitations: [

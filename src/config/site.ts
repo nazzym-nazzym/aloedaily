@@ -8,6 +8,7 @@ export const SITE_CONFIG = {
   logoAbsolute: 'https://aloedaily.com/assets/logo.webp',
   foundedYear: 2024,
   indexNowKey: '22d19f5b83d73d6b6e55fde441cbb690',
+  adsensePublisherId: '', // Set to 'ca-pub-XXXXXXXXXXXXXXXX' when Google AdSense publisher ID is issued
   adminEmail: 'contact@aloedaily.com',
   mediaEmail: 'contact@aloedaily.com',
   contactEmail: 'contact@aloedaily.com',

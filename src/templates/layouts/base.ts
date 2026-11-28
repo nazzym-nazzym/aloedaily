@@ -18,6 +18,7 @@ export interface BaseLayoutOptions {
   lang?: 'en' | 'es';
   hreflangs?: { lang: string; url: string }[];
   switchUrl?: string;
+  adsenseClient?: string;
 }
 
 export function renderBaseLayout(options: BaseLayoutOptions): string {
@@ -36,6 +37,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
     lang = 'en',
     hreflangs,
     switchUrl,
+    adsenseClient = SITE_CONFIG.adsensePublisherId,
   } = options;
 
   const displayTitle = title.toLowerCase().includes(SITE_CONFIG.name.toLowerCase())
@@ -47,6 +49,13 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
     : `<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />\n  <link rel="alternate" hreflang="en" href="${canonicalUrl}" />`;
 
   const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+  const ogImageType = ogImage.endsWith('.svg') ? 'image/svg+xml' : ogImage.endsWith('.png') ? 'image/png' : 'image/webp';
+  const normalizedAdsenseClient = adsenseClient
+    ? (adsenseClient.startsWith('ca-pub-') ? adsenseClient : `ca-pub-${adsenseClient.replace(/^pub-/, '')}`)
+    : '';
+  const adsenseHeadTag = normalizedAdsenseClient && !noindex
+    ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${normalizedAdsenseClient}" crossorigin="anonymous"></script>`
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="${lang}" class="scroll-smooth">
@@ -82,7 +91,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="${ogImageAlt}" />
-  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:image:type" content="${ogImageType}" />
   ${publishedTime ? `<meta property="article:published_time" content="${publishedTime}" />` : ''}
   ${modifiedTime ? `<meta property="article:modified_time" content="${modifiedTime}" />` : ''}
 
@@ -97,6 +106,7 @@ export function renderBaseLayout(options: BaseLayoutOptions): string {
 
   <!-- Inlined Critical Styles -->
   <style>${INLINE_CSS}</style>
+  ${adsenseHeadTag}
 
   <!-- Structured JSON-LD Schema Graph -->
   <script type="application/ld+json">

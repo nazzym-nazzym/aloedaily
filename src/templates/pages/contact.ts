@@ -68,28 +68,85 @@ export function renderContactPage(): string {
         <form id="contact-form" action="/api/contact" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
           <div>
             <label for="name" style="display: block; font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 0.4rem;">Full Name</label>
-            <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem;" />
+            <input type="text" id="name" name="name" required style="width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem;" />
           </div>
 
           <div>
             <label for="email" style="display: block; font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 0.4rem;">Professional or Personal Email</label>
-            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem;" />
+            <input type="email" id="email" name="email" required style="width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem;" />
           </div>
 
           <div>
             <label for="subject" style="display: block; font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 0.4rem;">Subject / Protocol in Question</label>
-            <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem;" />
+            <input type="text" id="subject" name="subject" required style="width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem;" />
           </div>
 
           <div>
             <label for="message" style="display: block; font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 0.4rem;">Message or Clinical Citation Details</label>
-            <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; font-family: inherit;"></textarea>
+            <textarea id="message" name="message" rows="5" required style="width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; font-family: inherit;"></textarea>
           </div>
 
-          <button type="submit" style="background: #064e3b; color: #ffffff; padding: 0.85rem 1.75rem; border: none; border-radius: 9999px; font-weight: 700; font-size: 1rem; cursor: pointer; align-self: flex-start; transition: background 0.15s ease;">
+          <div id="contact-status" role="status" aria-live="polite" style="display: none; padding: 0.9rem 1rem; border-radius: 0.65rem; font-size: 0.95rem; font-weight: 600;"></div>
+
+          <button id="contact-submit" type="submit" style="background: #064e3b; color: #ffffff; padding: 0.85rem 1.75rem; border: none; border-radius: 9999px; font-weight: 700; font-size: 1rem; cursor: pointer; align-self: flex-start; transition: background 0.15s ease;">
             Transmit Editorial Inquiry &rarr;
           </button>
         </form>
+        <script>
+          (function () {
+            var form = document.getElementById('contact-form');
+            var statusEl = document.getElementById('contact-status');
+            var submitBtn = document.getElementById('contact-submit');
+            if (!form || !statusEl || !submitBtn) return;
+
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'Sending Inquiry...';
+              statusEl.style.display = 'none';
+
+              var payload = {
+                name: (document.getElementById('name') || {}).value || '',
+                email: (document.getElementById('email') || {}).value || '',
+                subject: (document.getElementById('subject') || {}).value || '',
+                message: (document.getElementById('message') || {}).value || ''
+              };
+
+              fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(payload)
+              })
+                .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+                .then(function (result) {
+                  statusEl.style.display = 'block';
+                  if (result.ok && result.data.success) {
+                    statusEl.style.background = '#ecfdf5';
+                    statusEl.style.border = '1px solid #a7f3d0';
+                    statusEl.style.color = '#065f46';
+                    statusEl.textContent = result.data.message || 'Inquiry received. Thank you.';
+                    form.reset();
+                  } else {
+                    statusEl.style.background = '#fef2f2';
+                    statusEl.style.border = '1px solid #fecaca';
+                    statusEl.style.color = '#991b1b';
+                    statusEl.textContent = result.data.error || 'Please verify all fields and try again.';
+                  }
+                })
+                .catch(function () {
+                  statusEl.style.display = 'block';
+                  statusEl.style.background = '#fef2f2';
+                  statusEl.style.border = '1px solid #fecaca';
+                  statusEl.style.color = '#991b1b';
+                  statusEl.textContent = 'Network error. You can also email ${SITE_CONFIG.adminEmail} directly.';
+                })
+                .finally(function () {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = 'Transmit Editorial Inquiry &rarr;';
+                });
+            });
+          })();
+        </script>
       </section>
 
       <section>

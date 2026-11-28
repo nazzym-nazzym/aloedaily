@@ -531,6 +531,66 @@ async function runTests() {
     assert(unauthRes.status === 401, '/api/indexnow rejects unauthenticated POST with 401');
   }
 
+  // Test 42: AdSense CSP Readiness, /ads.txt & Head Script Injection
+  {
+    const req = new Request('https://aloedaily.com/');
+    const res = await worker.fetch(req, env, mockCtx);
+    const csp = res.headers.get('Content-Security-Policy') || '';
+    const body = await res.text();
+    assert(csp.includes('https://pagead2.googlesyndication.com'), 'CSP permits Google AdSense scripts');
+    assert(csp.includes('https://fundingchoicesmessages.google.com'), 'CSP permits Google CMP (Funding Choices)');
+    assert(!body.includes('110,000/mo'), 'Homepage does not leak internal SEO search volume metrics');
+
+    const envWithAds = { ...env, ADSENSE_PUB_ID: 'ca-pub-1234567890123456' };
+    const adsTxtRes = await worker.fetch(new Request('https://aloedaily.com/ads.txt'), envWithAds, mockCtx);
+    const adsTxtBody = await adsTxtRes.text();
+    assert(adsTxtRes.status === 200, '/ads.txt returns 200 OK when ADSENSE_PUB_ID is configured');
+    assert(adsTxtBody.includes('google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0'), '/ads.txt contains valid Google publisher record');
+
+    const homeWithAdsRes = await worker.fetch(new Request('https://aloedaily.com/'), envWithAds, mockCtx);
+    const homeWithAdsBody = await homeWithAdsRes.text();
+    assert(homeWithAdsBody.includes('adsbygoogle.js?client=ca-pub-1234567890123456'), 'AdSense verification script renders when ADSENSE_PUB_ID is configured');
+  }
+
+  // Test 43: Privacy Policy Discloses Google AdSense & Third-Party Cookies
+  {
+    const res = await worker.fetch(new Request('https://aloedaily.com/privacy/'), env, mockCtx);
+    const body = await res.text();
+    assert(body.includes('Google AdSense') && body.includes('adssettings.google.com'), 'Privacy policy discloses Google AdSense and personalized ad opt-out');
+    assert(!body.includes('does not use tracking cookies or persistent advertising cookies'), 'Privacy policy no longer contradicts AdSense cookie usage');
+  }
+
+  // Test 44: Contact Form Supports Standard HTML Form POST (x-www-form-urlencoded)
+  {
+    const formReq = new Request('https://aloedaily.com/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'name=Alice+Tester&email=alice@example.com&subject=Audit&message=Testing+contact+form',
+    });
+    const formRes = await worker.fetch(formReq, env, mockCtx);
+    const formBody = await formRes.text();
+    assert(formRes.status === 200, '/api/contact accepts standard HTML form POST');
+    assert(formBody.includes('Editorial Inquiry Received'), '/api/contact renders HTML confirmation for browser form POST');
+  }
+
+  // Test 45: Homepage Search (?s=...) Works & Returns Noindex
+  {
+    const searchReq = new Request('https://aloedaily.com/?s=aloin');
+    const searchRes = await worker.fetch(searchReq, env, mockCtx);
+    const searchBody = await searchRes.text();
+    assert(searchRes.status === 200, '/?s=aloin returns 200 OK');
+    assert(searchRes.headers.get('X-Robots-Tag')?.includes('noindex') === true, 'Search result page sets X-Robots-Tag noindex');
+    assert(searchBody.includes('Site Search') && searchBody.includes('Aloin'), 'Search results render matching articles');
+  }
+
+  // Test 46: Article Visual Figure & Valid Citations (No Empty Citation Lists)
+  {
+    const artRes = await worker.fetch(new Request('https://aloedaily.com/audits/seven-minerals-aloe-vera-gel-lab-audit-review/'), env, mockCtx);
+    const artBody = await artRes.text();
+    assert(artBody.includes('class="article-figure"') && artBody.includes('/assets/cards/seven-minerals-aloe-vera-gel-lab-audit-review.svg'), 'Article renders visual header figure');
+    assert(artBody.includes('Primary Peer-Reviewed Sources') && artBody.includes('International Aloe Science Council'), 'Audit article resolves previously broken IASC citation key');
+  }
+
   console.log(`\nTEST SUMMARY: ${passed} Passed, ${failed} Failed`);
   if (failed > 0) process.exit(1);
 }

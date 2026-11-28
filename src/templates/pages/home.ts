@@ -1,7 +1,15 @@
 import { PILLARS } from '../../data/pillars';
-import { getLatestArticles } from '../../data/articles';
-import { TESTED_PRODUCTS } from '../../data/products';
-import { SITE_CONFIG } from '../../config/site';
+import { ALL_ARTICLES, getArticlesByPillar, getLatestArticles } from '../../data/articles';
+import { Article } from '../../data/types';
+
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 function formatDate(dateStr: string): string {
   try {
@@ -17,17 +25,72 @@ function formatDate(dateStr: string): string {
   return dateStr;
 }
 
-export function renderHomePage(): string {
+function searchArticles(query: string): Article[] {
+  const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return [];
+  return ALL_ARTICLES.filter((article) => {
+    const haystack = `${article.title} ${article.metaDescription} ${article.directAnswer} ${article.pillar} ${article.slug}`.toLowerCase();
+    return terms.every((t) => haystack.includes(t));
+  }).slice(0, 24);
+}
+
+export function renderHomePage(searchQuery?: string): string {
+  const cleanQuery = (searchQuery || '').trim();
+  const searchResults = cleanQuery ? searchArticles(cleanQuery) : [];
   const latest = getLatestArticles(6);
 
-  const pillarsHtml = Object.values(PILLARS).map((pillar) => `
+  const searchResultsHtml = cleanQuery
+    ? `
+      <section style="padding: 3rem 0 1.5rem; border-bottom: 1px solid #e7e5e4; background: #ffffff;">
+        <div class="container">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.75rem;">
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #059669; letter-spacing: 0.05em;">Site Search</span>
+              <h2 style="font-size: 1.85rem; color: #064e3b; margin-top: 0.2rem;">
+                ${searchResults.length} Result${searchResults.length === 1 ? '' : 's'} for &ldquo;${escapeHtml(cleanQuery)}&rdquo;
+              </h2>
+            </div>
+            <a href="/" style="font-size: 0.9rem; font-weight: 700; color: #047857;">Clear Search &times;</a>
+          </div>
+          ${
+            searchResults.length > 0
+              ? `<div class="grid-cols-3">
+                  ${searchResults
+                    .map(
+                      (article) => `
+                    <article class="card">
+                      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <span class="badge-pill" style="font-size: 0.7rem;">${article.pillar}</span>
+                        <span style="font-size: 0.75rem; color: #78716c; margin-left: auto;">${article.readTimeMinutes} min read</span>
+                      </div>
+                      <h3 style="font-size: 1.1rem; color: #064e3b; margin-bottom: 0.5rem;">
+                        <a href="/${article.pillar}/${article.slug}/" style="color: inherit; text-decoration: none;">${article.title}</a>
+                      </h3>
+                      <p style="font-size: 0.875rem; color: #57534e; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1;">${article.metaDescription}</p>
+                      <a href="/${article.pillar}/${article.slug}/" style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-top: auto;">Read Protocol &rarr;</a>
+                    </article>
+                  `
+                    )
+                    .join('')}
+                </div>`
+              : `<p style="font-size: 1rem; color: #57534e; padding: 1.5rem; background: #fafaf9; border: 1px solid #e7e5e4; border-radius: 0.75rem;">No guides matched &ldquo;${escapeHtml(cleanQuery)}&rdquo;. Try searching terms like <em>aloin</em>, <em>retinol</em>, <em>dandruff</em>, <em>root rot</em>, or <em>iodine</em>.</p>`
+          }
+        </div>
+      </section>
+    `
+    : '';
+
+  const pillarsHtml = Object.values(PILLARS)
+    .map((pillar) => {
+      const count = getArticlesByPillar(pillar.id).length;
+      return `
     <a href="/${pillar.slug}/" class="card">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
         <span style="display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: #ecfdf5; color: ${pillar.accentColor}; font-size: 1.25rem;">
           ${pillar.iconSvg}
         </span>
-        <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #d1fae5; padding: 0.2rem 0.6rem; border-radius: 9999px;">
-          ${pillar.searchVolume}
+        <span style="font-size: 0.75rem; font-weight: 700; color: #065f46; background: #d1fae5; padding: 0.2rem 0.65rem; border-radius: 9999px;">
+          ${count} Guides
         </span>
       </div>
       <h3 style="font-size: 1.2rem; color: #064e3b; margin-bottom: 0.4rem;">${pillar.title}</h3>
@@ -38,9 +101,13 @@ export function renderHomePage(): string {
         Explore Hub &rarr;
       </div>
     </a>
-  `).join('');
+  `;
+    })
+    .join('');
 
-  const articlesHtml = latest.map((article) => `
+  const articlesHtml = latest
+    .map(
+      (article) => `
     <article class="card">
       <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
         <span class="badge-pill" style="font-size: 0.7rem;">${article.pillar}</span>
@@ -60,15 +127,17 @@ export function renderHomePage(): string {
         <a href="/${article.pillar}/${article.slug}/" style="font-size: 0.85rem; font-weight: 700; color: #047857;">Read Protocol &rarr;</a>
       </div>
     </article>
-  `).join('');
+  `
+    )
+    .join('');
 
   return `
     <!-- Hero Section -->
     <section style="background: linear-gradient(180deg, #ecfdf5 0%, #fafaf9 100%); padding: 4.5rem 0 3rem; border-bottom: 1px solid #e7e5e4;">
       <div class="container" style="text-align: center; max-width: 880px;">
-        <span class="badge-pill" style="margin-bottom: 1rem;">Evidence-Based Botanical Dermatology & Horticulture</span>
+        <span class="badge-pill" style="margin-bottom: 1rem;">Evidence-Based Botanical Dermatology &amp; Horticulture</span>
         <h1 style="font-size: clamp(2.2rem, 5vw, 3.5rem); color: #064e3b; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 1.25rem;">
-          The Definitive Daily Authority on Pure Aloe Vera & Botanical Science
+          The Definitive Daily Authority on Pure Aloe Vera &amp; Botanical Science
         </h1>
         <p style="font-size: 1.2rem; color: #44403c; line-height: 1.6; margin-bottom: 2rem;">
           Cut through the noise of drugstore greenwashing and viral internet myths. We synthesize peer-reviewed clinical dermatology, pharmacological toxicology, and practical horticulture to show you how to safely use, harvest, and audit pure <em>Aloe barbadensis Miller</em>.
@@ -84,8 +153,22 @@ export function renderHomePage(): string {
             Kitchen Iodine Purity Test
           </a>
         </div>
+
+        <form action="/" method="GET" role="search" aria-label="Search AloeDaily guides" class="search-form">
+          <input
+            type="search"
+            name="s"
+            value="${escapeHtml(cleanQuery)}"
+            placeholder="Search 150+ clinical aloe guides (e.g., retinol, aloin, root rot)..."
+            aria-label="Search guides"
+            class="search-input"
+          />
+          <button type="submit" class="search-btn">Search Guides</button>
+        </form>
       </div>
     </section>
+
+    ${searchResultsHtml}
 
     <!-- Core Pillars Grid -->
     <section style="padding: 4rem 0;">
@@ -103,7 +186,7 @@ export function renderHomePage(): string {
     <!-- Interactive Tools Banner -->
     <section style="background: #064e3b; color: #fff; padding: 4rem 0;">
       <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+        <div class="grid-cols-2" style="gap: 3rem; align-items: center;">
           <div>
             <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #6ee7b7; letter-spacing: 0.05em;">Interactive Utilities</span>
             <h2 style="color: #fff; font-size: 2.2rem; margin: 0.5rem 0 1rem;">Zero-Origin Botanical Tools</h2>
@@ -118,15 +201,15 @@ export function renderHomePage(): string {
                 <span>🧮</span> <span>Clinical Weight-Based Juice Dosage Calculator &rarr;</span>
               </a>
               <a href="/cultivation/fix-soft-mushy-aloe-leaves/" style="color: #a7f3d0; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
-                <span>🌱</span> <span>Plant Root Rot Diagnostic & Cinnamon Protocol &rarr;</span>
+                <span>🌱</span> <span>Plant Root Rot Diagnostic &amp; Cinnamon Protocol &rarr;</span>
               </a>
             </div>
           </div>
           <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 1.5rem; padding: 2rem;">
             <div style="font-size: 0.85rem; color: #6ee7b7; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">Consumer Protection Benchmark</div>
-            <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 0.75rem;">The AloeDaily Purity & Formulation Index™</h3>
+            <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 0.75rem;">The AloeDaily Purity &amp; Formulation Index™</h3>
             <p style="color: #d1fae5; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">
-              Many commercial "100% Pure Aloe" products on retail shelves are thickened with synthetic carbomers or contain artificial additives. We audit INCI ingredient statements and verify third-party certifications to evaluate genuine botanical integrity.
+              Many commercial &ldquo;100% Pure Aloe&rdquo; products on retail shelves are thickened with synthetic carbomers or contain artificial additives. We audit INCI ingredient statements and verify third-party certifications to evaluate genuine botanical integrity.
             </p>
             <a href="/audits/best-pure-aloe-vera-gels-reviewed/" style="display: inline-block; background: #10b981; color: #064e3b; font-weight: 800; padding: 0.65rem 1.25rem; border-radius: 0.5rem; text-decoration: none;">
               Explore Commercial Gel Audits

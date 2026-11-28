@@ -256,6 +256,24 @@ export const CLINICAL_STUDIES: Record<string, Citation> = {
     doi: '10.1034/j.1600-0749.2002.02033.x',
     evidenceGrade: 'In Vitro',
   },
+  'efsa-hydroxyanthracene-2018': {
+    id: 'efsa-hydroxyanthracene-2018',
+    studyTitle: 'Safety of hydroxyanthracene derivatives for use in food',
+    journal: 'EFSA Journal (European Food Safety Authority)',
+    year: 2018,
+    pubmedId: '32625659',
+    doi: '10.2903/j.efsa.2018.5090',
+    evidenceGrade: 'Systematic Review',
+  },
+  'wound-healing-davis-1989': {
+    id: 'wound-healing-davis-1989',
+    studyTitle: 'Wound healing. Oral and topical activity of Aloe vera',
+    journal: 'Journal of the American Podiatric Medical Association',
+    year: 1989,
+    pubmedId: '2607423',
+    doi: '10.7547/87507315-79-11-559',
+    evidenceGrade: 'In Vitro',
+  },
 };
 
 // Aliases ensuring legacy keys map to 100% verified genuine studies
@@ -263,4 +281,6 @@ CLINICAL_STUDIES['skin-barrier-2023'] = CLINICAL_STUDIES['skin-hydration-dalbelo
 CLINICAL_STUDIES['burn-wound-healing-2021'] = CLINICAL_STUDIES['burn-wound-healing-maenthaisong-2007'];
 CLINICAL_STUDIES['aloin-toxicity-safety-2022'] = CLINICAL_STUDIES['aloin-toxicology-boudreau-2017'];
 CLINICAL_STUDIES['gerd-gastric-mucosa-2020'] = CLINICAL_STUDIES['gerd-panahi-2015'];
+CLINICAL_STUDIES['digestive-gerd-panahi-2015'] = CLINICAL_STUDIES['gerd-panahi-2015'];
 CLINICAL_STUDIES['scalp-dermatitis-2022'] = CLINICAL_STUDIES['seborrheic-dermatitis-vardy-1999'];
+CLINICAL_STUDIES['iasc-standards-2023'] = CLINICAL_STUDIES['iasc-standards-monograph-2020'];

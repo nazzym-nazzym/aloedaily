@@ -194,15 +194,16 @@ export const HEALTH_SAFETY_ARTICLES: Article[] = [
     htmlContent: `
       <section id="nephrology-literature">
         <h2>Case Reports of Acute Renal Injury from Aloe Latex</h2>
-        <p>In clinical nephrology literature (Luyckx et al., 2002), medical cases describe acute renal failure, interstitial nephritis, and profound hypokalemic paralysis following high-dose ingestion of unpurified <em>Aloe capensis</em> or raw whole-leaf remedies taken as natural cleansers.</p>
+        <p>In clinical nephrology literature (Luyckx et al., 2002), medical case reports document acute renal failure, interstitial nephritis, and profound hypokalemic weakness following high-dose ingestion of unpurified <em>Aloe capensis</em> or raw whole-leaf preparations used as herbal laxative cleanses.</p>
+        <p>It is critical to separate these incidents from purified inner-fillet juice: the nephrotoxic cascade in published reports is driven by concentrated <strong>anthraquinone latex (aloin)</strong> triggering severe secretory diarrhea, dehydration, and secondary kidney injury—not by decolorized inner-leaf gel consumed within standard dietary limits.</p>
       </section>
       <section id="hypokalemia-renal-mechanisms">
-        <h2>Hypokalemic Nephropathy & Tubular Dysfunction</h2>
-        <p>When chronic laxative action flushes potassium from the GI tract, renal tubules adapt by conserving potassium at the expense of hydrogen ion secretion, inducing metabolic alkalosis and intracellular renal acidosis that compromises glomerular filtration rate (GFR).</p>
+        <h2>Hypokalemic Nephropathy &amp; Tubular Dysfunction</h2>
+        <p>When chronic stimulant laxative action flushes potassium and water from the gastrointestinal tract, systemic volume depletion activates the renin-angiotensin-aldosterone system (RAAS). Renal collecting ducts respond by excreting additional potassium and hydrogen ions, inducing metabolic alkalosis, electrolyte instability, and tubular vacuolization that can impair glomerular filtration rate (GFR).</p>
       </section>
       <section id="ckd-safety-guidelines">
         <h2>Safety Guidelines for Patients with Chronic Kidney Disease (CKD)</h2>
-        <p>Individuals with stage 3–5 CKD must avoid all unrefined botanical supplements, as impaired kidneys cannot balance rapid electrolyte shifts.</p>
+        <p>Individuals with stage 3–5 chronic kidney disease, reduced eGFR, or those taking potassium-altering medications (such as loop diuretics, thiazides, or ACE inhibitors) should avoid unrefined botanical supplements and obtain physician clearance before adding any concentrated aloe vera beverage to their routine.</p>
       </section>
     `,
     scientificCitations: [

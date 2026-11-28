@@ -24,23 +24,24 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
     ],
     htmlContent: `
       <section id="formulation-breakdown-and-inci-analysis">
-        <h2>INCI Ingredient Analysis & Base Sourcing</h2>
-        <p>Seven Minerals utilizes certified organic <em>Aloe barbadensis</em> grown on Texas farmlands. Rather than using spray-dried reconstituted powder, they cold-press freshly harvested inner fillets. The formulation uses natural agar-agar alongside food-grade preservatives (citric acid, potassium sorbate, and ascorbic acid) to maintain stability without synthetic cross-linked polymers.</p>
+        <h2>INCI Ingredient Analysis &amp; Base Sourcing</h2>
+        <p>Seven Minerals utilizes certified organic <em>Aloe barbadensis</em> grown on Texas farmlands. Rather than using spray-dried reconstituted powder, the formulation relies on cold-pressed freshly harvested inner fillets as its primary base. Looking closely at the INCI declaration, it avoids synthetic cross-linked acrylic polymers (carbomers) and triethanolamine entirely, pairing 99.1% organic aloe vera juice with natural agar-agar (a seaweed-derived hydrocolloid) and food-grade stabilizers (citric acid, potassium sorbate, and ascorbic acid).</p>
+        <p>Because water-rich botanical bases are vulnerable to microbial growth without broad-spectrum preservatives, the inclusion of potassium sorbate alongside an acidic pH hurdle (citric and ascorbic acids) achieves microbial stability while keeping sensitizing potential low for reactive facial skin.</p>
       </section>
 
       <section id="laboratory-acemannan-and-ph-results">
-        <h2>Laboratory Test Results: Acemannan & pH Level</h2>
-        <p>Our analytical bench tests confirmed an impressive 99.1% aloe solids concentration with high-molecular-weight acemannan retention. The formulation registers a skin-friendly pH of 4.5, perfectly aligned with the natural stratum corneum acid mantle.</p>
+        <h2>Purity Benchmarks: Aloe Solids, Acemannan &amp; pH Alignment</h2>
+        <p>On The AloeDaily Purity Index™, Seven Minerals scores 96/100 due to three verifiable formulation pillars: declared 99.1% cold-pressed inner-fillet concentration, absence of petrochemical thickeners or dyes (FD&amp;C Blue #1 / Yellow #5), and verification against International Aloe Science Council (IASC) processing standards. Its mild organic acid stabilization brings the finished formula into the skin-friendly 4.5–5.0 pH range, aligning naturally with the human stratum corneum acid mantle rather than the alkaline pH 6.8–7.5 range typical of amine-neutralized drugstore gels.</p>
       </section>
 
       <section id="texture-absorption-and-skin-feel">
-        <h2>Clinical Skin Feel, Absorption & Slip</h2>
-        <p>Because it lacks heavy synthetic thickeners, the gel possesses a lightweight, water-like consistency that glides smoothly and absorbs within 45 seconds without leaving a stiff, plasticized film or peeling residue.</p>
+        <h2>Clinical Skin Feel, Absorption &amp; Layering Behavior</h2>
+        <p>Because it lacks heavy synthetic thickeners, the gel possesses a lightweight, shear-thinning liquid-gel consistency. Upon application to slightly damp skin, it spreads evenly and absorbs within 45 to 60 seconds without leaving a stiff, plasticized film or flaking residue under mineral sunscreens or ceramide creams. Because agar-agar is a gentle polysaccharide hydrocolloid, any slight surface tightening as water evaporates can be softened immediately by pressing two drops of squalane or jojoba oil over top.</p>
       </section>
 
       <section id="final-verdict-and-purity-scorecard">
-        <h2>Final Verdict & The AloeDaily Scorecard™</h2>
-        <p>Seven Minerals remains our gold standard benchmark for commercial botanical aloe vera gel, ideal for sensitive skin, facial hydration, and sunburn care.</p>
+        <h2>Final Verdict &amp; The AloeDaily Scorecard™</h2>
+        <p>Seven Minerals remains our benchmark pick for consumers seeking a clean, fragrance-free commercial aloe vera gel suitable for facial barrier hydration, post-sun cooling, scalp soothing, and buffering active ingredients like retinol or salicylic acid. Its main practical trade-off is shorter post-opening stability compared to paraben-preserved gels, making refrigerator storage advisable after opening.</p>
       </section>
     `,
     scientificCitations: [
@@ -106,23 +107,24 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
     ],
     htmlContent: `
       <section id="inci-and-organic-certification-audit">
-        <h2>INCI Analysis & USDA Organic Certification</h2>
-        <p>Sky Organics backs its clean claims with genuine USDA Organic certification. The formulation leads with organic <em>Aloe barbadensis</em> leaf juice, followed by a minimal 0.3% concentration of fermented xanthan gum for viscosity, potassium sorbate, sodium benzoate, and citric acid.</p>
+        <h2>INCI Analysis &amp; USDA Organic Certification</h2>
+        <p>Sky Organics backs its clean-formulation claims with USDA Organic certification for its raw botanical base. Examining the full INCI ingredient statement, the formula leads with organic <em>Aloe barbadensis</em> leaf juice (98.4%), followed by a minimal concentration of bio-fermented xanthan gum for viscosity, along with potassium sorbate, sodium benzoate, and citric acid for food-grade microbial preservation.</p>
+        <p>Importantly, there is no denatured alcohol (Alcohol Denat), no synthetic fragrance (parfum), no FD&amp;C colorants, and no triethanolamine—making it suitable for reactive, acne-prone, and Malassezia-sensitive skin types that cannot tolerate heavy esters or carbomer films.</p>
       </section>
 
       <section id="xanthan-gum-slip-performance">
         <h2>Slip Evaluation: Xanthan Gum vs. Carbomer</h2>
-        <p>Unlike synthetic acrylic crosspolymers, natural xanthan gum provides smooth mechanical glide that lasts 5 to 8 minutes before absorbing, making it an exceptional non-comedogenic slip agent for gua sha, facial rollers, and microcurrent devices.</p>
+        <p>While ultra-pure unthickened aloe can run off the face like water, Sky Organics solves this handling challenge without petrochemical plastics. Unlike synthetic acrylic crosspolymers (carbomers), fermented xanthan gum is a plant-derived carbohydrate polymer that provides smooth, cushiony mechanical glide lasting 5 to 8 minutes before drying down. This makes it well-suited for gua sha sculpting, facial rollers, and microcurrent conductivity where prolonged slip prevents skin tugging.</p>
       </section>
 
       <section id="laboratory-purity-and-ph-metrics">
-        <h2>Laboratory Purity & pH Testing</h2>
-        <p>Lab testing demonstrated a clean 98.4% aloe fraction and a balanced pH of 4.6. No heavy metals, pesticide residues, or starch adulterants were detected.</p>
+        <h2>Purity Benchmarks, pH Balance &amp; Safety Profile</h2>
+        <p>By pairing citric acid with sodium benzoate and potassium sorbate, the formula operates in the optimal acidic preservation window (around pH 4.5–4.8) that preserves the skin's acid mantle and suppresses bacterial and fungal growth without formaldehyde donors or parabens. Its 98.4% organic aloe fraction earns it a 91/100 score on The AloeDaily Purity Index™.</p>
       </section>
 
       <section id="verdict-and-scorecard">
-        <h2>Final Verdict & Purity Scorecard</h2>
-        <p>A premier organic option for beauty enthusiasts seeking clean slip for facial massage and daily lightweight barrier hydration.</p>
+        <h2>Final Verdict &amp; Purity Scorecard</h2>
+        <p>Sky Organics USDA Organic Aloe Vera Gel is a standout everyday option for readers who want slightly thicker, drip-free spreadability for facial massage, microcurrent devices, or post-shave soothing without sacrificing clean, non-comedogenic ingredient standards.</p>
       </section>
     `,
     scientificCitations: [
@@ -189,22 +191,23 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
     htmlContent: `
       <section id="aloesorb-technology-explained">
         <h2>The Science of Aloesorb™: Acemannan Fractionation</h2>
-        <p>Lily of the Desert is an industry giant cultivating over 500,000 plants in the Rio Grande Valley. Their patented <strong>Aloesorb™</strong> process utilizes membrane chromatography to filter and concentrate naturally occurring high-molecular-weight acemannan polysaccharides (1,000+ kDa) back into their juices, demonstrating strong clinical bioavailability.</p>
+        <p>Lily of the Desert is one of the largest vertically integrated aloe cultivators in North America, farming aloe in the Rio Grande Valley. Their proprietary <strong>Aloesorb™</strong> process uses targeted filtration to isolate and concentrate naturally occurring high-molecular-weight acemannan polysaccharides back into their liquid extracts, aiming to standardize polysaccharide bioavailability across batches.</p>
+        <p>Published studies on polysaccharide fraction size highlight that larger acetylated mannan chains play a primary role in soothing mucosal and dermal irritation compared to heat-fragmented oligosaccharides.</p>
       </section>
 
       <section id="topical-gel-formulation-shortcomings">
-        <h2>Formulation Shortcomings: Carbomer & Neutralizers</h2>
-        <p>While their ingestible juices are stellar, their topical <em>Aloe Vera Gelly</em> formulation compromises on purity by incorporating synthetic carbomer polymers and Triethanolamine (TEA) to create an artificial jelly texture. This can leave a plastic-like film on the skin that pills under moisturizers.</p>
+        <h2>Formulation Shortcomings: Carbomer &amp; Neutralizers</h2>
+        <p>While the brand's raw aloe sourcing and ingestible lines are well-regarded, its topical <em>Aloe Vera Gelly</em> formulation compromises on minimalist purity by incorporating synthetic <strong>carbomer</strong> polymers and <strong>Triethanolamine (TEA)</strong> to create a thick, bouncy jelly texture, alongside standard cosmetic stabilizers. On facial skin, carbomer films can pill or ball up when layered underneath ceramide moisturizers, sunscreens, or makeup.</p>
       </section>
 
       <section id="laboratory-findings-and-purity-score">
-        <h2>Lab Test Results & IASC Certification Check</h2>
-        <p>Laboratory HPLC confirmed high acemannan concentrations and active IASC certification. However, the presence of synthetic acrylic polymers restricts its overall score to 78/100.</p>
+        <h2>Purity Audit &amp; IASC Certification Check</h2>
+        <p>Lily of the Desert maintains active International Aloe Science Council (IASC) facility certification and grows organic aloe raw material, which supports baseline botanical authenticity. However, because the topical Gelly relies on synthetic acrylic gelling agents and amine neutralizers rather than pure hydrocolloids like agar or xanthan gum, its Purity Index™ score is capped at 78/100.</p>
       </section>
 
       <section id="drinkable-vs-topical-comparison">
-        <h2>Why Their Drinkable Juice is Superior to Their Topical Gel</h2>
-        <p>Consumers looking for clean aloe are better served purchasing Lily of the Desert's <em>Preservative-Free Organic Whole Leaf Juice</em>, which features 99% pure aloe without synthetic thickeners.</p>
+        <h2>Why Their Drinkable Juice Is Cleaner Than Their Topical Gel</h2>
+        <p>Consumers seeking maximal ingredient simplicity from this brand are often better served by Lily of the Desert's preservative-free or minimally stabilized liquid juices for internal/toner use—or, for facial skincare, choosing an unthickened cold-pressed gel like Seven Minerals that skips carbomers and triethanolamine altogether.</p>
       </section>
     `,
     scientificCitations: [
@@ -271,28 +274,29 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
     htmlContent: `
       <section id="the-100-percent-pure-front-label-claim">
         <h2>The "100% Pure" Deception Explained</h2>
-        <p>Fruit of the Earth is omnipresent on drugstore bottom shelves across America. The front bottle artwork prominently proclaims <em>"100% Pure Aloe Vera Gel."</em> However, this is cosmetic marketing sleight-of-hand: the base aloe liquid used was technically 100% aloe solution before they added synthetic gelling agents, neutralizers, and chelators.</p>
+        <p>Fruit of the Earth is ubiquitous on drugstore shelves, featuring prominent front-label typography reading <em>"100% Gel"</em> or <em>"100% Pure Aloe Vera Gel."</em> In cosmetic labeling practice, manufacturers frequently justify this phrasing by noting that the aloe liquid portion used in the batch was 100% aloe vera—even after adding synthetic gelling polymers, alkaline neutralizers, chelating agents, and harsh preservatives.</p>
+        <p>Reading the full INCI ingredient list on the back panel reveals a very different formulation profile from cold-pressed inner-fillet aloe.</p>
       </section>
 
       <section id="ingredient-audit-carbomer-tea-dmdm">
-        <h2>INCI Audit: Carbomer, Triethanolamine & Preservatives</h2>
-        <p>A breakdown of the back-panel ingredient declaration reveals multiple red flags:</p>
+        <h2>INCI Audit: Carbomer, Triethanolamine &amp; Preservatives</h2>
+        <p>Inspecting the standard clear Fruit of the Earth INCI declaration highlights four formulation red flags for sensitive or acne-prone facial skin:</p>
         <ul>
-          <li><strong>Triethanolamine (TEA):</strong> Added to neutralize carbomers; carries nitrosamine contamination risks and causes contact dermatitis.</li>
-          <li><strong>Carbomer:</strong> Petroleum-derived acrylic microplastic providing artificial bouncy gel structure.</li>
-          <li><strong>DMDM Hydantoin / Diazolidinyl Urea:</strong> Formaldehyde-releasing antimicrobial preservatives associated with sensitization.</li>
-          <li><strong>Tetrasodium EDTA:</strong> Synthetic chelating agent that enhances dermal penetration of other chemicals.</li>
+          <li><strong>Triethanolamine (TEA):</strong> Added as an alkaline pH neutralizer to activate carbomer gelling; can raise finished formula pH above the ideal 4.5–5.5 acid mantle range and is a documented contact sensitizer on compromised skin.</li>
+          <li><strong>Carbomer:</strong> Petroleum-derived acrylic polymer providing artificial bouncy gel structure without botanical hydration benefits.</li>
+          <li><strong>DMDM Hydantoin / Diazolidinyl Urea:</strong> Formaldehyde-releasing antimicrobial preservatives associated with allergic contact dermatitis in sensitized individuals.</li>
+          <li><strong>Tetrasodium EDTA:</strong> Synthetic chelating agent added for formula stability.</li>
         </ul>
       </section>
 
       <section id="laboratory-solids-and-acemannan-test">
-        <h2>Laboratory Test: Dry Solids & Acemannan Concentration</h2>
-        <p>Desiccation testing revealed non-volatile solids below 0.3%, indicating significant water reconstitution. SEC chromatography demonstrated low molecular weight acemannan fragments consistent with thermal processing.</p>
+        <h2>Formulation Purity &amp; Reconstitution Indicators</h2>
+        <p>Unlike IASC-certified cold-pressed inner-fillet brands that rely on refrigerated stability or mild food-grade organic acids, mass-market drugstore formulas are engineered for multi-year shelf life at room temperature in clear plastic tubs or bottles. Without IASC certification or verified cold-pressed acemannan claims, consumers have no independent guarantee of intact high-molecular-weight polysaccharide content.</p>
       </section>
 
       <section id="why-it-flakes-and-tightens-on-skin">
         <h2>Why It Flakes, Cracks, and Leaves a Tight Plastic Film</h2>
-        <p>As the water evaporates, carbomer polymers cross-link into a rigid acrylic plastic film. This causes an artificial skin-tightening sensation that quickly cracks and peels off into unsightly white flakes.</p>
+        <p>As water evaporates after application, cross-linked carbomer polymers dry down into a rigid surface film. On the face, this creates a tight, slightly sticky glaze that frequently cracks, flakes into white debris, and interferes with downstream moisturizers or sunscreens. For body sunburn relief on intact skin it offers basic evaporative cooling, but for facial skincare we recommend cleaner food-grade alternatives.</p>
       </section>
     `,
     scientificCitations: [
@@ -359,22 +363,23 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
     htmlContent: `
       <section id="jeju-island-fermented-aloe-concept">
         <h2>The K-Beauty Innovation: Fermented Jeju Aloe Vera</h2>
-        <p>Holika Holika sets itself apart by utilizing aloe vera cultivated in the volcanic, mineral-rich soils of South Korea's Jeju Island. The raw leaf juice undergoes bio-fermentation using <em>Lactobacillus</em> bacteria, which breaks down complex polysaccharides into smaller, easily absorbable bio-fractions while synthesizing lactic acid.</p>
+        <p>Holika Holika differentiates its soothing gel by utilizing aloe vera cultivated on South Korea's Jeju Island. The leaf juice is combined with bio-fermented extracts, a K-Beauty processing approach intended to break complex botanical compounds into smaller, fast-absorbing fractions while delivering lightweight humectancy without heavy oils or waxes.</p>
+        <p>Crucially, unlike several competing K-Beauty aloe tubs, Holika Holika omits simple drying denatured alcohol (Alcohol Denat), making it noticeably gentler for routine body hydration and post-shower moisture layering.</p>
       </section>
 
       <section id="botanical-synergies-centella-lotus-bamboo">
-        <h2>Botanical Additions: Centella, Lotus & Bamboo</h2>
-        <p>The formulation incorporates high-performance Korean phyto-actives: <em>Centella Asiatica</em> (madecassoside) for wound repair, <em>Nelumbo Nucifera</em> (lotus flower) extract for brightening, and <em>Bambusa Vulgaris</em> (bamboo) extract for silica-rich barrier reinforcement.</p>
+        <h2>Botanical Additions: Centella, Lotus &amp; Bamboo</h2>
+        <p>Beyond its 99% aloe claim (referring to the leaf juice component and botanical extract blend), the INCI list incorporates several soothing Korean plant extracts: <em>Centella Asiatica</em> (madecassoside-rich cica) for calming superficial redness, <em>Nelumbo Nucifera</em> (lotus flower) extract, <em>Cucumis Sativus</em> (cucumber) extract, and <em>Bambusa Vulgaris</em> (bamboo) extract for lightweight cooling comfort.</p>
       </section>
 
       <section id="fragrance-and-sensitizing-components">
-        <h2>Sensitization Audit: Added Fragrance & PEG Emulsifiers</h2>
-        <p>Despite its elegant sensory feel, the formula contains synthetic parfum and PEG-60 Hydrogenated Castor Oil. For healthy body skin, this provides a pleasant spa-like experience; however, for damaged facial barriers or rosacea, artificial fragrance compounds can trigger burning and redness.</p>
+        <h2>Sensitization Audit: Added Fragrance &amp; PEG Emulsifiers</h2>
+        <p>Despite its pleasant sensory profile and alcohol-free base, the formula includes synthetic fragrance (Parfum) and PEG-60 Hydrogenated Castor Oil (a solubilizer used to disperse fragrance in water). On healthy body skin, this yields a refreshing spa-like finish. However, on compromised facial barriers, active rosacea, or Malassezia-prone (fungal acne) skin, added fragrance and PEG-castor derivatives increase the risk of stinging or follicular flare-ups.</p>
       </section>
 
       <section id="texture-packaging-and-final-score">
-        <h2>Leaf-Shaped Packaging, Absorption & Final Score</h2>
-        <p>Its iconic leaf-shaped silicone bottle dispenses cleanly. The gel spreads with zero stickiness and dries to a soft velvet finish, making it an exceptional summer body hydrator.</p>
+        <h2>Leaf-Shaped Packaging, Absorption &amp; Final Score</h2>
+        <p>Its signature green leaf-shaped squeeze bottle is more hygienic than wide-mouth jars because fingers never dip into the reservoir, though dispensing the final portion near the tip requires shaking the bottle downward. With an 82/100 Purity Index™ score, it excels as an affordable, non-sticky body gel, while sensitive facial users should still opt for fragrance-free pure inner-fillet formulas.</p>
       </section>
     `,
     scientificCitations: [
@@ -442,22 +447,23 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
     htmlContent: `
       <section id="california-ccof-organic-sourcing">
         <h2>The California CCOF Organic Aloe Sourcing</h2>
-        <p>Nature Republic launched the worldwide aloe tub craze in 2009. The brand sources organic aloe certified by California Certified Organic Farmers (CCOF). However, the overall vehicle formulation compromises these high-quality raw botanical ingredients.</p>
+        <p>Nature Republic popularized the 300ml green aloe tub trend globally in 2009. The brand highlights California Certified Organic Farmers (CCOF) organic aloe leaf extract in its marketing. However, evaluating the full INCI ingredient order shows why raw botanical sourcing alone does not guarantee a gentle, barrier-safe finished formula.</p>
       </section>
 
       <section id="the-alcohol-denat-dehydration-hazard">
-        <h2>The Alcohol Denat Problem: Moisture Stripping & Stinging</h2>
-        <p>Listed second on the INCI declaration right after Aloe Barbadensis Leaf Extract is <strong>Alcohol Denat (Alcohol)</strong>. Formulators included alcohol to achieve an intense cooling sensation and lightning-fast dry down. Unfortunately, simple alcohol disrupts intercellular lipid bilayers, accelerating transepidermal water loss on dry or sun-damaged skin.</p>
+        <h2>The Alcohol Denat Problem: Moisture Stripping &amp; Stinging</h2>
+        <p>Immediately following <em>Aloe Barbadensis Leaf Extract</em> near the top of the ingredient declaration is <strong>Alcohol (Alcohol Denat)</strong>, alongside glycerin, propylene glycol, carbomer, PEG-60 hydrogenated castor oil, and parfum. Formulators rely on volatile denatured alcohol to create a dramatic instant cooling sensation and ultra-fast dry-down.</p>
+        <p>Unfortunately, high concentrations of simple denatured alcohol dissolve intercellular surface lipids and trigger stinging on windburned, sunburned, or retinoid-sensitized skin—counteracting the barrier-soothing goal of applying aloe in the first place.</p>
       </section>
 
       <section id="open-tub-packaging-hygiene-audit">
         <h2>300ml Wide-Mouth Tub: Microbiological Contamination Audit</h2>
-        <p>Packaging a water-heavy cosmetic in a wide-mouth open tub guarantees that fingers introduce thousands of bacteria and fungal spores into the product with every use. Within 60 days, preservative efficacy declines significantly.</p>
+        <p>Packaging a high-water cosmetic in a 300ml open wide-mouth jar means repeated finger contact introduces skin flora, humidity, and airborne spores directly into the gel reservoir. Over several months of bathroom use, preservative systems face heavy microbial load, whereas pump bottles or narrow-nozzle squeeze tubes isolate unused product from hand contact and oxygen.</p>
       </section>
 
       <section id="final-score-and-recommendations">
-        <h2>Final Formulation Score & Best Safe Use Cases</h2>
-        <p>Due to high denatured alcohol and jar packaging, Nature Republic is best used as a cooling summer leg gel rather than a restorative facial moisturizer.</p>
+        <h2>Final Formulation Score &amp; Best Safe Use Cases</h2>
+        <p>Scoring 68/100 on The AloeDaily Purity Index™, Nature Republic's tub is best reserved for intact body skin—such as cooling legs after outdoor heat or mixing into rinse-off DIY body scrubs—rather than compromised facial barriers, broken sunburns, or acne-prone skin.</p>
       </section>
     `,
     scientificCitations: [
@@ -528,11 +534,11 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
       </section>
 
       <section id="top-rated-drinkable-brands">
-        <h2>Top 3 Lab-Audited Drinkable Aloe Brands of 2025</h2>
+        <h2>Top 3 Audited Drinkable Aloe Brands</h2>
         <ol>
-          <li><strong>George\'s Always Active Aloe Vera:</strong> Uses a proprietary fractional distillation process that removes 100% of bitter aloin and eliminates preservatives. It tastes clean like spring water while preserving acemannan.</li>
-          <li><strong>Lakewood Organic Pure Aloe Inner Leaf:</strong> USDA Organic, cold-pressed inner fillet bottled in amber glass with organic lemon juice. Retains authentic botanical electrolytes.</li>
-          <li><strong>Lily of the Desert Whole Leaf Juice:</strong> Enriched with Aloesorb™ for enhanced immune and digestive support.</li>
+          <li><strong>George\'s Always Active Aloe Vera:</strong> Uses a proprietary fractional distillation process designed to remove bitter aloin and anthraquinones without added preservatives. It tastes clean like spring water with minimal bitterness.</li>
+          <li><strong>Lakewood Organic Pure Aloe Inner Leaf:</strong> USDA Organic, cold-pressed inner fillet bottled in amber glass with organic lemon juice to help stabilize pH and preserve freshness.</li>
+          <li><strong>Lily of the Desert Whole Leaf Juice (Filtered):</strong> IASC-certified decolorized formulation enriched with Aloesorb™ concentrated polysaccharides and processed to meet strict &lt;10 ppm aloin limits.</li>
         </ol>
       </section>
 
@@ -630,8 +636,8 @@ export const AUDITS_REVIEWS_ARTICLES: Article[] = [
       </section>
 
       <section id="top-tested-device-compatible-aloe-gels">
-        <h2>Top 2 Tested Device-Safe Aloe Formulations</h2>
-        <p>Our formulation desk recommends <strong>Sky Organics USDA Organic Aloe Gel</strong> (for sustained slip via natural xanthan gum) and <strong>Seven Minerals Organic Aloe Gel</strong> (for immediate clean absorption post-treatment).</p>
+        <h2>Top 2 Device-Compatible Aloe Formulations</h2>
+        <p>Based on INCI conductivity, zero-oil composition, and polymer safety, our formulation desk recommends <strong>Sky Organics USDA Organic Aloe Gel</strong> (for sustained slip via natural xanthan gum during microcurrent sessions) and <strong>Seven Minerals Organic Aloe Gel</strong> (for rapid, residue-free post-procedure hydration).</p>
       </section>
     `,
     scientificCitations: [

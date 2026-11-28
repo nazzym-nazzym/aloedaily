@@ -6,6 +6,7 @@ export interface Env {
   ENVIRONMENT?: string;
   SITE_URL?: string;
   INDEXNOW_KEY?: string;
+  ADSENSE_PUB_ID?: string;
 }
 
 export default {

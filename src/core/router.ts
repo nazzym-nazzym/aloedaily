@@ -2,7 +2,7 @@ import { PILLARS } from '../data/pillars';
 import { PillarId } from '../data/types';
 import { getArticleBySlug, getArticlesByAuthor, getArticlesByReviewer, getArticlesByPillar } from '../data/articles';
 import { AUTHORS } from '../data/authors';
-import { renderBaseLayout } from '../templates/layouts/base';
+import { renderBaseLayout, BaseLayoutOptions } from '../templates/layouts/base';
 import { renderHomePage } from '../templates/pages/home';
 import { renderPillarHubPage } from '../templates/pages/pillar-hub';
 import { renderArticlePage } from '../templates/pages/article';
@@ -31,6 +31,8 @@ import { SITE_CONFIG } from '../config/site';
 
 export async function routeRequest(request: Request, url: URL, env?: any): Promise<Response> {
   const pathname = url.pathname;
+  const adsenseClient = (env?.ADSENSE_PUB_ID || SITE_CONFIG.adsensePublisherId || '').trim();
+  const renderPage = (opts: BaseLayoutOptions) => renderBaseLayout({ ...opts, adsenseClient });
 
   // 1. Direct Edge-Native In-Memory Logo & Favicon Assets (Zero Outbound Latency)
   if (pathname === '/assets/logo.webp' || pathname === '/assets/logo.png') {
@@ -79,9 +81,17 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
     }
   }
 
-  // 2. Virtual Feeds, RSS & Robots
+  // 2. Virtual Feeds, RSS, Ads.txt & Robots
   if (pathname === '/robots.txt') {
     return new Response(renderRobotsTxt(), {
+      status: 200,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=86400' },
+    });
+  }
+
+  if (pathname === '/ads.txt' && adsenseClient) {
+    const pubId = adsenseClient.startsWith('ca-pub-') ? adsenseClient.slice(3) : adsenseClient.startsWith('pub-') ? adsenseClient : `pub-${adsenseClient}`;
+    return new Response(`google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`, {
       status: 200,
       headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=86400' },
     });
@@ -148,10 +158,13 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
     return handleAffiliateRedirect(brandSlug);
   }
 
-  // 5. English Homepage (/)
+  // 5. English Homepage (/) & Site Search (/?s=...)
   if (pathname === '/' || pathname === '') {
+    const searchQuery = (url.searchParams.get('s') || '').trim();
     const canonical = `${SITE_CONFIG.url}/`;
-    const homeTitle = 'Aloe Daily: Pure Aloe Vera Science, Skincare Protocols & Plant Care Guides';
+    const homeTitle = searchQuery
+      ? `Search Results for "${searchQuery}" | ${SITE_CONFIG.name}`
+      : 'Aloe Daily: Pure Aloe Vera Science, Skincare Protocols & Plant Care Guides';
     const homeDesc = 'Evidence-based protocols for pure aloe vera skincare, ingestible safety, plant cultivation, and independent product audits. Backed by peer-reviewed clinical science.';
 
     const schema = buildPageSchemaGraph({
@@ -163,12 +176,13 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       inLanguage: 'en-US',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: homeTitle,
       metaDescription: homeDesc,
       canonicalUrl: canonical,
       schemaJson: schema,
-      contentHtml: renderHomePage(),
+      contentHtml: renderHomePage(searchQuery),
+      noindex: Boolean(searchQuery),
       lang: 'en',
       hreflangs: [
         { lang: 'x-default', url: `${SITE_CONFIG.url}/` },
@@ -178,7 +192,11 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       switchUrl: '/es/',
     });
 
-    return new Response(html, { status: 200, headers: getCacheHeaders('html') });
+    const headers = getCacheHeaders('html');
+    if (searchQuery) {
+      headers.set('X-Robots-Tag', 'noindex, follow');
+    }
+    return new Response(html, { status: 200, headers });
   }
 
   // 5b. Spanish Edition Homepage (/es/ or /es)
@@ -196,7 +214,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       inLanguage: 'es-ES',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: homeTitle,
       metaDescription: homeDesc,
       canonicalUrl: canonical,
@@ -225,7 +243,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       pageType: 'AboutPage',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: `About AloeDaily: Editorial Desks & Scientific Standards`,
       metaDescription: 'Meet our botanical science, horticulture, and cosmetic formulation desks. Review our editorial fact-checking and purity testing standards.',
       canonicalUrl: canonical,
@@ -251,7 +269,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       pageType: 'AboutPage',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: `Editorial & Fact-Checking Policy | ${SITE_CONFIG.name}`,
       metaDescription: 'Our rigorous scientific standard for botanical medicine, clinical citations, and zero-sponsored product reviews.',
       canonicalUrl: canonical,
@@ -277,7 +295,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       pageType: 'AboutPage',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: `Medical & Botanical Review Board | ${SITE_CONFIG.name}`,
       metaDescription: 'Meet the clinical and botanical research desks that peer-review all medical, skincare, and horticultural protocols on AloeDaily.',
       canonicalUrl: canonical,
@@ -299,7 +317,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       pageType: 'ContactPage',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: `Editorial & Press Contact | ${SITE_CONFIG.name}`,
       metaDescription: 'Submit clinical citation inquiries, press interviews, or protocol corrections to the AloeDaily editorial desk.',
       canonicalUrl: canonical,
@@ -317,13 +335,13 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Privacy Policy', url: '/privacy/' }],
       canonicalUrl: canonical,
       pageTitle: `Privacy Policy & Data Governance | ${SITE_CONFIG.name}`,
-      pageDescription: 'AloeDaily data protection, zero third-party tracking cookies policy, CCPA/GDPR compliance, and affiliate disclosure.',
+      pageDescription: 'AloeDaily data protection, Google AdSense advertising cookies disclosure, CCPA/GDPR compliance, and affiliate disclosure.',
       pageType: 'WebPage',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: `Privacy Policy & Data Governance | ${SITE_CONFIG.name}`,
-      metaDescription: 'AloeDaily data protection, zero third-party tracking cookies policy, CCPA/GDPR compliance, and affiliate disclosure.',
+      metaDescription: 'AloeDaily data protection, Google AdSense advertising cookies disclosure, CCPA/GDPR compliance, and affiliate disclosure.',
       canonicalUrl: canonical,
       schemaJson: schema,
       contentHtml: renderPrivacyPage(),
@@ -343,7 +361,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       pageType: 'WebPage',
     });
 
-    const html = renderBaseLayout({
+    const html = renderPage({
       title: `Terms of Service & Disclaimers | ${SITE_CONFIG.name}`,
       metaDescription: 'Terms of service, educational medical disclaimer, FDA compliance notice, and independent testing guidelines for AloeDaily.com.',
       canonicalUrl: canonical,
@@ -376,7 +394,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
         pageType: 'ProfilePage',
       });
 
-      const html = renderBaseLayout({
+      const html = renderPage({
         title: `${author.name} - Profile & Articles | ${SITE_CONFIG.name}`,
         metaDescription: author.bio,
         canonicalUrl: canonical,
@@ -423,7 +441,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
         itemListElements,
       });
 
-      const html = renderBaseLayout({
+      const html = renderPage({
         title: pageSeoTitle,
         metaDescription: pillar.metaDescription,
         canonicalUrl: canonical,
@@ -468,7 +486,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       });
 
       const cardUrl = `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`;
-      const html = renderBaseLayout({
+      const html = renderPage({
         title: article.metaTitle,
         metaDescription: article.metaDescription,
         canonicalUrl: canonical,
@@ -521,7 +539,7 @@ export async function routeRequest(request: Request, url: URL, env?: any): Promi
       });
 
       const cardUrl = `${SITE_CONFIG.url}/assets/cards/${article.slug}.svg`;
-      const html = renderBaseLayout({
+      const html = renderPage({
         title: article.metaTitle,
         metaDescription: article.metaDescription,
         canonicalUrl: canonical,

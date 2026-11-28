@@ -17,7 +17,7 @@ export function renderTermsPage(): string {
           Terms of Service & Editorial Disclaimers
         </h1>
         <p style="font-size: 1.05rem; color: #44403c; line-height: 1.6;">
-          Effective Date: January 1, 2025 &bull; Last Revised: February 20, 2025
+          Effective Date: January 1, 2025 &bull; Last Revised: November 28, 2026
         </p>
       </div>
     </div>
@@ -42,12 +42,12 @@ export function renderTermsPage(): string {
           <strong>${SITE_CONFIG.disclaimer.fda}</strong>
         </p>
 
-        <h2>4. Independent Product Audits & Affiliate Referral Disclosures</h2>
+        <h2>4. Independent Product Audits &amp; Affiliate Referral Disclosures</h2>
         <p>
           ${SITE_CONFIG.disclaimer.affiliate}
         </p>
         <p>
-          Our evaluations on The AloeDaily Purity Index™ (API-100) are conducted independently. We purchase retail products anonymously. Brands cannot purchase favorable ratings or influence laboratory findings.
+          Our evaluations on The AloeDaily Purity Index™ (API-100) are conducted independently based on INCI ingredient statement analysis, third-party certification verification (such as IASC and USDA Organic), and published scientific literature. Brands cannot purchase favorable ratings or influence editorial findings.
         </p>
 
         <h2>5. Intellectual Property & Botanical Content</h2>

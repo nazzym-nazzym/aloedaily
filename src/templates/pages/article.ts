@@ -1,9 +1,20 @@
 import { Article } from '../../data/types';
 import { AUTHORS } from '../../data/authors';
 import { PILLARS } from '../../data/pillars';
-import { getArticleBySlug } from '../../data/articles';
+import { getArticleBySlug, getArticlesByPillar } from '../../data/articles';
 import { renderAloinTimerScript } from '../../tools/aloin-timer';
 import { renderDosageCalculatorScript } from '../../tools/dosage-calculator';
+
+function computeReadTimeMinutes(article: Article): number {
+  const htmlWords = article.htmlContent.replace(/<[^>]+>/g, ' ');
+  const stepsWords = (article.howToSteps || []).map((s) => `${s.name} ${s.text}`).join(' ');
+  const faqWords = (article.faqs || []).map((f) => `${f.question} ${f.answer}`).join(' ');
+  const totalWords = `${article.directAnswer} ${htmlWords} ${stepsWords} ${faqWords}`
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return Math.max(2, Math.round(totalWords / 200));
+}
 
 function formatDate(dateStr: string): string {
   try {
@@ -99,7 +110,7 @@ export function renderArticlePage(article: Article): string {
           <strong>Lab Verdict:</strong> ${sc.verdict}
         </p>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="grid-cols-2" style="gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: #f0fdf4; border-radius: 0.5rem; padding: 1rem;">
             <div style="font-weight: 700; color: #166534; font-size: 0.85rem; margin-bottom: 0.5rem;">✓ Formulation Advantages</div>
             <ul style="font-size: 0.85rem; color: #166534; padding-left: 1.25rem;">
@@ -136,8 +147,9 @@ export function renderArticlePage(article: Article): string {
     </div>
   `).join('');
 
-  // Scientific Citations list (defensively filtered to valid objects)
-  const citationsHtml = article.scientificCitations.filter(Boolean).map(c => `
+  // Scientific Citations list (defensively filtered to valid objects before rendering)
+  const validCitations = article.scientificCitations.filter(Boolean);
+  const citationsHtml = validCitations.map(c => `
     <li style="margin-bottom: 0.6rem; font-size: 0.875rem; color: #57534e;">
       <strong>${c.studyTitle}</strong>. <em>${c.journal}</em> (${c.year}). 
       <span style="display: inline-block; background: #e0f2fe; color: #0369a1; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">${c.evidenceGrade}</span>
@@ -145,10 +157,16 @@ export function renderArticlePage(article: Article): string {
     </li>
   `).join('');
 
-  // Related Spoke Articles (ensure at least 3-4 companion articles for maximum PageRank distribution)
+  // Related Spoke Articles (pad to at least 4 companion articles from the same pillar)
   const expandedSlugs = [...article.relatedSlugs];
   if (expandedSlugs.length < 4) {
-    const pillarArticles = (PILLARS[article.pillar] ? getArticleBySlug(article.slug) : undefined) ? [] : [];
+    const pillarArticles = getArticlesByPillar(article.pillar);
+    for (const candidate of pillarArticles) {
+      if (candidate.slug !== article.slug && !expandedSlugs.includes(candidate.slug)) {
+        expandedSlugs.push(candidate.slug);
+        if (expandedSlugs.length >= 4) break;
+      }
+    }
   }
 
   // Find first related guide for mid-article callout box
@@ -168,7 +186,7 @@ export function renderArticlePage(article: Article): string {
     }
   }
 
-  const relatedHtml = article.relatedSlugs.map(slug => {
+  const relatedHtml = expandedSlugs.map(slug => {
     const rel = getArticleBySlug(slug);
     if (!rel) return '';
     return `
@@ -179,6 +197,8 @@ export function renderArticlePage(article: Article): string {
       </a>
     `;
   }).join('');
+
+  const estimatedReadTime = computeReadTimeMinutes(article);
 
   return `
     <article class="article-container" style="padding: 2.5rem 1.25rem 5rem;">
@@ -197,12 +217,24 @@ export function renderArticlePage(article: Article): string {
       <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
         <span class="badge-pill">${article.pillar}</span>
         ${article.badge ? `<span style="font-size: 0.75rem; font-weight: 700; color: #0369a1; background: #e0f2fe; padding: 0.25rem 0.65rem; border-radius: 9999px;">${article.badge}</span>` : ''}
-        <span style="font-size: 0.8rem; color: #78716c; margin-left: auto;">${article.readTimeMinutes} min read</span>
+        <span style="font-size: 0.8rem; color: #78716c; margin-left: auto;">${estimatedReadTime} min read</span>
       </div>
 
       <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); color: #064e3b; line-height: 1.2; margin-bottom: 1.25rem;">
         ${article.title}
       </h1>
+
+      <!-- Branded Botanical Protocol Visual Card -->
+      <figure class="article-figure">
+        <img
+          src="/assets/cards/${article.slug}.svg"
+          alt="${article.title.replace(/"/g, '&quot;')}"
+          width="1200"
+          height="630"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
 
       <!-- Author & Reviewer Metadata with Structured Profiles -->
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e7e5e4; margin-bottom: 1.75rem; font-size: 0.875rem; color: #57534e;">
@@ -286,9 +318,9 @@ export function renderArticlePage(article: Article): string {
       ` : ''}
 
       <!-- Clinical Studies Footnote Citations -->
-      ${article.scientificCitations.length > 0 ? `
+      ${validCitations.length > 0 ? `
         <section id="clinical-evidence" style="margin-top: 3rem; background: #fafaf9; border-top: 2px solid #059669; padding: 1.5rem; border-radius: 0 0 0.75rem 0.75rem;">
-          <h3 style="font-size: 1.1rem; color: #064e3b; margin-bottom: 0.75rem;">Primary Peer-Reviewed Sources & Literature</h3>
+          <h3 style="font-size: 1.1rem; color: #064e3b; margin-bottom: 0.75rem;">Primary Peer-Reviewed Sources &amp; Literature</h3>
           <ol style="padding-left: 1.25rem; margin: 0;">
             ${citationsHtml}
           </ol>
@@ -296,7 +328,7 @@ export function renderArticlePage(article: Article): string {
       ` : ''}
 
       <!-- Lateral Related Articles -->
-      ${article.relatedSlugs.length > 0 ? `
+      ${expandedSlugs.length > 0 ? `
         <section style="margin-top: 4rem; border-top: 1px solid #e7e5e4; padding-top: 2.5rem;">
           <h3 style="font-size: 1.35rem; color: #064e3b; margin-bottom: 1.25rem;">Related Guides in this Cluster</h3>
           <div class="grid-cols-2">

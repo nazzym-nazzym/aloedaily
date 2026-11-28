@@ -427,19 +427,19 @@ export const SKINCARE_ACNE_ARTICLES: Article[] = [
     htmlContent: `
       <section id="the-clay-dehydration-trap">
         <h2>The Clay Mask Dehydration Trap</h2>
-        <p>Traditional clay masks mixed with plain water quickly dry into a brittle shell that contracts aggressively on the skin. When left until it cracks, clay draws vital moisture out of healthy keratinocytes, causing rebound sebum hypersecretion within hours.</p>
+        <p>Traditional mineral clay masks mixed solely with tap water or harsh apple cider vinegar rapidly evaporate into a rigid, cracking crust. Once a clay mask enters its dry, flaking phase, capillary suction pulls vital moisture directly out of healthy stratum corneum keratinocytes—leaving acne-prone skin tight, erythematous, and prone to compensatory oil rebound within hours.</p>
       </section>
       <section id="aloe-hydrogel-balance">
         <h2>How Aloe Vera Buffers Mineral Clays</h2>
-        <p>Substituting water with cold-pressed aloe vera gel supplies humectant polysaccharides that bind water within the clay paste. The mask remains pliable longer, allowing mineral adsorption of sebum without stripping the skin's lipid barrier.</p>
+        <p>Replacing plain water with cold-pressed inner-fillet aloe vera gel introduces a network of water-binding <strong>acemannan polysaccharides</strong> and natural organic acids (pH 4.5–5.0). Because bentonite clay naturally carries a high alkaline pH (often 8.5–9.5 in water), buffering it with acidic aloe moderates harsh pH spikes while slowing evaporation so the paste stays supple on the skin.</p>
       </section>
       <section id="diy-recipe">
-        <h2>The Non-Drying Clay & Aloe Formulation</h2>
-        <p>Mix 1 tablespoon of cosmetic-grade bentonite or French green clay with 1.5 tablespoons of pure aloe vera gel in a non-metal bowl until smooth.</p>
+        <h2>The Non-Drying Clay &amp; Aloe Formulation</h2>
+        <p>In a clean ceramic or glass bowl (never reactive metal), combine 1 tablespoon of cosmetic-grade calcium bentonite or gentle white kaolin clay with 1.5 tablespoons of pure, fragrance-free aloe vera gel. Stir with a silicone spatula until a lump-free yogurt consistency forms, adding 1 teaspoon of distilled water if needed. Apply only to congested T-zone areas and rinse at the 8-to-10-minute mark while still cool and slightly tacky.</p>
       </section>
       <section id="removal-technique">
-        <h2>Gentle Dissolving & Removal Technique</h2>
-        <p>Never scrub dry clay with a rough towel. Rehydrate the mask with lukewarm water and wipe gently with a soft microfiber cloth.</p>
+        <h2>Gentle Dissolving &amp; Removal Technique</h2>
+        <p>Never scrub dried clay off with dry hands or coarse washcloths, which abrades inflamed pores. Splash lukewarm water repeatedly to re-hydrate the hydrogel matrix, gently lift residue with a soft damp microfiber cloth, and seal immediately with a lightweight non-comedogenic moisturizer.</p>
       </section>
     `,
     scientificCitations: [

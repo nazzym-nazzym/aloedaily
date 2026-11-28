@@ -116,11 +116,11 @@ export const AUDITS_TESTS_ARTICLES: Article[] = [
       </section>
 
       <section id="commercial-gel-ph-test-results">
-        <h2>Commercial Brand Audit: Lab pH Measurements</h2>
-        <p>Our formulation laboratory measured popular commercial aloe products using a calibrated benchtop pH meter:</p>
+        <h2>Commercial Brand Audit: Typical pH Ranges by Formula Type</h2>
+        <p>Comparing typical finished pH ranges across commercial aloe product categories highlights why formula buffering matters:</p>
         <ul>
-          <li><strong>Clean Cold-Pressed Formulations (Seven Minerals, Sky Organics):</strong> pH 4.4–4.7 — Optimal skin compatibility; enhances food-grade preservative efficacy.</li>
-          <li><strong>Drugstore Carbomer Gels (Fruit of the Earth):</strong> pH 6.6–7.2 — Elevated by alkaline triethanolamine (TEA) neutralizers. Impairs enzymatic barrier recovery.</li>
+          <li><strong>Unneutralized Organic Acid Formulations (e.g., Seven Minerals, Sky Organics):</strong> Typically pH 4.4–4.8 — Uses citric and ascorbic acids to align with the skin's acid mantle and optimize potassium sorbate/sodium benzoate preservation.</li>
+          <li><strong>Amine-Neutralized Carbomer Gels (e.g., conventional drugstore gels):</strong> Frequently pH 6.5–7.2 — Elevated toward neutral or slightly alkaline ranges by triethanolamine (TEA) required to swell synthetic acrylic polymers.</li>
         </ul>
       </section>
 

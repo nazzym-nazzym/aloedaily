@@ -17,7 +17,7 @@ export function renderPrivacyPage(): string {
           Privacy Policy & Data Governance
         </h1>
         <p style="font-size: 1.05rem; color: #44403c; line-height: 1.6;">
-          Effective Date: January 1, 2025 &bull; Last Revised: February 20, 2025
+          Effective Date: January 1, 2025 &bull; Last Revised: November 28, 2026
         </p>
       </div>
     </div>
@@ -26,41 +26,56 @@ export function renderPrivacyPage(): string {
       <div class="prose" style="font-size: 1rem; color: #292524; line-height: 1.7;">
         <h2>1. Commitment to Reader Privacy</h2>
         <p>
-          At ${SITE_CONFIG.name} (${SITE_CONFIG.domain}), reader privacy is an absolute pillar of our ethical standard. Because we operate on a zero-origin, server-side edge architecture via Cloudflare Workers, we do not deploy invasive third-party ad-tracking pixels, fingerprinting scripts, or cross-site tracking cookies.
+          At ${SITE_CONFIG.name} (${SITE_CONFIG.domain}), we respect reader privacy and maintain transparent data practices. We operate on a serverless edge architecture via Cloudflare Workers and limit first-party data collection strictly to what is necessary for site security, editorial correspondence, and transparent monetization.
         </p>
 
         <h2>2. Information We Collect</h2>
         <p>
-          We only collect personal information that you knowingly and voluntarily provide to us:
+          We collect information in the following ways:
         </p>
         <ul>
-          <li><strong>Direct Communications:</strong> When you submit a clinical citation inquiry or press dispatch through our Contact Form or via email to <a href="mailto:${SITE_CONFIG.adminEmail}">${SITE_CONFIG.adminEmail}</a>, we receive your name, email address, and message content.</li>
-          <li><strong>Server Logs:</strong> Like all internet services, our edge infrastructure automatically receives standard technical request data (IP address, user agent, requested URI, timestamp) solely for cybersecurity defense, DDoS mitigation, and system health monitoring. These logs are retained for no longer than 30 days.</li>
+          <li><strong>Direct Communications:</strong> When you submit a clinical citation inquiry or press dispatch through our <a href="/contact/">Contact Form</a> or via email to <a href="mailto:${SITE_CONFIG.adminEmail}">${SITE_CONFIG.adminEmail}</a>, we receive your name, email address, subject, and message content solely to respond to your inquiry.</li>
+          <li><strong>Server &amp; Edge Security Logs:</strong> Like standard internet infrastructure, our edge network automatically processes technical request metadata (IP address, user agent, requested URI, timestamp) for DDoS mitigation, cybersecurity defense, and system reliability.</li>
+          <li><strong>Advertising &amp; Cookie Data:</strong> When advertising partners (such as Google AdSense) are active on this site, cookies or device identifiers may be used by third-party vendors as described in Section 3 below.</li>
         </ul>
 
-        <h2>3. Affiliate Referrals & Outbound Links</h2>
+        <h2>3. Advertising, Google AdSense &amp; Third-Party Cookies</h2>
         <p>
-          ${SITE_CONFIG.name} participates in select affiliate referral programs. When you click an outbound link (routed through our <code>/out/</code> redirection paths) to purchase lab-audited aloe products, we may earn a referral fee from the retailer. Outbound partner sites operate under their own independent privacy policies. We encourage you to review their terms before completing transactions.
+          ${SITE_CONFIG.name} uses or may use third-party advertising networks, including <strong>Google AdSense</strong>, to support independent botanical research and free public access to our guides.
+        </p>
+        <ul>
+          <li>Third-party vendors, including Google, use cookies (and similar local storage or device identifiers) to serve ads based on a user's prior visits to ${SITE_CONFIG.domain} or other websites on the Internet.</li>
+          <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to ${SITE_CONFIG.domain} and/or other sites on the Internet.</li>
+          <li>You may opt out of personalized advertising at any time by visiting <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">YourAdChoices (aboutads.info)</a> or <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer">Your Online Choices</a>.</li>
+        </ul>
+        <p>
+          You may also control or disable cookies through your browser settings at any time; however, disabling cookies may affect certain site preferences or consent choices.
         </p>
 
-        <h2>4. Cookies & Edge Storage</h2>
+        <h2>4. Affiliate Referrals &amp; Outbound Links</h2>
         <p>
-          ${SITE_CONFIG.name} does not use tracking cookies or persistent advertising cookies. Any localized cookies used on this domain are strictly necessary for session security and edge caching.
+          ${SITE_CONFIG.name} participates in select affiliate referral programs. When you click an outbound link (routed through our <code>/out/</code> redirection paths) to purchase reviewed aloe products, we may earn a referral commission from the retailer at no additional cost to you. Outbound partner sites operate under their own independent privacy policies, and we encourage you to review their terms before completing transactions.
         </p>
 
-        <h2>5. CCPA / CPRA & GDPR Data Rights</h2>
+        <h2>5. Consent Management (EEA / UK / Switzerland) &amp; CCPA / CPRA Rights</h2>
         <p>
-          Under California Consumer Privacy Act (CCPA) and European General Data Protection Regulation (GDPR) frameworks, you retain full rights to:
+          Visitors from the European Economic Area (EEA), the United Kingdom, and Switzerland are presented with consent choices regarding personalized advertising and non-essential cookies in compliance with the General Data Protection Regulation (GDPR) and Google EU User Consent Policy.
+        </p>
+        <p>
+          Under the California Consumer Privacy Act (CCPA / CPRA) and GDPR frameworks, you retain the right to:
         </p>
         <ul>
           <li>Access any personal communication records we maintain regarding your inquiries.</li>
-          <li>Request permanent deletion of your contact records from our editorial archive.</li>
-          <li>Opt-out of any commercial communications (we do not sell or rent consumer personal data to third parties under any circumstances).</li>
+          <li>Request correction or permanent deletion of your contact records from our editorial archive.</li>
+          <li>Withdraw or modify your advertising consent preferences, or opt out of personalized advertising via the links in Section 3.</li>
         </ul>
+        <p>
+          ${SITE_CONFIG.name} does not directly sell personal contact records collected through our editorial forms.
+        </p>
 
         <h2>6. Contact Our Data Governance Team</h2>
         <p>
-          To exercise your privacy rights or request data erasure, transmit a formal request to our editorial desk:
+          To exercise your privacy rights, inquire about cookie disclosures, or request data erasure, transmit a formal request to our editorial desk:
         </p>
         <p>
           <strong>Data Protection Contact:</strong> <a href="mailto:${SITE_CONFIG.adminEmail}">${SITE_CONFIG.adminEmail}</a><br />

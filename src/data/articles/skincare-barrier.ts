@@ -463,15 +463,15 @@ export const SKINCARE_BARRIER_ARTICLES: Article[] = [
     htmlContent: `
       <section id="perioral-pathology">
         <h2>The Unique Pathology of Perioral Dermatitis</h2>
-        <p>Perioral dermatitis is a distinct facial dermatosis characterized by grouped pinpoint erythematous papules and pustules around the mouth, nasolabial folds, and lower chin. It is classically provoked by topical corticosteroids, fluorinated toothpastes, and heavy occlusive moisturizers that alter follicular microflora.</p>
+        <p>Perioral dermatitis is a distinct facial dermatosis characterized by grouped pinpoint erythematous papules, mild scaling, and small pustules around the mouth, nasolabial folds, and lower chin—often sparing a narrow pale border immediately next to the lip vermilion. It is classically provoked by topical corticosteroids, fluorinated toothpastes, heavy occlusive balms, or rich barrier creams that disrupt follicular microflora and skin permeability.</p>
       </section>
       <section id="zero-therapy-rules">
-        <h2>Why Zero-Therapy is First-Line Care</h2>
-        <p>Dermatologists first recommend "zero-therapy": discontinuing all active serums, heavy balms, and makeup. Applying heavy occlusives creates a warm, moist environment that exacerbates follicular irritation.</p>
+        <h2>Why Zero-Therapy Is First-Line Care</h2>
+        <p>Dermatologists overwhelmingly recommend <strong>zero-therapy</strong> as the cornerstone of initial management: temporarily halting all leave-on serums, exfoliating acids, facial oils, heavy moisturizers, and topical steroids. Although stopping everything feels counterintuitive when skin feels dry, applying heavy occlusives or layered emulsions traps heat and moisture inside sensitized follicles, prolonging papule flares.</p>
       </section>
       <section id="aloe-application-rules">
-        <h2>When & How to Safely Introduce Aloe</h2>
-        <p>If severe tightness and burning make complete zero-therapy intolerable, a sheer film of 100% pure, cold-pressed, polymer-free aloe vera provides non-occlusive hydration without trapping follicular moisture.</p>
+        <h2>When &amp; How to Safely Introduce Pure Aloe</h2>
+        <p>During the first 7 to 14 days of product withdrawal, severe dryness and burning can make strict zero-therapy uncomfortable. If soothing relief is needed, a wafer-thin layer of 100% pure, cold-pressed, fragrance-free, and polymer-free aloe vera gel is one of the few options that delivers cooling water hydration without lipids, waxes, or synthetic carbomer occlusion. Avoid raw homemade leaves (due to trace aloin irritation risk) and discontinue immediately if stinging persists past 30 seconds.</p>
       </section>
     `,
     scientificCitations: [
